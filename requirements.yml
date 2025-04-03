@@ -3,7 +3,7 @@ name: musicologist
 channels:
   - conda-forge
 dependencies:
-  - python==3.11
+  - python==3.8
   - numpy==2.2.4
   - pandas==2.2.3
   - matplotlib==3.10.1
@@ -21,3 +21,4 @@ dependencies:
     - jukemirlib
     - tdqm
     - soundfile
+    - stable_audio_tools
