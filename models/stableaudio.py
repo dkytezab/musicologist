@@ -15,8 +15,10 @@ print('model got')
 
 model = model.to(device)
 
+BATCH_SIZE = 4
+
 # Set up text and timing conditioning
-conditioning = [{
+conditioning =  BATCH_SIZE * [{
     "prompt": "Beethoven 5th Symphony, 1st movement",
     "seconds_start": 0, 
     "seconds_total": 30
@@ -33,13 +35,24 @@ output = generate_diffusion_cond(
     sigma_min=0.3,
     sigma_max=500,
     sampler_type="dpmpp-3m-sde",
-    device=device
+    device=device,
+    batch_size=BATCH_SIZE
 )
 
 print('done output')
 # Rearrange audio batch to a single sequence
 output = rearrange(output, "b d n -> d (b n)")
-
+print(output.shape)
 # Peak normalize, clip, convert to int16, and save to file
 output = output.to(torch.float32).div(torch.max(torch.abs(output))).clamp(-1, 1).mul(32767).to(torch.int16).cpu()
-torchaudio.save("output.wav", output, sample_rate)
+print(output.shape)
+## torchaudio.save("output.wav", output, sample_rate)
+
+sample_size = output.shape[1] // BATCH_SIZE  # Compute the size of each sample
+output = output.view(BATCH_SIZE, 2, sample_size)  # Reshape into (4, sample_size)
+
+# Save each sample separately
+for i, sample in enumerate(output):
+    filename = f"outputs/sample_{i}.wav"
+    torchaudio.save(filename, sample, sample_rate)
+    print(f"Saved {filename}")
