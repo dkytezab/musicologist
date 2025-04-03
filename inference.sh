@@ -12,4 +12,4 @@
 #SBATCH -J dont_at_me_please
 
 module load cuda cudnn
-python pipeline/generate.py
+python pipeline/diffusion/generate.py
