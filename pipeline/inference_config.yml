@@ -1,8 +1,9 @@
 ---
-batch_size: 8
+batch_size: 32
 num_batches: 1
 prompt_path: 'pipeline/prompt.txt'
 output_path: 'pipeline/output'
 steps:
   - 50
 sample_length: 30
+verbose: true

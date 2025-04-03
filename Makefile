@@ -1,5 +1,5 @@
-# clean: gets rid of log files
-clean:
+# cleanlogs: gets rid of log files
+cleanlogs:
 	find . -type f -name '*.err' -delete
 	find . -type f -name '*.out' -delete
 
