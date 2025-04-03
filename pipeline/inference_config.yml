@@ -1,0 +1,8 @@
+---
+batch_size: 8
+num_batches: 1
+prompt_path: 'pipeline/prompt.txt'
+output_path: 'pipeline/output'
+steps:
+  - 50
+sample_length: 30
