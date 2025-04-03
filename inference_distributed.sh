@@ -7,9 +7,9 @@
 #SBATCH -p gpu
 #SBATCH -o logs/inference/train_G%j.out
 #SBATCH -e logs/inference/train_G%j.err
-#SBATCH --gres=gpu:1
+#SBATCH --gres=gpu:2
 #SBATCH --constraint=ampere
 #SBATCH -J dont_at_me_please
 
 module load cuda cudnn
-python pipeline/diffusion/generate.py
+torchrun --nproc_per_node=2 pipeline/diffusion/generate_distributed.py
