@@ -1,6 +1,7 @@
 import torch
 import torchaudio
 import yaml
+import time
 from einops import rearrange
 from stable_audio_tools import get_pretrained_model
 from stable_audio_tools.inference.generation import generate_diffusion_cond
@@ -15,6 +16,7 @@ SAMPLE_LENGTH = config['sample_length']
 STEPS = config['steps']
 PROMPT_PATH = config['prompt_path']
 OUTPUT_PATH = config['output_path']
+VERBOSE = config['verbose']
 
 # Load prompts from file
 with open(PROMPT_PATH, 'r') as file:
@@ -42,6 +44,7 @@ model = model.to(device)
 
 # Generate audio using the diffusion model
 for batch in range(NUM_BATCHES):
+    batch_start_time = time.time()
     for i, condition in enumerate(conditioning):
         cond_expanded = [condition] * BATCH_SIZE
         for step_count in STEPS:
@@ -71,3 +74,7 @@ for batch in range(NUM_BATCHES):
                 filename = f"{OUTPUT_PATH}/prompt_{i}_step_{step_count}_batch_{batch}_sample_{j}.wav"
                 torchaudio.save(filename, sample, sample_rate)
                 print(f"Saved {filename}")
+    batch_end_time = time.time()
+    total_time = batch_end_time - batch_start_time
+    if VERBOSE:
+        print(f"Batch {batch} of {BATCH_SIZE} completed in {total_time:.2f} seconds, for {(total_time / BATCH_SIZE):.2f} s / sample.")
