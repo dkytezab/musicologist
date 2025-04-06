@@ -3,9 +3,9 @@ cleanlogs:
 	find . -type f -name '*.err' -delete
 	find . -type f -name '*.out' -delete
 
-# cleandata: gets rid of all the .wav files
+# cleandata: gets rid of all the .pt files
 cleanclips:
-	find . -type f -name '*.wav' -delete
+	find . -type f -name '*.pt' -delete
 
 # cleanembeds: gets rid of all embedding files
 cleanembeds:

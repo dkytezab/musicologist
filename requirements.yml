@@ -13,6 +13,7 @@ dependencies:
     - torchaudio==2.6.0
     - torch_xla==2.6.0
     - diffusers==0.32.3
+    - scikit-learn
     - transformers
     - muq
     - librosa
