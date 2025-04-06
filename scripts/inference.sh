@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #SBATCH -N 1
-#SBATCH -n 4
+#SBATCH -n 2
 #SBATCH --mem=30g
 #SBATCH -t 00:30:00
 #SBATCH -p gpu

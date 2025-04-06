@@ -5,8 +5,8 @@ cleanlogs:
 
 # cleandata: gets rid of all the .pt files
 cleanclips:
-	find . -type f -name '*.pt' -delete
+	find . -type f -name '*.wav' -delete
 
 # cleanembeds: gets rid of all embedding files
 cleanembeds:
-	find . -type f -name '*.npy' -delete
+	find . -type f -name '*.pt' -delete

@@ -1,9 +1,9 @@
 ---
-batch_size: 32
+batch_size: 4
 num_batches: 1
 prompt_path: 'pipeline/diffusion/prompt.txt'
 output_path: 'data/diffusion'
 steps:
-  - 50
+  - 100
 sample_length: 30
 verbose: true

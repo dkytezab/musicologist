@@ -62,18 +62,19 @@ for batch in range(NUM_BATCHES):
             )
 
             # Rearrange audio batch to a single sequence
-            output = rearrange(output, "b d n -> d (b n)")
+            # output = rearrange(output, "b d n -> d (b n)")
             # Peak normalize, clip, convert to int16, and save to file
-            output = output.to(torch.float32).div(torch.max(torch.abs(output))).clamp(-1, 1).mul(32767).to(torch.int16).cpu()
+            output = output.to(torch.float32)
+            peak = output.abs().view(output.size(0), -1).max(dim=1, keepdim=True).values  # (BATCH_SIZE, 1)
+            peak = peak.view(-1, 1, 1)  # Reshape to (BATCH_SIZE, 1, 1) for broadcasting
+            output = output / peak
+            output = output.clamp(-1, 1).mul(32767).to(torch.int16).cpu()
 
-            sample_size = output.shape[1] // BATCH_SIZE  # Compute the size of each sample
-            output = output.view(BATCH_SIZE, 2, sample_size)  # Reshape into (4, sample_size)
-
-            # Save each sample separately
             for j, sample in enumerate(output):
                 filename = f"{OUTPUT_PATH}/prompt_{i}_step_{step_count}_batch_{batch}_sample_{j}.wav"
                 torchaudio.save(filename, sample, sample_rate)
                 print(f"Saved {filename}")
+
     batch_end_time = time.time()
     total_time = batch_end_time - batch_start_time
     if VERBOSE:
