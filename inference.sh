@@ -9,7 +9,7 @@
 #SBATCH -e logs/inference/train_G%j.err
 #SBATCH --gres=gpu:1
 #SBATCH --constraint=ampere
-#SBATCH -J dont_at_me_please
+#SBATCH -J diffusion_inference
 
 module load cuda cudnn
 python pipeline/diffusion/generate.py

@@ -9,7 +9,7 @@
 #SBATCH -e logs/inference/train_G%j.err
 #SBATCH --gres=gpu:1
 #SBATCH --constraint=ampere
-#SBATCH -J dont_at_me_please
+#SBATCH -J embeddings_generation
 
 module load cuda cudnn
 python pipeline/embeddings/generate_embeddings.py
