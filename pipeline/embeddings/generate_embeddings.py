@@ -1,59 +1,47 @@
-import numpy as np
-import librosa
+from transformers import ClapModel, ClapProcessor
 import torch
-import laion_clap
+import torchaudio
+import numpy as np
 
-# quantization
-def int16_to_float32(x):
-    return (x / 32767.0).astype(np.float32)
+SAMPLE_DIR = 'data/diffusion'
+OUTPUT_DIR = 'data/embeddings'
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
-def float32_to_int16(x):
-    x = np.clip(x, a_min=-1., a_max=1.)
-    return (x * 32767.).astype(np.int16)
+# Load the model and processor
+model = ClapModel.from_pretrained("laion/larger_clap_music").to(DEVICE)
+processor = ClapProcessor.from_pretrained("laion/larger_clap_music")
 
-model = laion_clap.CLAP_Module(enable_fusion=False)
-model.load_ckpt() # download the default pretrained checkpoint.
+audio_path = f'{SAMPLE_DIR}/prompt_0_step_50_batch_0_sample_0.wav'
 
-# Directly get audio embeddings from audio files
-audio_file = [
-    'data/diffusion/prompt_0_step_50_batch_0_sample_0.wav'
-]
-audio_embed = model.get_audio_embedding_from_filelist(x = audio_file, use_tensor=False)
-print(audio_embed[:,-20:])
+def preprocess_audio(audio_path):
+    # Load the audio file
+    audio_input, sr = torchaudio.load(audio_path)
+    # If there are multiple channels, squeeze to a single channel
+    if audio_input.shape[0] > 1:
+        audio_input = torch.mean(audio_input, dim=0, keepdim=True)
+    # Resample to 48kHz
+    resampler = torchaudio.transforms.Resample(orig_freq=sr, new_freq=48000)
+    audio_input = resampler(audio_input)
+    # Truncate to the first 10 seconds (480,000 samples)
+    if audio_input.shape[-1] > 480000:
+        audio_input = audio_input[..., :480000]
+    return audio_input
+
+# Preprocess the audio file
+sample = preprocess_audio(audio_path)
+
+# Convert to numpy float32 array for the processor
+sample_np = sample.cpu().numpy().astype(np.float32)
+
+# IMPORTANT: Pass the sampling_rate argument to the processor
+inputs = processor(audios=sample_np, sampling_rate=48000, return_tensors="pt")
+inputs = {k: v.to(DEVICE) for k, v in inputs.items()}
+
+# Generate audio embedding
+audio_embed = model.get_audio_features(**inputs)
+
+# Save the audio embedding
+embedding = audio_embed.cpu().detach().numpy()
+np.save(f'{OUTPUT_DIR}/CLAP/audio_embedding.npy', embedding)
+
 print(audio_embed.shape)
-
-# Get audio embeddings from audio data
-audio_data, _ = librosa.load('/home/data/test_clap_short.wav', sr=48000) # sample rate should be 48000
-audio_data = audio_data.reshape(1, -1) # Make it (1,T) or (N,T)
-audio_embed = model.get_audio_embedding_from_data(x = audio_data, use_tensor=False)
-print(audio_embed[:,-20:])
-print(audio_embed.shape)
-
-# Directly get audio embeddings from audio files, but return torch tensor
-audio_file = [
-    '/home/data/test_clap_short.wav',
-    '/home/data/test_clap_long.wav'
-]
-audio_embed = model.get_audio_embedding_from_filelist(x = audio_file, use_tensor=True)
-print(audio_embed[:,-20:])
-print(audio_embed.shape)
-
-# Get audio embeddings from audio data
-audio_data, _ = librosa.load('/home/data/test_clap_short.wav', sr=48000) # sample rate should be 48000
-audio_data = audio_data.reshape(1, -1) # Make it (1,T) or (N,T)
-audio_data = torch.from_numpy(int16_to_float32(float32_to_int16(audio_data))).float() # quantize before send it in to the model
-audio_embed = model.get_audio_embedding_from_data(x = audio_data, use_tensor=True)
-print(audio_embed[:,-20:])
-print(audio_embed.shape)
-
-# Get text embedings from texts:
-text_data = ["I love the contrastive learning", "I love the pretrain model"] 
-text_embed = model.get_text_embedding(text_data)
-print(text_embed)
-print(text_embed.shape)
-
-# Get text embedings from texts, but return torch tensor:
-text_data = ["I love the contrastive learning", "I love the pretrain model"] 
-text_embed = model.get_text_embedding(text_data, use_tensor=True)
-print(text_embed)
-print(text_embed.shape)
