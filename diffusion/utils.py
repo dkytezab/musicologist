@@ -29,7 +29,7 @@ def get_conditioning_dict(
 
 def save_audio(
         audio,
-        index: int,
+        prompt_index: int,
         steps: int,
         batch: int,
         sample_rate: float,
@@ -42,7 +42,7 @@ def save_audio(
     
     for j, sample in enumerate(audio):
 
-        filename = f"{output_dir}/sample_{j}.wav"
+        filename = f"{output_dir}/prompt_{prompt_index}/sample_{j}.wav"
         torchaudio.save(filename, sample, sample_rate)
 
         if verbose:
