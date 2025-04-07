@@ -2,10 +2,11 @@ import torch
 import torchaudio
 import numpy as np
 from pathlib import Path
-from load_model import get_model
+from load_model import get_embed_model
 from transformers import ClapModel, ClapProcessor, AutoProcessor, MusicgenForConditionalGeneration
 from muq import MuQMuLan
 import librosa
+from typing import Optional
 
 
 def preprocess_audio(
@@ -64,8 +65,8 @@ def get_embedding(
 
 def save_embeddings(
         audio_embeds,
-        out_dir: None,
         diff_timestep: int,
+        out_dir: Optional[str] = None,
         ) -> None:
     
     audio_tensor = torch.stack(audio_embeds)

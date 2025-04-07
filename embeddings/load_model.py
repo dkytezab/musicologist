@@ -1,13 +1,13 @@
 from transformers import ClapModel, ClapProcessor, AutoProcessor, MusicgenForConditionalGeneration
 from muq import MuQMuLan
 import torch
-from typing import Tuple
+from typing import Tuple, Optional
 
 
-def get_model(
+def get_embed_model(
     model_name: str = "laion-clap",
     device: str = "cuda" if torch.cuda.is_available() else "cpu",
-): # type: ignore
+) -> Tuple[ClapModel or MuQMuLan or MusicgenForConditionalGeneration, Optional[AutoProcessor]]: # type: ignore
     # Loads in a user-specified model
     
     if model_name == "laion-clap":
@@ -31,4 +31,4 @@ def get_model(
     # Add more models here in the future, maybe jukebox layers?
 
     else:
-        raise ValueError("Specified model not presently supported")
+        raise ValueError("Specified embeddings model not presently supported")
