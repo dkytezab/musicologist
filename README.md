@@ -4,6 +4,11 @@ Unsupervised concept identification from diffusion-generated audio using represe
 conda env create -f requirements.yml
 conda activate musicologist
 ```
+To access Stable Audio 1.0, go to the [model card](https://huggingface.co/stabilityai/stable-audio-open-1.0) on HuggingFace and fill out the access form. Then run
+```
+huggingface-cli login
+```
+And enter your HuggingFace access token.
 
 
 ## citations
