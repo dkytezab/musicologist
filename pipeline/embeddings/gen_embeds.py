@@ -7,6 +7,7 @@ from transformers import ClapModel, ClapProcessor, AutoProcessor, MusicgenForCon
 from muq import MuQMuLan
 import librosa
 import yaml
+import os
 
 from load_model import get_model
 from utils import preprocess_audio, get_embedding, save_embeddings
@@ -29,7 +30,7 @@ if __name__ == "__main__":
         AUDIO_DIR = f'{AUDIO_DIR}/{diff_timestep}'
         audio_embeds = []
 
-        for audio_path in AUDIO_DIR:
+        for audio_path in os.listdir(AUDIO_DIR):
 
             audio_embed = get_embedding(
                 audio_path=audio_path,
