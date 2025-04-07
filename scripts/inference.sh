@@ -12,4 +12,4 @@
 #SBATCH -J diffusion_inference
 
 module load cuda cudnn
-python pipeline/diffusion/generate.py
+python diffusion/generate.py

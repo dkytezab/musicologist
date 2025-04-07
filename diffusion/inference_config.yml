@@ -1,7 +1,7 @@
 ---
 batch_size: 4
 num_batches: 1
-prompt_path: 'pipeline/diffusion/prompt.txt'
+prompt_path: 'diffusion/prompt.txt'
 output_path: 'data/diffusion'
 steps:
   - 100

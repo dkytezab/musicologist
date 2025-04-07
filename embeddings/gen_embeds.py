@@ -12,7 +12,7 @@ import os
 from load_model import get_model
 from utils import preprocess_audio, get_embedding, save_embeddings
 
-with open("pipeline/embeddings/embed_config.yml", "r") as file:
+with open("embeddings/embed_config.yml", "r") as file:
     embed_config = yaml.safe_load(file)
 
 MODEL = embed_config['model']

@@ -7,7 +7,7 @@ from stable_audio_tools import get_pretrained_model
 from stable_audio_tools.inference.generation import generate_diffusion_cond
 
 # Load args from config file
-with open('pipeline/diffusion/inference_config.yml', 'r') as file:
+with open('diffusion/inference_config.yml', 'r') as file:
     config = yaml.safe_load(file)
 
 NUM_BATCHES = config['num_batches']

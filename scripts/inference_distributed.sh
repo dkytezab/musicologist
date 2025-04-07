@@ -12,4 +12,4 @@
 #SBATCH -J dist_diffusion_inference
 
 module load cuda cudnn
-torchrun --nproc_per_node=2 pipeline/diffusion/generate_distributed.py
+torchrun --nproc_per_node=2 diffusion/generate_distributed.py
