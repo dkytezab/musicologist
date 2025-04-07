@@ -1,9 +1,0 @@
----
-batch_size: 4
-num_batches: 1
-prompt_path: 'diffusion/prompt.txt'
-output_path: 'data/diffusion'
-steps:
-  - 100
-sample_length: 30
-verbose: true
