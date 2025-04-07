@@ -4,7 +4,7 @@ model_name: "stable-diffusion"
 batch_size: 4
 num_batches: 1
 
-prompt_path: 'diffusion/prompt.txt'
+prompt_path: 'data/prompt.txt'
 output_dir: 'data/audio'
 
 steps: 100
