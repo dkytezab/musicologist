@@ -61,7 +61,7 @@ if __name__ == "__main__":
                 save_audio(
                     audio=output,
                     output_dir=OUTPUT_DIR,
-                    index=i,
+                    prompt_index=i,
                     steps=step_count,
                     batch=batch,
                     sample_rate=sample_rate,
