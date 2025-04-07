@@ -1,0 +1,6 @@
+---
+model: 'laion-clap'
+audio_dir: 'pipeline/data/audio'
+output_dir: 'pipeline/data/embeddings'
+num_seconds: 10
+num_diffusion_timesteps: 8

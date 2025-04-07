@@ -64,16 +64,16 @@ def get_embedding(
 
 def save_embeddings(
         audio_embeds,
-        out_path: None,
+        out_dir: None,
         diff_timestep: int,
         ) -> None:
     
     audio_tensor = torch.stack(audio_embeds)
     
-    if out_path == None:
+    if out_dir == None:
         out_path = f'pipeline/data/embeddings/{diff_timestep}_embeddings.pt'
         
     else:
-        out_path = f'{out_path}/{diff_timestep}_embeddings.pt'
+        out_path = f'{out_dir}/{diff_timestep}_embeddings.pt'
     
     torch.save(audio_tensor, out_path)
