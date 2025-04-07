@@ -9,7 +9,7 @@ import librosa
 import yaml
 import os
 
-from load_model import get_model
+from load_model import get_embed_model
 from utils import preprocess_audio, get_embedding, save_embeddings
 
 with open("embeddings/embed_config.yml", "r") as file:
@@ -23,7 +23,7 @@ NUM_DIFFUSION_TIMESTEPS = embed_config['num_diffusion_timesteps']
 
 if __name__ == "__main__":
 
-    model, processor = get_model(model_name=MODEL)
+    model, processor = get_embed_model(model_name=MODEL)
 
     for diff_timestep in range(NUM_DIFFUSION_TIMESTEPS):
 
