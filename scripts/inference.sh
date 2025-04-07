@@ -12,4 +12,4 @@
 #SBATCH -J diffusion_inference
 
 module load cuda cudnn
-python diffusion/generate.py
+python diffusion/gen_audio.py

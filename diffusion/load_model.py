@@ -5,7 +5,7 @@ from typing import Tuple, Optional
 def get_diff_model(
         model_name: str = "stable-diffusion",
         device: str = "cuda" if torch.cuda.is_available() else "cpu",
-        ) -> Tuple[]: # type: ignore
+        ) -> Tuple: # type: ignore
     
     if model_name == "stable-diffusion":
         model_path = "stabilityai/stable-audio-open-1.0"

@@ -5,7 +5,7 @@ import time
 from einops import rearrange
 from stable_audio_tools import get_pretrained_model
 from stable_audio_tools.inference.generation import generate_diffusion_cond
-from typing import bool, Dict, Optional
+from typing import Dict, Optional
 
 from load_model import get_diff_model
 from utils import get_conditioning_dict, diff_gen_flexible, save_audio
@@ -14,7 +14,7 @@ from utils import get_conditioning_dict, diff_gen_flexible, save_audio
 with open('diffusion/diff_config.yml', 'r') as file:
     config = yaml.safe_load(file)
 
-MODEL_NAME = config['stable-diffusion']
+MODEL_NAME = config['model_name']
 
 NUM_BATCHES = config['num_batches']
 BATCH_SIZE = config['batch_size']
