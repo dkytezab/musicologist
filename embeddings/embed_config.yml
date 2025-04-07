@@ -1,6 +1,10 @@
 ---
 model: 'laion-clap'
-audio_dir: 'data/audio'
-output_dir: 'data/embeddings'
+
+audio_dir: 'data/generated'
+output_dir: 'data/generated'
+
 num_seconds: 10
-num_diffusion_timesteps: 8
+steps:
+  - 10
+  - 20

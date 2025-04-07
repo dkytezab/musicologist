@@ -35,6 +35,7 @@ def get_embedding(
         audio_path,
         model,
         processor: None,
+        model_name: str = "laion-clap",
         device: str = "cuda" if torch.cuda.is_available() else "cpu",
         khz_freq: int = 48000,
         num_seconds: int = 10,
@@ -46,17 +47,18 @@ def get_embedding(
                               )
     sample_np = sample.cpu().numpy().astype(np.float32)
 
-    if model == MuQMuLan:
+    if model_name == "muq-mulan":
         model = model.to(device).eval()
         inputs = torch.tensor(sample_np).unsqueeze(0).to(device)
         with torch.no_grad():
             audio_embed = model(wavs = inputs).squeeze(0).cpu()
         
 
-    elif model == ClapModel:
-        inputs = torch.from_numpy(processor(audios=sample_np, sampling_rate=48000, return_tensors="pt")).float()
-        audio_embed = model.get_audio_embedding_from_data(x = inputs, use_tensor=True)
-        return audio_embed.squeez(0).cpu()
+    elif model_name == "laion-clap":
+        inputs = processor(audios=sample_np, sampling_rate=48000, return_tensors="pt")
+        inputs = {k: v.to(device) for k, v in inputs.items()}
+        audio_embed = model.get_audio_features(**inputs)
+        return audio_embed.squeeze(0).cpu()
 
 
     else:
@@ -64,6 +66,7 @@ def get_embedding(
 
 
 def save_embeddings(
+        model_name,
         audio_embeds,
         diff_timestep: int,
         out_dir: Optional[str] = None,
@@ -72,9 +75,9 @@ def save_embeddings(
     audio_tensor = torch.stack(audio_embeds)
     
     if out_dir == None:
-        out_path = f'data/embeddings/{diff_timestep}_embeddings.pt'
+        out_path = f'data/generated/diff_step_{diff_timestep}/{model_name}_embeddings.pt'
         
     else:
-        out_path = f'{out_dir}/{diff_timestep}_embeddings.pt'
+        out_path = f'{out_dir}/diff_step_{diff_timestep}/{model_name}_embeddings.pt'
     
     torch.save(audio_tensor, out_path)

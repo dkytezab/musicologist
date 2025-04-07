@@ -42,7 +42,7 @@ def save_audio(
     
     for j, sample in enumerate(audio):
 
-        filename = f"{output_dir}/prompt_{prompt_index}/sample_{j}.wav"
+        filename = f"{output_dir}/diff_step_{steps}/prompt_{prompt_index}_sample_{j}.wav"
         torchaudio.save(filename, sample, sample_rate)
 
         if verbose:

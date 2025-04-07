@@ -12,4 +12,4 @@
 #SBATCH -J embeddings_generation
 
 module load cuda cudnn
-python pipeline/embeddings/generate_embeddings.py
+python embeddings/gen_embeds.py

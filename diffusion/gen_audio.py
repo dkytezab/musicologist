@@ -46,11 +46,11 @@ if __name__ == "__main__":
 
         for i, condition in enumerate(conditioning):
 
-            for step_count in STEPS:
+            for step in STEPS:
 
                 output = diff_gen_flexible(
                     model=model,
-                    steps=step_count,
+                    steps=step,
                     index=i,
                     condition=condition,
                     batch_size=BATCH_SIZE,
@@ -62,7 +62,7 @@ if __name__ == "__main__":
                     audio=output,
                     output_dir=OUTPUT_DIR,
                     prompt_index=i,
-                    steps=step_count,
+                    steps=step,
                     batch=batch,
                     sample_rate=sample_rate,
                     verbose=VERBOSE,
