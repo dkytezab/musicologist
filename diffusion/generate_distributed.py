@@ -16,7 +16,7 @@ local_rank = torch.distributed.get_rank()
 device = torch.device(f"cuda:{local_rank}")
 
 # Load args from config file
-with open('pipeline/diffusion/inference_config.yml', 'r') as file:
+with open('diffusion/inference_config.yml', 'r') as file:
     config = yaml.safe_load(file)
 
 NUM_BATCHES = config['num_batches']
