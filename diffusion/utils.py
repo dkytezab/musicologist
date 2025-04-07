@@ -1,4 +1,5 @@
 from typing import Optional, Dict
+import os
 import torch
 import torchaudio
 from stable_audio_tools import get_pretrained_model
@@ -43,6 +44,7 @@ def save_audio(
     for j, sample in enumerate(audio):
 
         filename = f"{output_dir}/prompt_{prompt_index}/sample_{j}.wav"
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
         torchaudio.save(filename, sample, sample_rate)
 
         if verbose:
