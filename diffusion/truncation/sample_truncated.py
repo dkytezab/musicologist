@@ -1,13 +1,15 @@
 # Based on Karras et al. (2022) diffusion models for PyTorch
 import torch
-from k_diffusion import BrownianTreeNoiseSampler
+import k_diffusion as K
+from k_diffusion.sampling import BrownianTreeNoiseSampler
 from tqdm.auto import trange, tqdm
+from stable_audio_tools.inference.sampling import make_cond_model_fn, t_to_alpha_sigma
 
 @torch.no_grad()
 def sample_dpmpp_2m_sde_truncated(model,
                                   x,
                                   sigmas,
-                                  truncation_t,
+                                  truncation_t=None,
                                   extra_args=None,
                                   callback=None,
                                   disable=None,
@@ -16,6 +18,11 @@ def sample_dpmpp_2m_sde_truncated(model,
                                   noise_sampler=None,
                                   solver_type='midpoint'):
     """DPM-Solver++(2M) SDE."""
+    print(f"USING TRUNCATED SAMPLING WITH {truncation_t}")
+    if truncation_t is None:
+        truncation_t = len(sigmas) - 1
+    elif truncation_t >= len(sigmas) - 1:
+        truncation_t = len(sigmas) - 1
 
     if solver_type not in {'heun', 'midpoint'}:
         raise ValueError('solver_type must be \'heun\' or \'midpoint\'')
@@ -28,9 +35,7 @@ def sample_dpmpp_2m_sde_truncated(model,
     old_denoised = None
     h_last = None
 
-    for i in trange(len(sigmas) - 1, disable=disable):
-        if i >= truncation_t:
-            break
+    for i in trange(truncation_t, disable=disable):
         denoised = model(x, sigmas[i] * s_in, **extra_args)
         if callback is not None:
             callback({'x': x, 'i': i, 'sigma': sigmas[i], 'sigma_hat': sigmas[i], 'denoised': denoised})
@@ -58,3 +63,47 @@ def sample_dpmpp_2m_sde_truncated(model,
         old_denoised = denoised
         h_last = h
     return x
+
+def sample_k_truncated(
+        model_fn, 
+        noise, 
+        truncation_t=None,
+        init_data=None,
+        steps=100, 
+        sampler_type="dpmpp-2m-sde", 
+        sigma_min=0.01, 
+        sigma_max=100, 
+        rho=1.0, 
+        device="cuda", 
+        callback=None, 
+        cond_fn=None,
+        **extra_args
+    ):
+
+    print(f"sample_k_truncated w/ {truncation_t}")
+    is_k_diff = sampler_type in ["k-heun", "k-lms", "k-dpmpp-2s-ancestral", "k-dpm-2", "k-dpm-fast", "k-dpm-adaptive", "dpmpp-2m-sde", "dpmpp-3m-sde","dpmpp-2m"]
+
+    if is_k_diff:
+
+        denoiser = K.external.VDenoiser(model_fn)
+
+        if cond_fn is not None:
+            denoiser = make_cond_model_fn(denoiser, cond_fn)
+
+        # Make the list of sigmas. Sigma values are scalars related to the amount of noise each denoising step has
+        sigmas = K.sampling.get_sigmas_polyexponential(steps, sigma_min, sigma_max, rho, device=device)
+        # Scale the initial noise by sigma 
+        noise = noise * sigmas[0]
+
+        if init_data is not None:
+            # set the initial latent to the init_data, and noise it with initial sigma
+            x = init_data + noise 
+        else:
+            # SAMPLING
+            # set the initial latent to noise
+            x = noise
+
+        return sample_dpmpp_2m_sde_truncated(denoiser, x, sigmas, truncation_t=truncation_t, disable=False, callback=callback, extra_args=extra_args)
+        
+    else:
+        raise ValueError(f"Unknown sampler type {sampler_type}")
