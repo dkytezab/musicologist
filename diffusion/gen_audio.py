@@ -25,6 +25,7 @@ OUTPUT_DIR = config['output_dir']
 SAMPLE_LENGTH = config['sample_length']
 STEPS = config['steps']
 EARLY_STOPPING = config['early_stopping']
+TRUNCATION_T = config['truncation_t']
 VERBOSE = config['verbose']
 
 if __name__ == "__main__":
@@ -55,6 +56,7 @@ if __name__ == "__main__":
                     condition=condition,
                     batch_size=BATCH_SIZE,
                     sample_size=sample_size,
+                    truncation_t=TRUNCATION_T,
                     early_stopping=EARLY_STOPPING,
                 )
 

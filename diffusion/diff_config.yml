@@ -8,7 +8,8 @@ prompt_path: 'data/prompt.txt'
 output_dir: 'data/audio'
 
 steps:
-  - 100
+  - 50
 sample_length: 30
-early_stopping: False
+early_stopping: True
+truncation_t: 45
 verbose: true

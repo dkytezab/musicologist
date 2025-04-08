@@ -4,6 +4,7 @@ import torch
 import torchaudio
 from stable_audio_tools import get_pretrained_model
 from stable_audio_tools.inference.generation import generate_diffusion_cond
+from truncation.gen_truncated import generate_diffusion_cond_truncated
 
 def get_conditioning_dict(
         seconds_total: int,
@@ -64,12 +65,35 @@ def diff_gen_flexible(
         cfg_scale: int = 7,
         sampler_type: str = "dpmpp-3m-sde",
         early_stopping: bool = False,
+        truncation_t = None,
         device: str = "cuda" if torch.cuda.is_available() else "cpu",
 ):
     # Allows for implementation of generation with and without early_stopping
     
     if early_stopping:
-        raise ValueError("Early stopping not presently implemented")
+        print(f"STOPPING EARLY AT {truncation_t}")
+        cond_expanded = [condition] * batch_size
+        output = generate_diffusion_cond_truncated(
+                model,
+                steps=steps,
+                cfg_scale=7,
+                truncation_t=truncation_t,
+                conditioning=cond_expanded,
+                sample_size=sample_size,
+                sigma_min=0.3,
+                sigma_max=500,
+                sampler_type="dpmpp-3m-sde",
+                device=device,
+                batch_size=batch_size,
+            ).to(torch.float32)
+        
+        peak = output.abs().view(output.size(0), -1).max(dim=1, keepdim=True).values
+        peak = peak.view(-1, 1, 1)
+        output = output / peak
+        output = output.clamp(-1, 1).mul(32767).to(torch.int16).cpu()
+
+        return output
+        # raise ValueError("Early stopping not presently implemented")
     
     else:
         cond_expanded = [condition] * batch_size
