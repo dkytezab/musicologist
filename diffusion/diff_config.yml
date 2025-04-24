@@ -1,15 +1,19 @@
 ---
 model_name: "stable-diffusion"
 
-batch_size: 4
+batch_size: 1
 num_batches: 1
 
-prompt_path: 'data/prompt.txt'
+prompt_path: 'data/prompt_test.txt'
 output_dir: 'data/audio'
 
 steps:
   - 50
 sample_length: 30
 early_stopping: True
-truncation_t: 45
+truncation_ts:
+  - 49
+  - 48
+  - 47
+  - 20
 verbose: true

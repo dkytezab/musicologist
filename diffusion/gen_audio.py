@@ -25,7 +25,7 @@ OUTPUT_DIR = config['output_dir']
 SAMPLE_LENGTH = config['sample_length']
 STEPS = config['steps']
 EARLY_STOPPING = config['early_stopping']
-TRUNCATION_T = config['truncation_t']
+TRUNCATION_TS = config['truncation_ts']
 VERBOSE = config['verbose']
 
 if __name__ == "__main__":
@@ -49,21 +49,22 @@ if __name__ == "__main__":
 
             for step_count in STEPS:
 
-                output = diff_gen_flexible(
+                outputs = diff_gen_flexible(
                     model=model,
                     steps=step_count,
                     index=i,
                     condition=condition,
                     batch_size=BATCH_SIZE,
                     sample_size=sample_size,
-                    truncation_t=TRUNCATION_T,
+                    truncation_ts=TRUNCATION_TS,
                     early_stopping=EARLY_STOPPING,
                 )
 
                 save_audio(
-                    audio=output,
+                    audios=outputs,
                     output_dir=OUTPUT_DIR,
                     prompt_index=i,
+                    truncation_ts=TRUNCATION_TS,
                     steps=step_count,
                     batch=batch,
                     sample_rate=sample_rate,
