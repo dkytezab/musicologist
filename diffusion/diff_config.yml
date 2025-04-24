@@ -5,7 +5,7 @@ batch_size: 1
 num_batches: 1
 
 prompt_path: 'data/prompt_test.txt'
-output_dir: 'data/audio'
+output_dir: 'data/generated'
 
 steps:
   - 50

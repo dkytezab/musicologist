@@ -41,13 +41,15 @@ def save_audio(
     ) -> None:
 
     if output_dir == None:
-        output_dir = 'data/audio'
+        output_dir = 'data/generated'
     
     for i, audio in enumerate(audios):
         for j, sample in enumerate(audio):
 
-            filename = f"{output_dir}/prompt_{prompt_index}/sample_{j}_truncation_{truncation_ts[len(truncation_ts) - i - 1]}.wav"
-            os.makedirs(os.path.dirname(filename), exist_ok=True)
+            #filename = f"{output_dir}/prompt_{prompt_index}/sample_{j}_truncation_{truncation_ts[len(truncation_ts) - i - 1]}.wav"
+            # os.makedirs(os.path.dirname(filename), exist_ok=True)
+
+            filename = f"{output_dir}/diff_step_{truncation_ts[len(truncation_ts) - i - 1]}/steps_{steps}_prompt_{prompt_index}_sample_{j}.wav"
             torchaudio.save(filename, sample.cpu(), sample_rate)
 
             if verbose:
