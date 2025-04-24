@@ -11,6 +11,10 @@ cleanclips:
 cleanembeds:
 	find . -type f -name '*.pt' -delete
 
+# cleaviz: cleans the produced scatter plots
+cleanviz:
+	find viz/outputs -type f -name '*.png' -delete
+
 # initgen: sets-up the data directory as desired
 initgen:
 	mkdir -p data/generated
