@@ -245,7 +245,7 @@ def generate_truncated_seq(
 
     if diff_objective == "v":    
         # k-diffusion denoising process go!
-        sampled = sample_k_truncated_seq(model.model, noise, truncation_ts, init_audio, steps, **sampler_kwargs, **conditioning_inputs, **negative_conditioning_tensors, cfg_scale=cfg_scale, batch_cfg=True, rescale_cfg=True, device=device)
+        sampled_seq = sample_k_truncated_seq(model.model, noise, truncation_ts, init_audio, steps, **sampler_kwargs, **conditioning_inputs, **negative_conditioning_tensors, cfg_scale=cfg_scale, batch_cfg=True, rescale_cfg=True, device=device)
 
     # elif diff_objective == "rectified_flow":
 
@@ -265,10 +265,15 @@ def generate_truncated_seq(
     torch.cuda.empty_cache()
     # Denoising process done. 
     # If this is latent diffusion, decode latents back into audio
+    out = []
+
     if model.pretransform is not None and not return_latents:
+
         #cast sampled latents to pretransform dtype
-        sampled = sampled.to(next(model.pretransform.parameters()).dtype)
-        sampled = model.pretransform.decode(sampled)
+        for sampled in sampled_seq:
+            sampled = sampled.to(next(model.pretransform.parameters()).dtype)
+            sampled = model.pretransform.decode(sampled)
+            out.append(sampled)
 
     # Return audio
-    return sampled
+    return out

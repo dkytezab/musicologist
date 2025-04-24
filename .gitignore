@@ -2,3 +2,4 @@
 *.pt
 *.err
 *.out
+*.pyc

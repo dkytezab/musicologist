@@ -3,7 +3,7 @@ cleanlogs:
 	find . -type f -name '*.err' -delete
 	find . -type f -name '*.out' -delete
 
-# cleandata: gets rid of all the .pt files
+# cleandata: gets rid of all the .wav files
 cleanclips:
 	find . -type f -name '*.wav' -delete
 

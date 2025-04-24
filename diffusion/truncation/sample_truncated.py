@@ -4,6 +4,7 @@ import k_diffusion as K
 from k_diffusion.sampling import BrownianTreeNoiseSampler
 from tqdm.auto import trange, tqdm
 from stable_audio_tools.inference.sampling import make_cond_model_fn, t_to_alpha_sigma
+import typing as tp
 
 @torch.no_grad()
 def sample_dpmpp_2m_sde_truncated(model,
@@ -75,12 +76,11 @@ def sample_dpmpp_2m_sde_truncated_seq(model,
                                   eta=1.,
                                   s_noise=1.,
                                   noise_sampler=None,
-                                  solver_type='midpoint'):
+                                  solver_type='midpoint'
+    ) -> tp.List[torch.Tensor]:
     """DPM-Solver++(2M) SDE."""
-    if truncation_t is None:
-        truncation_t = len(sigmas) - 1
-    elif truncation_t >= len(sigmas) - 1:
-        truncation_t = len(sigmas) - 1
+    if truncation_ts is None:
+        return [sample_dpmpp_2m_sde_truncated(model, x, sigmas, extra_args=extra_args, callback=callback, disable=disable, eta=eta, s_noise=s_noise, noise_sampler=noise_sampler, solver_type=solver_type)]
 
     if solver_type not in {'heun', 'midpoint'}:
         raise ValueError('solver_type must be \'heun\' or \'midpoint\'')
@@ -93,7 +93,10 @@ def sample_dpmpp_2m_sde_truncated_seq(model,
     old_denoised = None
     h_last = None
 
-    for i in trange(truncation_t, disable=disable):
+    outs = []
+
+    for i in trange(len(sigmas) - 1, disable=disable):
+
         denoised = model(x, sigmas[i] * s_in, **extra_args)
         if callback is not None:
             callback({'x': x, 'i': i, 'sigma': sigmas[i], 'sigma_hat': sigmas[i], 'denoised': denoised})
@@ -120,8 +123,12 @@ def sample_dpmpp_2m_sde_truncated_seq(model,
 
         old_denoised = denoised
         h_last = h
-    return x
 
+        if truncation_ts is not None and i in truncation_ts:
+            outs.append(denoised)
+
+    return outs
+ 
 def sample_k_truncated(
         model_fn, 
         noise, 
