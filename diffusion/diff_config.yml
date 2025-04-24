@@ -1,15 +1,15 @@
 ---
 model_name: "stable-diffusion"
 
-batch_size: 16
+batch_size: 15
 num_batches: 1
 
 prompt_path: 'data/prompt.txt'
 output_dir: 'data/generated'
 
 steps:
-  - 10
-  - 20
+  - 30
+  - 50
 sample_length: 30
 early_stopping: False
 verbose: true

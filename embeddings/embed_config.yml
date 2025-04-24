@@ -1,10 +1,11 @@
 ---
-model: 'laion-clap'
+models: 
+- 'laion-clap'
+- 'muq-mulan'
 
 audio_dir: 'data/generated'
 output_dir: 'data/generated'
 
 num_seconds: 10
 steps:
-  - 10
-  - 20
+  - 100

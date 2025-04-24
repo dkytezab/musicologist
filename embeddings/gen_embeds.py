@@ -11,10 +11,11 @@ import os
 from load_model import get_embed_model
 from utils import preprocess_audio, get_embedding, save_embeddings
 
+
 with open("embeddings/embed_config.yml", "r") as file:
     embed_config = yaml.safe_load(file)
 
-MODEL = embed_config['model']
+MODELS = embed_config['models']
 AUDIO_DIR = embed_config['audio_dir']
 OUTPUT_DIR = embed_config['output_dir']
 NUM_SECONDS = embed_config['num_seconds']
@@ -22,29 +23,37 @@ STEPS = embed_config['steps']
 
 if __name__ == "__main__":
 
-    model, processor = get_embed_model(model_name=MODEL)
+    for MODEL in MODELS:
 
-    for diff_timestep in STEPS:
+        model, processor = get_embed_model(model_name=MODEL)
 
-        TEMP_AUDIO_DIR = f'{AUDIO_DIR}/diff_step_{diff_timestep}'
+        for diff_timestep in STEPS:
 
-        audio_embeds = []
-        audio_paths = [f for f in os.listdir(TEMP_AUDIO_DIR) if f.endswith('.wav')]
+            TEMP_AUDIO_DIR = f'{AUDIO_DIR}/diff_step_{diff_timestep}'
 
-        for audio_path in audio_paths:
+            audio_embeds = []
+            audio_paths = [f for f in os.listdir(TEMP_AUDIO_DIR) if f.endswith('.wav')]
 
-            audio_embed = get_embedding(
-                audio_path=f'{TEMP_AUDIO_DIR}/{audio_path}',
-                model=model,
+            for audio_path in audio_paths:
+
+                audio_embed = get_embedding(
+                    audio_path=f'{TEMP_AUDIO_DIR}/{audio_path}',
+                    model=model,
+                    model_name=MODEL,
+                    processor=processor,
+                    num_seconds=NUM_SECONDS,
+                )
+                audio_embeds.append(audio_embed)
+            
+            save_embeddings(
                 model_name=MODEL,
-                processor=processor,
-                num_seconds=NUM_SECONDS,
+                audio_embeds=audio_embeds,
+                out_dir=OUTPUT_DIR,
+                diff_timestep=diff_timestep,
             )
-            audio_embeds.append(audio_embed)
+
+            del audio_embed, audio_embeds, audio_paths
+            torch.cuda.empty_cache()
         
-        save_embeddings(
-            model_name=MODEL,
-            audio_embeds=audio_embeds,
-            out_dir=OUTPUT_DIR,
-            diff_timestep=diff_timestep,
-        )
+        del model, processor
+        torch.cuda.empty_cache()

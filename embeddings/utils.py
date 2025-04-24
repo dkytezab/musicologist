@@ -47,11 +47,14 @@ def get_embedding(
                               )
     sample_np = sample.cpu().numpy().astype(np.float32)
 
+    del sample
+
     if model_name == "muq-mulan":
         model = model.to(device).eval()
-        inputs = torch.tensor(sample_np).unsqueeze(0).to(device)
+        inputs = torch.tensor(sample_np).to(device)
         with torch.no_grad():
             audio_embed = model(wavs = inputs).squeeze(0).cpu()
+        return audio_embed
         
 
     elif model_name == "laion-clap":
@@ -81,3 +84,4 @@ def save_embeddings(
         out_path = f'{out_dir}/diff_step_{diff_timestep}/{model_name}_embeddings.pt'
     
     torch.save(audio_tensor, out_path)
+    del audio_tensor, out_path, audio_embeds
