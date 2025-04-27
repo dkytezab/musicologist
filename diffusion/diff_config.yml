@@ -8,12 +8,9 @@ prompt_path: 'data/prompt_test.txt'
 output_dir: 'data/generated'
 
 steps:
-  - 50
+  - 100
 sample_length: 30
 early_stopping: True
 truncation_ts:
-  - 49
-  - 48
-  - 47
-  - 20
+ - 49
 verbose: true
