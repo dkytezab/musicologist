@@ -48,7 +48,7 @@ def save_audio(
 
             #filename = f"{output_dir}/prompt_{prompt_index}/sample_{j}_truncation_{truncation_ts[len(truncation_ts) - i - 1]}.wav"
 
-            filename = f"{output_dir}/diff_step_{truncation_ts[len(truncation_ts) - i - 1]}/steps_{steps}_prompt_{prompt_index}_sample_{j}.wav"
+            filename = f"{output_dir}/diff_step_{truncation_ts[i]}/steps_{steps}_prompt_{prompt_index}_sample_{j}.wav"
             os.makedirs(os.path.dirname(filename), exist_ok=True)
             torchaudio.save(filename, sample.cpu(), sample_rate)
 
