@@ -25,7 +25,8 @@ OUTPUT_DIR = config['output_dir']
 SAMPLE_LENGTH = config['sample_length']
 STEPS = config['steps']
 EARLY_STOPPING = config['early_stopping']
-TRUNCATION_TS = list(range(1, 100))
+TRUNCATION_TS = config['truncation_ts']
+CACHE_IDXS = config['cache_idxs']
 VERBOSE = config['verbose']
 
 if __name__ == "__main__":
@@ -58,6 +59,7 @@ if __name__ == "__main__":
                     sample_size=sample_size,
                     truncation_ts=TRUNCATION_TS,
                     early_stopping=EARLY_STOPPING,
+                    cache_idxs=CACHE_IDXS
                 )
 
                 save_audio(

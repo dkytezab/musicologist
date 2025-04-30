@@ -70,6 +70,7 @@ def diff_gen_flexible(
         sampler_type: str = "dpmpp-3m-sde",
         early_stopping: bool = False,
         truncation_ts = None,
+        cache_idxs = None,
         device: str = "cuda" if torch.cuda.is_available() else "cpu",
 ):
     # Allows for implementation of generation with and without early_stopping
@@ -90,6 +91,7 @@ def diff_gen_flexible(
                 sampler_type="dpmpp-3m-sde",
                 device=device,
                 batch_size=batch_size,
+                cache_idxs=cache_idxs
             )
         
         for i, output in enumerate(outputs):

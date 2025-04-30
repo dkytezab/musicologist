@@ -10,6 +10,7 @@ def get_diff_model(
     if model_name == "stable-diffusion":
         model_path = "stabilityai/stable-audio-open-1.0"
         model, model_config = get_pretrained_model(model_path)
+        print(model.model.model.transformer.layers[0])
         return model.to(device), model_config
     
     # Add more diffusion models here

@@ -1,16 +1,21 @@
 ---
 model_name: "stable-diffusion"
 
-batch_size: 1
+batch_size: 2
 num_batches: 1
 
-prompt_path: 'data/prompt_test.txt'
+prompt_path: 'data/prompts/musiccaps-balanced.txt'
 output_dir: 'data/generated'
 
 steps:
-  - 100
+  - 50
 sample_length: 30
 early_stopping: True
 truncation_ts:
+ - 1
+ - 25
  - 49
+cache_idxs:
+ - 2
+ - 10
 verbose: true
