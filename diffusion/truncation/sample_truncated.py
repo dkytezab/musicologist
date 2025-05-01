@@ -68,8 +68,6 @@ def sample_dpmpp_2m_sde_truncated_seq(model,
         if truncation_ts is not None and i in truncation_ts:
             outs.append(denoised)
 
-    cache.save(f"data/activations")
-    cache.clear()
     return outs
     
 def sample_k_truncated_seq(

@@ -59,7 +59,9 @@ if __name__ == "__main__":
                     sample_size=sample_size,
                     truncation_ts=TRUNCATION_TS,
                     early_stopping=EARLY_STOPPING,
-                    cache_idxs=CACHE_IDXS
+                    cache_idxs=CACHE_IDXS,
+                    prompt_idx=i,
+                    batch_idx=batch
                 )
 
                 save_audio(

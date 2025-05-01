@@ -1,3 +1,4 @@
+import os
 import torch
 import torch.nn as nn
 from typing import List, Optional
@@ -56,7 +57,10 @@ class ActivationCache:
         self.activations = {idx: { t: [None] * 2 for t in self.record_ts } for idx in self.layer_idxs}
         self.current_t = None
 
-    def save(self, path: str):
+    def save(self,
+             path: str,
+             prompt_idx: int = 0,
+             batch_idx: int = 0):
         """
         Save the cached activations to a .pt file.
         Args:
@@ -64,8 +68,8 @@ class ActivationCache:
         """
         for idx in self.layer_idxs:
             for t in self.record_ts:
-                out = self.activations[idx][t][1] - self.activations[idx][t][0]
+                out = self.activations[idx][t][1]
                 print(f"Layer {idx} | t = {t} | Shape: {out.shape}")
-                torch.save(out, f"diff_step_{t}/{path}/layer_{idx}.pt")
-
-    
+                filename = f"{path}/diff_step_{t}/layer_{idx}_prompt_{prompt_idx}_batch_{batch_idx}.pt"
+                os.makedirs(os.path.dirname(filename), exist_ok=True)
+                torch.save(out, filename)

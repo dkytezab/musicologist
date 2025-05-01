@@ -25,6 +25,8 @@ def generate_truncated_seq(
         init_noise_level: float = 1.0,
         return_latents = False,
         cache_idxs: tp.Optional[tp.List[int]] = None,
+        prompt_idx: int = 0,
+        batch_idx: int = 0,
         **sampler_kwargs
         ) -> torch.Tensor: 
     """
@@ -116,6 +118,9 @@ def generate_truncated_seq(
     if diff_objective == "v":    
         # k-diffusion denoising process go!
         sampled_seq = sample_k_truncated_seq(model.model, noise, truncation_ts, init_audio, steps, cache=cache, **sampler_kwargs, **conditioning_inputs, **negative_conditioning_tensors, cfg_scale=cfg_scale, batch_cfg=True, rescale_cfg=True, device=device)
+
+    cache.save(f"data/activations", prompt_idx=prompt_idx, batch_idx=batch_idx)
+    cache.clear()
 
     # elif diff_objective == "rectified_flow":
 
