@@ -24,8 +24,10 @@ OUTPUT_DIR = config['output_dir']
 
 SAMPLE_LENGTH = config['sample_length']
 STEPS = config['steps']
-EARLY_STOPPING = config['early_stopping']
-TRUNCATION_TS = list(range(1, 100))
+EXPERIMENT_TYPE = config['experiment_type']
+TRUNCATION_TS = config['truncation_ts']
+PERTURBATION_TS = config['perturbation_ts']
+N_PERTURBATIONS = config['n_perturbations']
 VERBOSE = config['verbose']
 
 if __name__ == "__main__":
@@ -41,37 +43,42 @@ if __name__ == "__main__":
         prompt_path=PROMPT_PATH,   
     )
 
-    for batch in range(NUM_BATCHES):
+    for t in PERTURBATION_TS:
 
-        batch_start_time = time.time()
+        for batch in range(NUM_BATCHES):
 
-        for i, condition in enumerate(conditioning):
+            batch_start_time = time.time()
 
-            for step_count in STEPS:
+            for i, condition in enumerate(conditioning):
+                
+                    outputs = diff_gen_flexible(
+                        model=model,
+                        steps=STEPS,
+                        index=i,
+                        condition=condition,
+                        batch_size=BATCH_SIZE,
+                        sample_size=sample_size,
+                        truncation_ts=TRUNCATION_TS,
+                        perturbation_t=t,
+                        n_perturbations=N_PERTURBATIONS,
+                        experiment_type=EXPERIMENT_TYPE,
+                    )
 
-                outputs = diff_gen_flexible(
-                    model=model,
-                    steps=step_count,
-                    index=i,
-                    condition=condition,
-                    batch_size=BATCH_SIZE,
-                    sample_size=sample_size,
-                    truncation_ts=TRUNCATION_TS,
-                    early_stopping=EARLY_STOPPING,
-                )
+                    print(len(outputs))
 
-                save_audio(
-                    audios=outputs,
-                    output_dir=OUTPUT_DIR,
-                    prompt_index=i,
-                    truncation_ts=TRUNCATION_TS,
-                    steps=step_count,
-                    batch=batch,
-                    sample_rate=sample_rate,
-                    verbose=VERBOSE,
-                )
+                    save_audio(
+                        audios=outputs,
+                        output_dir=OUTPUT_DIR,
+                        prompt_index=i,
+                        perturbation_t=t,
+                        truncation_ts=TRUNCATION_TS,
+                        batch=batch,
+                        sample_rate=sample_rate,
+                        verbose=VERBOSE,
+                        experiment_type=EXPERIMENT_TYPE,
+                    )
 
-        batch_end_time = time.time()
-        total_time = batch_end_time - batch_start_time
-        if VERBOSE:
-            print(f"Batch {batch} of {BATCH_SIZE} completed in {total_time:.2f} seconds, for {(total_time / BATCH_SIZE):.2f} s / sample.")
+            batch_end_time = time.time()
+            total_time = batch_end_time - batch_start_time
+            if VERBOSE:
+                print(f"Batch {batch} of {BATCH_SIZE} completed in {total_time:.2f} seconds, for {(total_time / BATCH_SIZE):.2f} s / sample.")

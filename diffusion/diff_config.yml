@@ -5,12 +5,15 @@ batch_size: 1
 num_batches: 1
 
 prompt_path: 'data/prompt_test.txt'
-output_dir: 'data/generated'
+output_dir: 'data/perturbation'
 
-steps:
-  - 100
+steps: 50
 sample_length: 30
-early_stopping: True
+experiment_type: "perturbation"
 truncation_ts:
  - 49
+perturbation_ts:
+ - 2
+ - 25
+n_perturbations: 3
 verbose: true
