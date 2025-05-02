@@ -11,5 +11,5 @@
 #SBATCH --constraint=ampere
 #SBATCH -J diffusion_inference
 
-module load cuda cudnn
+module load cuda cudnn awscli
 python diffusion/gen_audio.py
