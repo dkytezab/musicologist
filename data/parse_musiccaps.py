@@ -7,6 +7,6 @@ subset = df[df["is_balanced_subset"] == True]  # select entries in genre-balance
 prompts = subset["caption"].tolist()
 
 # save the prompts to a text file
-with open("data/prompt.txt", "w") as f:
+with open("data/prompts/prompt.txt", "w") as f:
     for prompt in prompts:
         f.write(prompt + "\n")
