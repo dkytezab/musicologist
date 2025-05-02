@@ -4,12 +4,16 @@ model_name: "stable-diffusion"
 batch_size: 1
 num_batches: 1
 
-prompt_path: 'data/prompt_test.txt'
+prompt_path: 'data/prompts/prompt_test.txt'
 output_dir: 'data/generated'
 
-steps: 100
-sample_length: 30
+steps: 50
+sample_length: 10
 early_stopping: True
 truncation_ts:
- - 49
+- 10
+- 20
+- 30
+- 40
+- 45
 verbose: true

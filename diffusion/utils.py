@@ -35,7 +35,6 @@ def save_audio(
         audios,
         prompt_index: int,
         truncation_ts: List[int],
-        steps: int,
         batch: int,
         sample_rate: float,
         verbose: bool,
@@ -84,17 +83,18 @@ def diff_gen_flexible(
         outputs = generate_truncated_seq(
                 model,
                 steps=steps,
-                cfg_scale=7,
+                cfg_scale=cfg_scale,
                 truncation_ts=truncation_ts,
                 conditioning=cond_expanded,
                 sample_size=sample_size,
-                sigma_min=0.3,
-                sigma_max=500,
-                sampler_type="dpmpp-3m-sde",
+                sigma_min=sigma_min,
+                sigma_max=sigma_max,
+                sampler_type=sampler_type,
                 device=device,
                 batch_size=batch_size,
             )
         
+        new_outpus = []
         for i, output in enumerate(outputs):
             # Normalize the output
             output = output.to(torch.float32)
@@ -103,10 +103,12 @@ def diff_gen_flexible(
             output = output / peak
             output = output.clamp(-1, 1).mul(32767).to(torch.int16).cpu()
             if sample_length is not None:
-                entries_to_keep = round(sample_length / 47 * output.shape[1])
-                output = output[:, :entries_to_keep, :]
+                entries_to_keep = round(sample_length / 47 * output.shape[2])
+                output = output[:, :entries_to_keep, :entries_to_keep]
+            print(output.shape)
+            new_outpus.append(output)
 
-        return outputs
+        return new_outpus
 
     
     else:
@@ -114,12 +116,12 @@ def diff_gen_flexible(
         output = generate_diffusion_cond(
                 model,
                 steps=steps,
-                cfg_scale=7,
+                cfg_scale=cfg_scale,
                 conditioning=cond_expanded,
                 sample_size=sample_size,
-                sigma_min=0.3,
-                sigma_max=500,
-                sampler_type="dpmpp-3m-sde",
+                sigma_min=sigma_min,
+                sigma_max=sigma_max,
+                sampler_type=sampler_type,
                 device=device,
                 batch_size=batch_size,
             ).to(torch.float32)
