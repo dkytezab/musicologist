@@ -48,7 +48,7 @@ def save_audio(
 
             #filename = f"{output_dir}/prompt_{prompt_index}/sample_{j}_truncation_{truncation_ts[len(truncation_ts) - i - 1]}.wav"
 
-            filename = f"{output_dir}/diff_step_{truncation_ts[i]}/steps_{steps}_prompt_{prompt_index}_sample_{j}.wav"
+            filename = f"{output_dir}/diff_step_{truncation_ts[i]}/prompt_{prompt_index}_sample_{j}.wav"
             os.makedirs(os.path.dirname(filename), exist_ok=True)
             torchaudio.save(filename, sample.cpu(), sample_rate)
 
@@ -70,6 +70,7 @@ def diff_gen_flexible(
         sampler_type: str = "dpmpp-3m-sde",
         early_stopping: bool = False,
         truncation_ts = None,
+        sample_length: Optional[int] = None,
         device: str = "cuda" if torch.cuda.is_available() else "cpu",
 ):
     # Allows for implementation of generation with and without early_stopping
@@ -99,6 +100,9 @@ def diff_gen_flexible(
             peak = peak.view(-1, 1, 1)
             output = output / peak
             output = output.clamp(-1, 1).mul(32767).to(torch.int16).cpu()
+            if sample_length is not None:
+                entries_to_keep = round(sample_length / 47 * output.shape[1])
+                output = output[:, :entries_to_keep, :]
 
         return outputs
 
