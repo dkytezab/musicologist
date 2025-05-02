@@ -5,7 +5,8 @@ import torchaudio
 from stable_audio_tools import get_pretrained_model
 from stable_audio_tools.inference.generation import generate_diffusion_cond
 from truncation.gen_truncated import generate_truncated_seq
-from config import DATA_DIR
+
+DATA_DIR = "/data/generated"
 
 def get_conditioning_dict(
         seconds_total: int,
