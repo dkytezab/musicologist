@@ -14,7 +14,7 @@ cleanembeds:
 # initgen: sets-up the data directory as desired
 initgen:
 	mkdir -p data/generated
-	awk '/^steps:/ {in_steps=1; next} /^[^[:space:]-]/ {in_steps=0} in_steps \
+	awk '/^truncation_ts:/ {in_steps=1; next} /^[^[:space:]-]/ {in_steps=0} in_steps \
 	&& /^\s*-\s*/ {gsub(/- /, "", $$0); print}' diffusion/diff_config.yml | \
 	while read step; do \
 		mkdir -p data/generated/diff_step_$$step; \

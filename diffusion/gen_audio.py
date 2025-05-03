@@ -8,7 +8,7 @@ from stable_audio_tools.inference.generation import generate_diffusion_cond
 from typing import Dict, Optional
 
 from load_model import get_diff_model
-from utils import get_conditioning_dict, diff_gen_flexible, save_audio
+from utils import get_conditioning_dict, diff_gen_flexible, save_audio, write_sample_to_csv
 
 # Load args from config file
 with open('diffusion/diff_config.yml', 'r') as file:
@@ -59,6 +59,7 @@ if __name__ == "__main__":
                     sample_length=SAMPLE_LENGTH,
                 )
 
+                #save_audio writes to the csv
                 save_audio(
                     audios=outputs,
                     output_dir=OUTPUT_DIR,
@@ -67,7 +68,9 @@ if __name__ == "__main__":
                     batch=batch,
                     sample_rate=sample_rate,
                     verbose=VERBOSE,
+                    sample_length=SAMPLE_LENGTH,
                 )
+
 
         batch_end_time = time.time()
         total_time = batch_end_time - batch_start_time
