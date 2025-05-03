@@ -1,0 +1,25 @@
+[
+  {
+    "prompt": "Several ukuleles are playing the same strumming melody together with an acoustic guitar. Someone is playing a shaker slightly offbeat. The song is in 4/4 time and has a tempo of 120 BPM. The mood is happy and upbeat.",
+    "aspects": [
+      "joyful",
+      "energetic"
+    ],
+    "bpm": 120
+  },
+  {
+    "prompt": "A solo piano piece with a slow tempo of 60 BPM. The mood is melancholic and introspective, with a focus on minor chords and arpeggios.",
+    "aspects": [
+      "sad"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A fast-paced electronic track with a tempo of 140 BPM. The mood is energetic and uplifting, featuring synthesizers, drum machines, and vocal samples.",
+    "aspects": [
+      "joyful",
+      "energetic"
+    ],
+    "bpm": 140
+  }
+]
