@@ -80,7 +80,7 @@ if __name__ == "__main__":
                 save_audio(
                     audios=outputs,
                     output_dir=OUTPUT_DIR,
-                    prompt_index=i,
+                    prompt_index=i+start,
                     truncation_ts=TRUNCATION_TS,
                     batch=batch,
                     sample_rate=sample_rate,

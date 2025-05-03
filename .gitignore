@@ -4,3 +4,4 @@
 *.out
 *.pyc
 data/prompts/prompts_job_*.txt
+*.csv
