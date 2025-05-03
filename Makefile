@@ -1,11 +1,11 @@
 # cleanlogs: gets rid of log files
-cleanlogs:
-	find . -type f -name '*.err' -delete
-	find . -type f -name '*.out' -delete
+# cleanlogs:
+# 	find . -type f -name '*.err' -delete
+# 	find . -type f -name '*.out' -delete
 
 # cleandata: gets rid of all the .wav files
-cleanclips:
-	find . -type f -name '*.wav' -delete
+# cleanclips:
+# 	find . -type f -name '*.wav' -delete
 
 # cleanembeds: gets rid of all embedding files
 cleanembeds:
