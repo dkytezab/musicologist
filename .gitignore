@@ -3,3 +3,4 @@
 *.err
 *.out
 *.pyc
+data/prompts/prompts_job_*.txt
