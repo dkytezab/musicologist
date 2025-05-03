@@ -33,3 +33,4 @@ createaudiodir:
 resetgen:
 	find data/generated -type d -name 'diff_step_*' -empty -delete
 	find data -type d -name 'generated' -empty -delete
+	find data/prompts -type f -name 'prompts_job_*.txt' -delete
