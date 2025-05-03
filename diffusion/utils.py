@@ -55,12 +55,16 @@ def save_audio(
             filename = f"{output_dir}/diff_step_{truncation_ts[i]}/prompt_{prompt_index}_sample_{j}.wav"
             os.makedirs(os.path.dirname(filename), exist_ok=True)
 
-            if sample.ndim == 1:
-                wav = sample.unsqueeze(0)
-            else:
-                wav = sample.mean(dim=0, keepdim=True)
+            print(f"Sample shape is {sample.shape}")
 
-            torchaudio.save(filename, wav.cpu(), sample_rate)
+            if sample.ndim == 1:
+                sample = sample.unsqueeze(0)
+            else:
+                sample = sample.to(torch.float32).mean(dim=0, keepdim=True).to(torch.int16)
+            
+            print(sample.shape)
+
+            torchaudio.save(filename, sample.cpu(), sample_rate)
 
             if verbose:
                 print(f"Saved {filename}") 
@@ -84,6 +88,7 @@ def diff_gen_flexible(
         condition: str,
         batch_size,
         sample_size,
+        sample_rate: int,
         sigma_min: float = 0.3,
         sigma_max: float = 500,
         cfg_scale: int = 7,
@@ -121,11 +126,12 @@ def diff_gen_flexible(
             peak = peak.view(-1, 1, 1)
             output = output / peak
             output = output.clamp(-1, 1).mul(32767).to(torch.int16).cpu()
-            if sample_length is not None:
-                entries_to_keep = round(sample_length / 47 * output.shape[2])
-                output = output[:, 0, :entries_to_keep]
             print(output.shape)
+            if sample_length is not None:
+                entries_to_keep = int(sample_rate * sample_length)
+                output = output[:, :, :entries_to_keep]
             new_outpus.append(output)
+            print(entries_to_keep)
 
         return new_outpus
 

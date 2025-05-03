@@ -57,6 +57,7 @@ if __name__ == "__main__":
                     truncation_ts=TRUNCATION_TS,
                     early_stopping=EARLY_STOPPING,
                     sample_length=SAMPLE_LENGTH,
+                    sample_rate=sample_rate,
                 )
 
                 #save_audio writes to the csv

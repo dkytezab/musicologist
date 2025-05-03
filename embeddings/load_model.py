@@ -10,7 +10,7 @@ def get_embed_model(
     device: str = "cuda" if torch.cuda.is_available() else "cpu",
 ) -> Tuple[ClapModel or MuQMuLan or MusicgenForConditionalGeneration, Optional[AutoProcessor]]: # type: ignore
     # Loads in a user-specified model
-    cache_dir = "models/{model_name}"
+    cache_dir = f"models/{model_name}"
     
     if model_name == "laion-clap":
         model_path = "laion/larger_clap_general"

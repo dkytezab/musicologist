@@ -13,5 +13,6 @@ truncation_ts:
 - 35
 - 40
 - 45
+- 49
 num_prompts: 500
 batch_size: 10
