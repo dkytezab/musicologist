@@ -19,6 +19,8 @@ AUDIO_DIR = embed_config['audio_dir']
 OUTPUT_DIR = embed_config['output_dir']
 NUM_SECONDS = embed_config['num_seconds']
 TRUNCATION_TS = embed_config['truncation_ts']
+NUM_PROMPTS = embed_config['num_prompts']
+BATCH_SIZE = embed_config['batch_size']
 
 if __name__ == "__main__":
 
@@ -28,23 +30,32 @@ if __name__ == "__main__":
     for diff_step in TRUNCATION_TS:
 
         DIFF_DIR = f'{AUDIO_DIR}/diff_step_{diff_step}'
-        audio_embeds = []
+        # Embedding dimension of 512 for CLAP, may need to change for other models
+        audio_tensor = torch.zeros((NUM_PROMPTS, BATCH_SIZE, 512))
 
-        for audio_path in os.listdir(DIFF_DIR):
+        for prompt_index in range(NUM_PROMPTS):
+            for sample in range(BATCH_SIZE):
+                audio_path = f'{DIFF_DIR}/prompt_{prompt_index}_sample_{sample}.wav'
 
-            print(f'Processing {audio_path}...')
+                if not os.path.exists(audio_path):
+                    raise FileNotFoundError(f"Cannot find audio file at {audio_path}")
+                
+                print(f'Processing {audio_path}...')
 
-            audio_embed = get_embedding(
-                audio_path=f'{AUDIO_DIR}/diff_step_{diff_step}/{audio_path}',
-                model=model,
-                processor=processor,
-                num_seconds=NUM_SECONDS,
-            )
+                audio_embed = get_embedding(
+                    audio_path=audio_path,
+                    model=model,
+                    processor=processor,
+                    num_seconds=NUM_SECONDS,
+                )
             
-            audio_embeds.append(audio_embed)
+                audio_tensor[prompt_index, sample, :] = audio_embed
         
         save_embeddings(
-            audio_embeds=audio_embeds,
+            audio_tensor=audio_tensor,
             out_dir=DIFF_DIR,
             diff_timestep=diff_step,
+            model_name=MODEL,
         )
+
+        print(f'Finished processing {DIFF_DIR}!')
