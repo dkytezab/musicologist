@@ -54,7 +54,13 @@ def save_audio(
 
             filename = f"{output_dir}/diff_step_{truncation_ts[i]}/prompt_{prompt_index}_sample_{j}.wav"
             os.makedirs(os.path.dirname(filename), exist_ok=True)
-            torchaudio.save(filename, sample.cpu(), sample_rate)
+
+            if sample.ndim == 1:
+                wav = sample.unsqueeze(0)
+            else:
+                wav = sample.mean(dim=0, keepdim=True)
+
+            torchaudio.save(filename, wav.cpu(), sample_rate)
 
             if verbose:
                 print(f"Saved {filename}") 
@@ -75,7 +81,6 @@ def save_audio(
 def diff_gen_flexible(
         model,
         steps,
-        index: int,
         condition: str,
         batch_size,
         sample_size,
@@ -118,7 +123,7 @@ def diff_gen_flexible(
             output = output.clamp(-1, 1).mul(32767).to(torch.int16).cpu()
             if sample_length is not None:
                 entries_to_keep = round(sample_length / 47 * output.shape[2])
-                output = output[:, :entries_to_keep, :entries_to_keep]
+                output = output[:, 0, :entries_to_keep]
             print(output.shape)
             new_outpus.append(output)
 
@@ -173,6 +178,9 @@ def write_sample_to_csv(
     label_json = pd.read_json(tag_json_path)
     label_json_row = label_json.iloc[prompt_index]
 
+    prompt = label_json_row["prompt"]
+    print(f"Writing sample with prompt {prompt_index}: {prompt}")
+
     row = {
         "diffusion_step": diffusion_step,
         "prompt_index": prompt_index,
@@ -180,7 +188,7 @@ def write_sample_to_csv(
         "model": model,
         "csv_path": str(csv_path),
         "sample_length": sample_length,
-        "prompt": label_json_row["prompt"],
+        "prompt": prompt,
         "tag_json_path": str(tag_json_path),
         "audio_file_path": str(audio_file_path),
         "tag.genre": label_json_row["genre"],

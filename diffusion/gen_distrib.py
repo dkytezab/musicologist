@@ -68,7 +68,6 @@ if __name__ == "__main__":
                 outputs = diff_gen_flexible(
                     model=model,
                     steps=STEPS,
-                    index=i,
                     condition=condition,
                     batch_size=BATCH_SIZE,
                     sample_size=sample_size,
@@ -80,7 +79,7 @@ if __name__ == "__main__":
                 save_audio(
                     audios=outputs,
                     output_dir=OUTPUT_DIR,
-                    prompt_index=i+start,
+                    prompt_index=i + start,
                     truncation_ts=TRUNCATION_TS,
                     batch=batch,
                     sample_rate=sample_rate,
