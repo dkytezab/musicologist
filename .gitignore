@@ -4,4 +4,7 @@
 *.out
 *.pyc
 data/prompts/prompts_job_*.txt
+__pycache__/
+**/__pycache__/
 *.csv
+/models

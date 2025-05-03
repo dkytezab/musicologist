@@ -1,6 +1,7 @@
 from transformers import ClapModel, ClapProcessor, AutoProcessor, MusicgenForConditionalGeneration
 from muq import MuQMuLan
 import torch
+from huggingface_hub import snapshot_download
 from typing import Tuple, Optional
 
 
@@ -9,16 +10,23 @@ def get_embed_model(
     device: str = "cuda" if torch.cuda.is_available() else "cpu",
 ) -> Tuple[ClapModel or MuQMuLan or MusicgenForConditionalGeneration, Optional[AutoProcessor]]: # type: ignore
     # Loads in a user-specified model
+    cache_dir = "models/{model_name}"
     
     if model_name == "laion-clap":
         model_path = "laion/larger_clap_general"
-        model = ClapModel.from_pretrained(model_path).to(device)
-        processor = AutoProcessor.from_pretrained(model_path)
+        local_dir = snapshot_download(model_path, cache_dir=cache_dir)
+
+        #model = ClapModel.from_pretrained(model_path).to(device)
+        model = ClapModel.from_pretrained(local_dir, local_files_only=True).to(device).eval()
+        processor = AutoProcessor.from_pretrained(local_dir, local_files_only=True)
         return (model, processor)
     
     elif model_name == "muq":
         model_path = "OpenMuQ/MuQ-MuLan-large"
-        model = MuQMuLan.from_pretrained(model_path).to(device).eval()
+        local_dir = snapshot_download(model_path, cache_dir=cache_dir)
+
+        #model = MuQMuLan.from_pretrained(model_path).to(device).eval()
+        model = MuQMuLan.from_pretrained(local_dir, local_files_only=True).to(device).eval()
         processor = None
         return (model, processor)
     
