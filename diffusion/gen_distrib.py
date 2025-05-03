@@ -80,11 +80,12 @@ if __name__ == "__main__":
                 save_audio(
                     audios=outputs,
                     output_dir=OUTPUT_DIR,
-                    prompt_index=i + start,
+                    prompt_index=i,
                     truncation_ts=TRUNCATION_TS,
                     batch=batch,
                     sample_rate=sample_rate,
                     verbose=VERBOSE,
+                    sample_length=SAMPLE_LENGTH,
                 )
 
         batch_end_time = time.time()

@@ -8,7 +8,7 @@ from truncation.gen_truncated import generate_truncated_seq
 from pathlib import Path
 import pandas as pd
 
-DATA_DIR = "/data/generated"
+DATA_DIR = "data/generated"
 
 def get_conditioning_dict(
         seconds_total: int,
@@ -41,7 +41,6 @@ def save_audio(
         sample_rate: float,
         verbose: bool,
         sample_length: int,
-        prompt: str,
         output_dir: Optional[str] = None,
     ) -> None:
 
@@ -61,13 +60,14 @@ def save_audio(
                 print(f"Saved {filename}") 
             
             write_sample_to_csv(
-                csv_path=Path(f"{output_dir}"),
+                csv_path=Path(f"{output_dir}/audio_info.csv"),
                 tag_json_path=Path(f"data/prompts/prompt_tags.json"),
                 audio_file_path=Path(filename),
                 model="stable-diffusion",
                 prompt_index=prompt_index,
                 diffusion_step=truncation_ts[i],
                 sample_length=sample_length,
+                sample_index=j,
             )
         
 
@@ -156,11 +156,12 @@ def write_sample_to_csv(
         prompt_index, 
         diffusion_step,
         sample_length,
+        sample_index,
         ):
     
     if not csv_path.exists():
         with open(csv_path, 'w') as f:
-            f.write("csv_path, tag_json_path, audio_file_path, model, prompt, prompt_index, diffusion_step, sample_length\n")
+            f.write("diffusion_step, prompt_index, sample_index, model, csv_path, sample_length, prompt, tag_json_path, audio_file_path, tag.genre, tag.instruments, tag.mood, tag.tempo, tag.audio_quality, tag.performance_context, tag.vocals, tag.style\n")
     
     if not tag_json_path.exists():
         raise FileNotFoundError(f"Label JSON path {tag_json_path} does not exist.")
@@ -173,14 +174,15 @@ def write_sample_to_csv(
     label_json_row = label_json.iloc[prompt_index]
 
     row = {
+        "diffusion_step": diffusion_step,
+        "prompt_index": prompt_index,
+        "sample_index": sample_index,
+        "model": model,
         "csv_path": str(csv_path),
+        "sample_length": sample_length,
+        "prompt": label_json_row["prompt"],
         "tag_json_path": str(tag_json_path),
         "audio_file_path": str(audio_file_path),
-        "model": model,
-        "prompt": label_json_row["prompt"],
-        "prompt_index": prompt_index,
-        "diffusion_step": diffusion_step,
-        "sample_length": sample_length,
         "tag.genre": label_json_row["genre"],
         "tag.instruments": label_json_row["instruments"],
         "tag.mood": label_json_row["mood"],
