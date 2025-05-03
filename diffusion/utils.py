@@ -5,6 +5,8 @@ import torchaudio
 from stable_audio_tools import get_pretrained_model
 from stable_audio_tools.inference.generation import generate_diffusion_cond
 from truncation.gen_truncated import generate_truncated_seq
+from pathlib import Path
+import pandas as pd
 
 DATA_DIR = "/data/generated"
 
@@ -38,6 +40,8 @@ def save_audio(
         batch: int,
         sample_rate: float,
         verbose: bool,
+        sample_length: int,
+        prompt: str,
         output_dir: Optional[str] = None,
     ) -> None:
 
@@ -55,6 +59,16 @@ def save_audio(
 
             if verbose:
                 print(f"Saved {filename}") 
+            
+            write_sample_to_csv(
+                csv_path=Path(f"{output_dir}"),
+                tag_json_path=Path(f"data/prompts/prompt_tags.json"),
+                audio_file_path=Path(filename),
+                model="stable-diffusion",
+                prompt_index=prompt_index,
+                diffusion_step=truncation_ts[i],
+                sample_length=sample_length,
+            )
         
 
 
@@ -132,3 +146,56 @@ def diff_gen_flexible(
         output = output.clamp(-1, 1).mul(32767).to(torch.int16).cpu()
 
         return [output]
+
+
+def write_sample_to_csv(
+        csv_path: Path, 
+        tag_json_path: Path,
+        audio_file_path: Path,
+        model,  
+        prompt_index, 
+        diffusion_step,
+        sample_length,
+        ):
+    
+    if not csv_path.exists():
+        with open(csv_path, 'w') as f:
+            f.write("csv_path, tag_json_path, audio_file_path, model, prompt, prompt_index, diffusion_step, sample_length\n")
+    
+    if not tag_json_path.exists():
+        raise FileNotFoundError(f"Label JSON path {tag_json_path} does not exist.")
+    
+    if not audio_file_path.exists():
+        raise FileNotFoundError(f"Audio file path {audio_file_path} does not exist.")
+    
+    # Reading label json file
+    label_json = pd.read_json(tag_json_path)
+    label_json_row = label_json.iloc[prompt_index]
+
+    row = {
+        "csv_path": str(csv_path),
+        "tag_json_path": str(tag_json_path),
+        "audio_file_path": str(audio_file_path),
+        "model": model,
+        "prompt": label_json_row["prompt"],
+        "prompt_index": prompt_index,
+        "diffusion_step": diffusion_step,
+        "sample_length": sample_length,
+        "tag.genre": label_json_row["genre"],
+        "tag.instruments": label_json_row["instruments"],
+        "tag.mood": label_json_row["mood"],
+        "tag.tempo": label_json_row["tempo"],
+        "tag.audio_quality": label_json_row["audio_quality"],
+        "tag.performance_context": label_json_row["performance_context"],
+        "tag.vocals": label_json_row["vocals"],
+        "tag.style": label_json_row["style"],
+    }
+
+    df = pd.DataFrame([row])
+
+    df.to_csv(
+        csv_path,
+        mode = "a",                     
+        index = False,
+        header = not csv_path.exists(),
+    )

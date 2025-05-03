@@ -7,6 +7,7 @@ from transformers import ClapModel, ClapProcessor, AutoProcessor, MusicgenForCon
 from muq import MuQMuLan
 import librosa
 from typing import Optional
+import os
 
 
 def preprocess_audio(
@@ -15,6 +16,8 @@ def preprocess_audio(
         num_seconds: int = 10,
         ):
     # Preprocesses audio prior to passing into model
+    if not os.path.exists(audio_path):
+        raise FileNotFoundError(f"Cannot find audio file at {audio_path}")
 
     audio_input, sr = torchaudio.load(audio_path)
     if audio_input.shape[0] > 1:
@@ -46,18 +49,25 @@ def get_embedding(
                               )
     sample_np = sample.cpu().numpy().astype(np.float32)
 
-    if model == MuQMuLan:
+    if isinstance(model, MuQMuLan):
         model = model.to(device).eval()
         inputs = torch.tensor(sample_np).unsqueeze(0).to(device)
         with torch.no_grad():
             audio_embed = model(wavs = inputs).squeeze(0).cpu()
         
 
-    elif model == ClapModel:
-        inputs = torch.from_numpy(processor(audios=sample_np, sampling_rate=48000, return_tensors="pt")).float()
-        audio_embed = model.get_audio_embedding_from_data(x = inputs, use_tensor=True)
-        return audio_embed.squeez(0).cpu()
-
+    elif isinstance(model, ClapModel):
+        encoding = processor(
+            audios=sample_np,
+            sampling_rate=khz_freq,
+            return_tensors="pt",
+        )
+        encoding_items = {k: v.to(device) for k, v in encoding.items()}
+        model = model.to(device).eval()
+        with torch.no_grad():
+            embeds = model.get_audio_features(**encoding_items)
+        audio_embed = embeds.squeeze(0).cpu()
+        return audio_embed
 
     else:
         raise ValueError("Specified model not presently supported")
