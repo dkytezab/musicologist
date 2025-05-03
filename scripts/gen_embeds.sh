@@ -5,11 +5,11 @@
 #SBATCH --mem=30g
 #SBATCH -t 00:30:00
 #SBATCH -p gpu
-#SBATCH -o logs/inference/train_G%j.out
-#SBATCH -e logs/inference/train_G%j.err
+#SBATCH -o logs/embeds/%j.out
+#SBATCH -e logs/embeds/%j.err
 #SBATCH --gres=gpu:1
 #SBATCH --constraint=ampere
 #SBATCH -J embeddings_generation
 
 module load cuda cudnn
-python pipeline/embeddings/generate_embeddings.py
+python embeddings/gen_embeds.py
