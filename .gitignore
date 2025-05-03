@@ -8,3 +8,9 @@ __pycache__/
 **/__pycache__/
 *.csv
 /models
+*.genre
+*.md5
+*.bpm
+*.mp3
+*.jams
+*.mirex
