@@ -167,7 +167,7 @@ def write_sample_to_csv(
     
     if not csv_path.exists():
         with open(csv_path, 'w') as f:
-            f.write("diffusion_step, prompt_index, sample_index, model, csv_path, sample_length, prompt, tag_json_path, audio_file_path, tag.genre, tag.instruments, tag.mood, tag.tempo, tag.audio_quality, tag.performance_context, tag.vocals, tag.style\n")
+            f.write("diffusion_step, prompt_index, sample_index, model, csv_path, sample_length, prompt, tag_json_path, audio_file_path, tag.aspects, tag.bpm\n")
     
     if not tag_json_path.exists():
         raise FileNotFoundError(f"Label JSON path {tag_json_path} does not exist.")
@@ -192,14 +192,8 @@ def write_sample_to_csv(
         "prompt": prompt,
         "tag_json_path": str(tag_json_path),
         "audio_file_path": str(audio_file_path),
-        "tag.genre": label_json_row["genre"],
-        "tag.instruments": label_json_row["instruments"],
-        "tag.mood": label_json_row["mood"],
-        "tag.tempo": label_json_row["tempo"],
-        "tag.audio_quality": label_json_row["audio_quality"],
-        "tag.performance_context": label_json_row["performance_context"],
-        "tag.vocals": label_json_row["vocals"],
-        "tag.style": label_json_row["style"],
+        "tag.aspects": label_json_row["aspects"],
+        "tag.bpm": label_json_row["bpm"],
     }
 
     df = pd.DataFrame([row])
