@@ -7,24 +7,17 @@ num_batches: 1
 prompt_path: 'data/prompts/prompt_test.txt'
 output_dir: 'data/generated'
 
-steps: 10
+steps: 50
 sample_length: 10
 early_stopping: True
 truncation_ts:
-- 3
-- 6
-- 9
-# - 12
-# - 15
-# - 18
-# - 21
-# - 24
-# - 27
-# - 30
-# - 33
-# - 36
-# - 39
-# - 42
-# - 45
-# - 48
+- 5
+- 10
+- 15
+- 20
+- 25
+- 30
+- 35
+- 40
+- 45
 verbose: true
