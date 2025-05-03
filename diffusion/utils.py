@@ -38,9 +38,9 @@ def save_audio(
         prompt_index: int,
         truncation_ts: List[int],
         batch: int,
-        sample_rate: float,
         verbose: bool,
         sample_length: int,
+        sample_rate: float = 48000,
         output_dir: Optional[str] = None,
     ) -> None:
 
@@ -50,19 +50,15 @@ def save_audio(
     for i, audio in enumerate(audios):
         for j, sample in enumerate(audio):
 
-            #filename = f"{output_dir}/prompt_{prompt_index}/sample_{j}_truncation_{truncation_ts[len(truncation_ts) - i - 1]}.wav"
-
             filename = f"{output_dir}/diff_step_{truncation_ts[i]}/prompt_{prompt_index}_sample_{j}.wav"
             os.makedirs(os.path.dirname(filename), exist_ok=True)
 
             print(f"Sample shape is {sample.shape}")
 
-            if sample.ndim == 1:
-                sample = sample.unsqueeze(0)
-            else:
-                sample = sample.to(torch.float32).mean(dim=0, keepdim=True).to(torch.int16)
-            
-            print(sample.shape)
+            # if sample.ndim == 1:
+            #     sample = sample.unsqueeze(0)
+            # else:
+            #     sample = sample.to(torch.float32).mean(dim=0, keepdim=True).to(torch.int16)
 
             torchaudio.save(filename, sample.cpu(), sample_rate)
 
@@ -88,10 +84,10 @@ def diff_gen_flexible(
         condition: str,
         batch_size,
         sample_size,
-        sample_rate: int,
-        sigma_min: float = 0.3,
-        sigma_max: float = 500,
-        cfg_scale: int = 7,
+        sample_rate: int = 48000,
+        sigma_min: float = 0.01,
+        sigma_max: float = 100,
+        cfg_scale: int = 6,
         sampler_type: str = "dpmpp-3m-sde",
         early_stopping: bool = False,
         truncation_ts = None,
@@ -131,7 +127,6 @@ def diff_gen_flexible(
                 entries_to_keep = int(sample_rate * sample_length)
                 output = output[:, :, :entries_to_keep]
             new_outpus.append(output)
-            print(entries_to_keep)
 
         return new_outpus
 
