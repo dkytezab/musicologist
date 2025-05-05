@@ -30,6 +30,16 @@ def is_brass_like(example_audio: Dict[str, Any]) -> bool:
         ["brass", "reed"], example_audio
     )
 
+def is_string(example_audio: Dict[str, Any]) -> bool:
+    return is_in_instrument_family(
+        ["string"], example_audio
+    )
+
+def is_string_like(example_audio: Dict[str, Any]) -> bool:
+    return is_in_instrument_family(
+        ["string"], example_audio
+    )
+
 def is_blown(example_audio: Dict[str, Any]) -> bool:
     return is_in_instrument_family(
         ["brass", "flute", "reed", "vocal"], example_audio
@@ -67,3 +77,15 @@ def gen_audio_is_brass(df: pd.DataFrame) -> pd.DataFrame:
 # Returns all audio that doesn't have brass, reed or flute aspects
 def gen_audio_not_is_brass_like(df: pd.DataFrame) -> pd.DataFrame:
     return has_aspect(df=df, aspects=["brass",], get_true=False, logic="or")
+
+def gen_audio_is_string(df: pd.DataFrame) -> pd.DataFrame:
+    return has_aspect(df=df, aspects=["string",], get_true=True, logic="or")
+
+def gen_audio_not_is_string_like(df: pd.DataFrame) -> pd.DataFrame:
+    return has_aspect(df=df, aspects=["string",], get_true=False, logic="or")
+
+def gen_audio_is_blown(df: pd.DataFrame) -> pd.DataFrame:
+    return has_aspect(df=df, aspects=["brass", "flute", "reed", "vocal",], get_true=True, logic="or")
+
+def gen_audio_not_is_blown_like(df: pd.DataFrame) -> pd.DataFrame:
+    return has_aspect(df=df, aspects=["brass", "flute", "reed", "vocal", "organ",], get_true=False, logic="or")

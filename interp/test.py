@@ -4,17 +4,23 @@ import torch
 import pandas as pd
 import itertools
 
-embeds = torch.load("data/concepts/is_brass/laion-clap_embeds.pt")
+pl = 10000
+nl = 10000
+
+string_dataset = ConceptDataset(split="train", concept_filter="is_string", pos_limit=pl, neg_limit=nl, overwrite=True)
+embeds = string_dataset.get_embeds(model_name="laion-clap", save=True)
+
+embeds = torch.load("data/concepts/is_string/laion-clap_embeds.pt")
 print(f"Embeddings shape: {embeds.shape}")
 
 class1 = BinaryClassifier(
-    concept_filter="is_brass",
-    num_pos_samples=250,
-    num_neg_samples=250,
+    concept_filter="is_string",
+    num_pos_samples=pl,
+    num_neg_samples=nl,
     model_name="laion-clap",
     hparams={
         "model_type": "logistic",
-        "test_size": 0.2
+        "test_size": 0.15
     }
 )
 
@@ -24,12 +30,16 @@ print(f"Train accuracy: {class1.concept_train_accuracy}")
 print(f"Test accuracy: {class1.concept_test_accuracy}")
 print(f"Model coefficients: {class1.model.coef_}")
 
-diff_step = 49
-pt_path = f"data/generated/diff_step_{diff_step}/laion-clap_embeddings.pt"
-
-acc = class1.inference(pt_path=pt_path)
-
-print(f"Audio accuracy for diff step {diff_step}: {acc}")
+diff_steps = [5, 10, 15, 20, 25, 30, 35, 40, 45, 49]
+dict = {}
+for step in diff_steps:
+    path = f"data/generated/diff_step_{step}/laion-clap_embeddings.pt"
+    tpr, tnr, acc = class1.inference(pt_path=path)
+    dict[step] = (tpr, tnr, acc)
+for step in diff_steps:
+    print(f"TPR for diff step {step}: {dict[step][0]}")
+    print(f"TNR for diff step {step}: {dict[step][1]}")
+    print(f"Audio accuracy for diff step {step}: {dict[step][2]}")
 
 # d = pd.read_csv("data/generated/gen_audio_info.csv", low_memory=False)
 # d.columns = d.columns.str.strip()
@@ -45,6 +55,4 @@ print(f"Audio accuracy for diff step {diff_step}: {acc}")
 #         print(a, b, c)
 
 
-# brass_dataset = ConceptDataset(split="valid", concept_filter="is_blown", pos_limit=2400, neg_limit=8000, overwrite=True)
-# embeds = brass_dataset.get_embeds(model_name="laion-clap", save=True)
 

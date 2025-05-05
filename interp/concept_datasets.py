@@ -76,7 +76,7 @@ class ConceptDataset(NSynthDataset):
           if not os.path.exists(self.dir_path):
                 os.makedirs(self.dir_path)
 
-          self.concept_filter_path = concept_filter_path if concept_filter_path is not None else f"interp/concept_filts.py"
+          self.concept_filter_path = concept_filter_path if concept_filter_path is not None else f"interp/concept_filters.py"
 
           # To ensure balance
           self.pos_limit = pos_limit

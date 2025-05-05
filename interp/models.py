@@ -4,6 +4,7 @@ import os
 import pandas as pd
 import numpy as np
 import sklearn.linear_model
+from sklearn.metrics import recall_score, confusion_matrix
 
 from concept_filters import load_concept_filter
 
@@ -48,9 +49,12 @@ class BinaryClassifier(object):
         input_tensor = torch.concat([pos_tensor, neg_tensor])
 
         pred = self.model.predict(input_tensor)
+        tn, fp, fn, tp = confusion_matrix(labels, pred).ravel()
+        tpr = tp / (tp + fn)
+        tnr = tn / (tn + fp)
         acc = sklearn.metrics.accuracy_score(labels, pred)
 
-        return acc
+        return acc, tpr, tnr
 
     def _train_logistic_model(self, embeds: np.array, labels: np.array) -> None:
         lin_model = sklearn.linear_model.LogisticRegression()
