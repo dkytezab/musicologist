@@ -1,9 +1,11 @@
-from typing import Optional, List, Dict
+from typing import Optional, List, Dict, Tuple
 import torch
 import os
 import pandas as pd
 import numpy as np
 import sklearn.linear_model
+
+from concept_filters import load_concept_filter
 
 class BinaryClassifier(object):
     def __init__(self, 
@@ -39,6 +41,16 @@ class BinaryClassifier(object):
         self.concept_train_accuracy = tr_acc
         self.concept_test_accuracy = te_acc
         self.model = lin_model
+    
+    def inference(self, pt_path: str,) -> None:
+        pos_tensor, neg_tensor = self._load_gen_audio_embeds(pt_path=pt_path, csv_path=None)
+        labels = np.concatenate([np.ones(pos_tensor.shape[0]), np.zeros(neg_tensor.shape[0])])
+        input_tensor = torch.concat([pos_tensor, neg_tensor])
+
+        pred = self.model.predict(input_tensor)
+        acc = sklearn.metrics.accuracy_score(labels, pred)
+
+        return acc
 
     def _train_logistic_model(self, embeds: np.array, labels: np.array) -> None:
         lin_model = sklearn.linear_model.LogisticRegression()
@@ -78,6 +90,49 @@ class BinaryClassifier(object):
         return concept_embeds_np, labels
         
 
-    def _load_gen_audio_embeds(self, test_pt_path: str) -> torch.Tensor:
-        pass
+    def _load_gen_audio_embeds(self, 
+                               pt_path: str,  
+                               csv_path: Optional[str],
+                               ) -> Tuple[torch.Tensor]:
+        
+        # Processing the csv
+        csv_path = csv_path if csv_path is not None else "data/generated/audio_info.csv"
+        gen_audio_csv = pd.read_csv(csv_path)
+
+        refined_csv = gen_audio_csv[["diffusion_step", "prompt_index", "sample_index", "tag.aspects"]]
+        
+        concept_filter_name = f"gen_audio_{self.concept_filter}"
+        concept_padder_name = f"gen_audio_not_{self.concept_filter}_like"
+
+        if not os.path.exists(pt_path):
+            raise FileNotFoundError(f"Generated audio embeddings file not found at {pt_path}")
+        
+        gen_audio_embeds = torch.load(pt_path)
+        prompts, batch_size, embed_dim = gen_audio_embeds.shape
+
+        assert prompts == 1000, f"{prompts} prompts found; 1000 expected."
+        assert batch_size == 7, f"Batch size of {batch_size} found; batch size of 7 expected."
+
+        concept_filter_func = load_concept_filter(func_name=concept_filter_name)
+        concept_padder_func = load_concept_filter(func_name=concept_padder_name)
+
+        pos_samps = concept_filter_func(refined_csv)
+        neg_samps = concept_padder_func(refined_csv)
+
+        pos_samps["prompt_index"] = pd.to_numeric(
+            pos_samps["prompt_index"], errors="coerce"
+        )
+        neg_samps["prompt_index"] = pd.to_numeric(
+            neg_samps["prompt_index"], errors="coerce"
+        )
+
+        pos_indices = torch.tensor(pos_samps["prompt_index"].dropna().astype(int).unique(), dtype=torch.int64)
+        neg_indices = torch.tensor(neg_samps["prompt_index"].dropna().astype(int).unique(), dtype=torch.int64)
+
+        num_pos_prompts, num_neg_prompts = len(pos_indices), len(neg_indices)
+
+        pos_tensor = gen_audio_embeds[pos_indices, :, :].reshape(num_pos_prompts * batch_size, embed_dim)
+        neg_tensor = gen_audio_embeds[neg_indices, :, :].reshape(num_neg_prompts * batch_size, embed_dim)
+
+        return (pos_tensor, neg_tensor)
 

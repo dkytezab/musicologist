@@ -2,7 +2,7 @@ from typing import List, Dict, Any, Optional, Union, Callable, Tuple
 import importlib.util
 from json import loads
 from pathlib import Path
-from concept_filts import is_brass
+from concept_filters import is_brass
 import pandas as pd
 import os
 import sys
@@ -13,6 +13,8 @@ from muq import MuQMuLan
 import torchaudio
 import numpy as np
 import warnings
+
+from concept_filters import load_concept_filter
 
 # (1) Load and parse json file, (2) add columns to json file, (3) sample and get csv file in data/concepts/{concept}
 
@@ -82,21 +84,13 @@ class ConceptDataset(NSynthDataset):
           self.get_true = get_true
           self.overwrite = overwrite
           
-          filter_func = self._load_concept_filter(func_name=self.concept_filter)
-          padder_func = self._load_concept_filter(func_name=self.concept_padder)
+          filter_func = load_concept_filter(concept_filter_path=self.concept_filter_path, 
+                                            func_name=self.concept_filter)
+          padder_func = load_concept_filter(concept_filter_path=self.concept_filter_path, 
+                                            func_name=self.concept_padder)
           new_json = self._get_new_json(concept_filters=[filter_func, padder_func])
 
           self._write_csv(new_json)
-
-    def _load_concept_filter(self, func_name: str) -> Callable:
-        spec = importlib.util.spec_from_file_location(func_name, self.concept_filter_path)
-        func_file = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(func_file)
-        func = getattr(func_file, func_name, None)
-        if func == None:
-            raise AttributeError("Specified concept filter/padder not found in file")
-        else:
-            return func
 
     def _get_mask(self, new_json: Dict, get_true: bool) -> pd.Series:
         df = pd.DataFrame.from_dict(new_json, orient="index")
