@@ -57,6 +57,7 @@ class ConceptDataset(NSynthDataset):
                 concept_filter: str,
                 concept_filter_path: Optional[str] = None,
                 csv_path: Optional[str] = None,
+                dir_path: Optional[str] = None,
                 get_true: bool = True,
                 pos_limit: Optional[int] = None,
                 neg_limit: Optional[int] = None,
@@ -67,8 +68,13 @@ class ConceptDataset(NSynthDataset):
 
           self.concept_filter = concept_filter
           self.concept_padder = f"{concept_filter}_like"  
+          self.dir_path = dir_path if dir_path is not None else f"data/concepts/{concept_filter}"
+          self.csv_path = csv_path if csv_path is not None else f"data/concepts/{concept_filter}/audio_info.csv"
+
+          if not os.path.exists(self.dir_path):
+                os.makedirs(self.dir_path)
+
           self.concept_filter_path = concept_filter_path if concept_filter_path is not None else f"interp/concept_filts.py"
-          self.csv_path = csv_path if csv_path is not None else f"data/concepts/{concept_filter}.csv"
 
           # To ensure balance
           self.pos_limit = pos_limit
@@ -105,6 +111,8 @@ class ConceptDataset(NSynthDataset):
 
         self.possible_pos_samples = pos_mask.sum()
         self.possible_neg_samples = neg_mask.sum()
+
+        print(self.possible_pos_samples, self.possible_neg_samples)
 
         if self.pos_limit is not None and self.pos_limit > self.possible_pos_samples:
             warnings.warn(f"Positive limit {self.pos_limit} exceeds possible positive samples {self.possible_pos_samples}")
@@ -179,7 +187,7 @@ class ConceptDataset(NSynthDataset):
                                             embed_dim=embed_dim,
                                             )
         if save:
-            self._save_embeds(embeds)
+            self._save_embeds(embeds, model_name=model_name, save_path=None)
 
         return embeds
 
@@ -239,6 +247,7 @@ class ConceptDataset(NSynthDataset):
                 with torch.no_grad():
                     audio_embed = model.get_audio_features(**encoding_items).squeeze(0).cpu()
                 new_tens[idx, :] = audio_embed
+                print(f"Produced embeddings from index {idx}")
         
         elif isinstance(model, MuQMuLan):
             raise NotImplementedError("MuQMuLan model not supported yet")
@@ -252,7 +261,8 @@ class ConceptDataset(NSynthDataset):
     def _save_embeds(self, embeds: torch.Tensor, save_path: Optional[None], model_name: str,) -> None:
 
         if save_path is None:
-            save_path = f"data/concepts/{self.concept_filter}/{model_name}_embeds.pt"
+            save_path = f"{self.dir_path}/{model_name}_embeds.pt"
+
         if os.path.exists(save_path) and not self.overwrite:
             raise FileExistsError(f"Embeddings already saved for {model_name}, concept dataset")
         else:
