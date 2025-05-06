@@ -66,31 +66,71 @@ class ConceptDataset(NSynthDataset):
                 overwrite: bool = False,
                 ) -> None:
           
-          super().__init__(split=split)
+        super().__init__(split=split)
 
-          self.concept_filter = concept_filter
-          self.concept_padder = f"{concept_filter}_like"  
-          self.dir_path = dir_path if dir_path is not None else f"data/concepts/{concept_filter}"
-          self.csv_path = csv_path if csv_path is not None else f"data/concepts/{concept_filter}/audio_info.csv"
+        self.concept_filter = concept_filter
+        self.concept_padder = f"{concept_filter}_like"  
+        self.dir_path = dir_path if dir_path is not None else f"data/concepts/{concept_filter}"
+        self.csv_path = csv_path if csv_path is not None else f"data/concepts/{concept_filter}/audio_info.csv"
+        self.concept_filter_path = concept_filter_path if concept_filter_path is not None else f"interp/concept_filters.py"
 
-          if not os.path.exists(self.dir_path):
-                os.makedirs(self.dir_path)
+        self.overwrite = overwrite
+        self.get_true = get_true
 
-          self.concept_filter_path = concept_filter_path if concept_filter_path is not None else f"interp/concept_filters.py"
+        # Loading in filters
+        filter_func = load_concept_filter(concept_filter_path=self.concept_filter_path, 
+                                        func_name=self.concept_filter)
+        padder_func = load_concept_filter(concept_filter_path=self.concept_filter_path, 
+                                        func_name=self.concept_padder)
+        
+        if not os.path.exists(self.dir_path):
+            os.makedirs(self.dir_path)
 
-          # To ensure balance
-          self.pos_limit = pos_limit
-          self.neg_limit = pos_limit if neg_limit is None else neg_limit
-          self.get_true = get_true
-          self.overwrite = overwrite
-          
-          filter_func = load_concept_filter(concept_filter_path=self.concept_filter_path, 
-                                            func_name=self.concept_filter)
-          padder_func = load_concept_filter(concept_filter_path=self.concept_filter_path, 
-                                            func_name=self.concept_padder)
-          new_json = self._get_new_json(concept_filters=[filter_func, padder_func])
+        # Loading in the csv if present
+        if not self.overwrite and os.path.exists(self.csv_path):
+            self._load_from_csv()
+        
+        # Otherwise, create from scratch
+        else:
+            new_json = self._get_new_json(concept_filters=[filter_func, padder_func])
+            self._get_pos_neg_limits(new_json, pos_limit, neg_limit)
+            self._write_csv(new_json)
+    
+    def _load_from_csv(self):
+        df = pd.read_csv(self.csv_path)
+        
+        self.samples = df
+        self.pos_samples = df[df["binary_class"] == 1]
+        self.neg_samples = df[df["binary_class"] == 0]
 
-          self._write_csv(new_json)
+        self.num_pos_samples = self.pos_limit = self.pos_samples.sum()
+        self.num_neg_samples = self.neg_limit = self.neg_samples.sum()
+        self.num_samples = self.samples.sum()
+
+        self.possible_pos_samples = None
+        self.possible_neg_samples = None
+    
+    def _get_pos_neg_limits(self, new_json, pos_limit, neg_limit) -> None:
+        _, pos_mask = self._get_mask(new_json, get_true=self.get_true)
+        _, neg_mask = self._get_mask(new_json, get_true=not self.get_true)
+
+        self.possible_pos_samples = pos_mask.sum()
+        self.possible_neg_samples = neg_mask.sum()
+
+        pos_limit = pos_limit if pos_limit is not None else self.possible_pos_samples
+        neg_limit = neg_limit if neg_limit is not None else self.possible_neg_samples
+
+        balanced_lim = min(pos_limit, neg_limit)
+
+        self.pos_limit, self.neg_limit = balanced_lim, balanced_lim
+
+    def _get_pos_neg_limits(concept_filter: str) -> Tuple[int, int]:
+        temp_ds = ConceptDataset(split="train", concept_filter=concept_filter, get_true=True)
+
+        pos_lim = temp_ds.possible_pos_samples
+        neg_lim = temp_ds.possible_neg_samples
+
+        return min(pos_lim, neg_lim), min(pos_lim, neg_lim)
 
     def _get_mask(self, new_json: Dict, get_true: bool) -> pd.Series:
         df = pd.DataFrame.from_dict(new_json, orient="index")
@@ -105,8 +145,6 @@ class ConceptDataset(NSynthDataset):
 
         self.possible_pos_samples = pos_mask.sum()
         self.possible_neg_samples = neg_mask.sum()
-
-        print(self.possible_pos_samples, self.possible_neg_samples)
 
         if self.pos_limit is not None and self.pos_limit > self.possible_pos_samples:
             warnings.warn(f"Positive limit {self.pos_limit} exceeds possible positive samples {self.possible_pos_samples}")
@@ -135,14 +173,7 @@ class ConceptDataset(NSynthDataset):
         self.num_neg_samples = len(self.neg_samples)
         self.num_samples = len(self.samples)
     
-        if os.path.exists(self.csv_path):
-            if self.overwrite:
-                os.remove(self.csv_path)
-                self.samples.to_csv(self.csv_path, index=False)
-            else:
-                raise FileExistsError("CSV file already created for concept dataset")
-        else:
-            self.samples.to_csv(self.csv_path, index=False)
+        self.samples.to_csv(self.csv_path, index=False)
     
     def get_embeds(self, 
                    model_name: str,
@@ -255,7 +286,7 @@ class ConceptDataset(NSynthDataset):
     def _save_embeds(self, embeds: torch.Tensor, save_path: Optional[None], model_name: str,) -> None:
 
         if save_path is None:
-            save_path = f"{self.dir_path}/{model_name}_embeds.pt"
+            save_path = f"{self.dir_path}/{model_name}_embeddings.pt"
 
         if os.path.exists(save_path) and not self.overwrite:
             raise FileExistsError(f"Embeddings already saved for {model_name}, concept dataset")

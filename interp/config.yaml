@@ -1,9 +1,21 @@
 ---
+embed_model: 'laion-clap'
 concepts:
-- 'is_brass'
 - 'is_blown'
 - 'is_string'
-models:
+class_models:
 - 'logistic'
-- 'svm'
-- 'mlp'
+overwrite: False
+hparams:
+- test_size: 0.2
+truncation_ts:
+- 5
+- 10
+- 15
+- 20
+- 25
+- 30
+- 35
+- 40
+- 45
+- 49

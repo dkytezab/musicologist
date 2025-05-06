@@ -1,13 +1,60 @@
 from typing import Optional, List, Dict, Tuple
 import torch
+import torch.nn as nn
 import os
 import pandas as pd
 import numpy as np
 import sklearn.linear_model
 from sklearn.metrics import recall_score, confusion_matrix
+from torch.utils.data import DataLoader
 
 from concept_filters import load_concept_filter
 
+class SimpleMLP(nn.Module):
+    def __init__(self, hparams):
+        super(SimpleMLP, self).__init__()
+
+        self.num_layers = hparams["num_layers"]
+        self.hidden_dim = hparams["layer_width"]
+        self.input_dim = hparams["input_dim"]
+
+        in_dim = self.input_dim
+        layers = []
+        for _ in range(self.hidden_dim):
+            layers.append(nn.Linear(in_dim, self.hidden_dim))
+            layers.append(nn.ReLU())
+        layers.append(nn.Linear(in_dim, 1))
+        layers.append(nn.Sigmoid())
+        self.model = nn.Sequential(*layers)
+    
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        return self.model(x)
+    
+    def backward(self, 
+                 train_loader: DataLoader,
+                 epochs: int, 
+                 lr: float, 
+                 save_loss: bool = True,
+                 device: str = "cuda" if torch.cuda.is_available() else "cpu",
+                 ) -> None:
+        criterion = nn.CrossEntropyLoss()
+        optimizer = nn.optim.Adam(model.parameters(), lr=lr)
+
+        model = self.to(device).train()
+        run_loss = []
+        for batch_x, batch_y in train_loader:
+            batch_x, batch_y = batch_x.to(device), batch_y.to(device)
+
+            outputs = model(batch_x)
+            loss = criterion(outputs, batch_y)
+
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+
+            run_loss.append(loss.item())
+        return run_loss
+        
 class BinaryClassifier(object):
     def __init__(self, 
                  concept_filter: str, 
@@ -23,7 +70,7 @@ class BinaryClassifier(object):
         self.model_name = model_name
 
         self.dir_path = dir_path if dir_path is not None else f"data/concepts/{concept_filter}"  
-        self.concept_pt_path = concept_pt_path if concept_pt_path is not None else f"{self.dir_path}/{model_name}_embeds.pt"
+        self.concept_pt_path = concept_pt_path if concept_pt_path is not None else f"{self.dir_path}/{model_name}_embeddings.pt"
         self.hparams = hparams if hparams is not None else {}
 
         self.num_pos_samples = num_pos_samples
@@ -35,13 +82,15 @@ class BinaryClassifier(object):
         embeds, labels = self._load_concept_embeds(self.concept_pt_path, csv_path, self.model_name)
 
         if self.hparams["model_type"] == "logistic":
-            tr_acc, te_acc, lin_model = self._train_logistic_model(embeds, labels)
+            tr_acc, te_acc, model = self._train_logistic_model(embeds, labels)
+        elif self.hparams["model_type"] == "mlp":
+            tr_acc, te_acc, model = self._train_mlp(embeds, labels)
         else:
             raise NotImplementedError(f"Model type {self.hparams['model_type']} not implemented")
 
         self.concept_train_accuracy = tr_acc
         self.concept_test_accuracy = te_acc
-        self.model = lin_model
+        self.model = model
     
     def inference(self, pt_path: str,) -> None:
         pos_tensor, neg_tensor = self._load_gen_audio_embeds(pt_path=pt_path, csv_path=None)
@@ -55,8 +104,26 @@ class BinaryClassifier(object):
         acc = sklearn.metrics.accuracy_score(labels, pred)
 
         return acc, tpr, tnr
+    
+    def _train_mlp(self, embeds: np.array, labels: np.array):
+        model = SimpleMLP(self.hparams)
+        test_size = self.hparams["test_size"] if "test_size" in self.hparams else 0.2
 
-    def _train_logistic_model(self, embeds: np.array, labels: np.array) -> None:
+        x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(embeds, labels, test_size=test_size)
+        x_train, x_test = torch.tensor(x_train, dtype=torch.float32), torch.tensor(x_test, dtype=torch.float32)
+        y_train, y_test = torch.tensor(y_train, dtype=torch.float32), torch.tensor(y_test, dtype=torch.float32)
+
+        train = torch.TensorDataset(x_train, y_train)
+        train_loader = DataLoader(train, batch_size=32, shuffle=True)
+
+        model.train(train_loader)
+
+        train_acc = sklearn.metrics.accuracy_score(y_train, model(x_train))
+        test_acc = sklearn.metrics.accuracy_score(y_test, model(x_test))
+
+        return train_acc, test_acc, model
+
+    def _train_logistic_model(self, embeds: np.array, labels: np.array):
         lin_model = sklearn.linear_model.LogisticRegression()
         test_size = self.hparams["test_size"] if "test_size" in self.hparams else 0.2
 
@@ -93,7 +160,6 @@ class BinaryClassifier(object):
         concept_embeds_np = concept_embeds.numpy()
         return concept_embeds_np, labels
         
-
     def _load_gen_audio_embeds(self, 
                                pt_path: str,  
                                csv_path: Optional[str],
@@ -139,4 +205,3 @@ class BinaryClassifier(object):
         neg_tensor = gen_audio_embeds[neg_indices, :, :].reshape(num_neg_prompts * batch_size, embed_dim)
 
         return (pos_tensor, neg_tensor)
-
