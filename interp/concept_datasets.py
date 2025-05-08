@@ -2,10 +2,8 @@ from typing import List, Dict, Any, Optional, Union, Callable, Tuple
 import importlib.util
 from json import loads
 from pathlib import Path
-from concept_filters import is_brass
 import pandas as pd
 import os
-import sys
 import torch
 from huggingface_hub import snapshot_download
 from transformers import ClapModel, ClapProcessor, AutoProcessor, MusicgenForConditionalGeneration
@@ -14,14 +12,7 @@ import torchaudio
 import numpy as np
 import warnings
 
-from concept_filters import load_concept_filter
-
-# (1) Load and parse json file, (2) add columns to json file, (3) sample and get csv file in data/concepts/{concept}
-
-def get_func_name(func: Callable[[dict], bool]) -> str:
-        if hasattr(func, '__name__'):
-            return func.__name__
-        raise ValueError(f"Callable {func} does not define a name.")
+from concept_filters import NSYNTH_FILTER_DICT, NSYNTH_PADDER_DICT, create_concept_filter
 
 class NSynthDataset(object):
     def __init__(self, split: str) -> None:
@@ -33,7 +24,9 @@ class NSynthDataset(object):
     def _dataset(self) -> Dict:
         return loads(self.json_path.read_text())
     
-    def _get_new_json(self, concept_filters: Tuple[Callable[[dict], bool], ...]) -> Dict:
+    def _get_new_json(self, 
+                      concept_filters: Tuple[Callable[[dict], bool], ...],
+                      concept_filter_names: Tuple[str, ...],) -> Dict:
         dataset = self._dataset()
         new_dataset = {}
         items = iter(dataset.items())
@@ -46,8 +39,12 @@ class NSynthDataset(object):
                 **sample_info,
                  "audio_fpath": str(self.audio_path / Path(fpath + ".wav"))
             }
-            for concept_filter in concept_filters:
-                sample[get_func_name(concept_filter)] = concept_filter(sample)
+
+            df_row = pd.DataFrame([sample_info])
+
+            for func, name in zip(concept_filters, concept_filter_names):
+                filtered = func(df_row)
+                sample[name] = not filtered.empty
             
             new_dataset[fpath] = sample
 
@@ -69,7 +66,8 @@ class ConceptDataset(NSynthDataset):
         super().__init__(split=split)
 
         self.concept_filter = concept_filter
-        self.concept_padder = f"{concept_filter}_like"  
+        self.concept_padder = f"{concept_filter}_like" 
+
         self.dir_path = dir_path if dir_path is not None else f"data/concepts/{concept_filter}"
         self.csv_path = csv_path if csv_path is not None else f"data/concepts/{concept_filter}/audio_info.csv"
         self.concept_filter_path = concept_filter_path if concept_filter_path is not None else f"interp/concept_filters.py"
@@ -78,24 +76,36 @@ class ConceptDataset(NSynthDataset):
         self.get_true = get_true
 
         # Loading in filters
-        filter_func = load_concept_filter(concept_filter_path=self.concept_filter_path, 
-                                        func_name=self.concept_filter)
-        padder_func = load_concept_filter(concept_filter_path=self.concept_filter_path, 
-                                        func_name=self.concept_padder)
+        print("Getting concept filter, padder...")
+        self._get_filters()
         
         if not os.path.exists(self.dir_path):
             os.makedirs(self.dir_path)
 
         # Loading in the csv if present
         if not self.overwrite and os.path.exists(self.csv_path):
+            print(f"Loading from csv at {self.csv_path}...")
             self._load_from_csv()
         
         # Otherwise, create from scratch
         else:
-            new_json = self._get_new_json(concept_filters=[filter_func, padder_func])
+            print("Getting new json...")
+            new_json = self._get_new_json(concept_filters=[self.concept_filter_func, self.concept_padder_func],
+                                          concept_filter_names=[self.concept_filter, self.concept_padder])
+            if len(new_json) < 1:
+                raise ValueError("Produced json is empty")
+            print("Getting positive, negative limits...")
             self._get_pos_neg_limits(new_json, pos_limit, neg_limit)
+            print("Writing csv...")
             self._write_csv(new_json)
     
+    def _get_filters(self):
+        col_dict, get_true, logic = NSYNTH_FILTER_DICT[self.concept_filter]
+        self.concept_filter_func = create_concept_filter(col_dict, get_true, logic)
+
+        col_dict, get_true, logic = NSYNTH_PADDER_DICT[self.concept_padder]
+        self.concept_padder_func = create_concept_filter(col_dict, get_true, logic)
+
     def _load_from_csv(self):
         df = pd.read_csv(self.csv_path)
         
@@ -103,56 +113,28 @@ class ConceptDataset(NSynthDataset):
         self.pos_samples = df[df["binary_class"] == 1]
         self.neg_samples = df[df["binary_class"] == 0]
 
-        self.num_pos_samples = self.pos_limit = self.pos_samples.sum()
-        self.num_neg_samples = self.neg_limit = self.neg_samples.sum()
-        self.num_samples = self.samples.sum()
+        self.num_pos_samples = self.pos_limit = len(self.pos_samples)
+        self.num_neg_samples = self.neg_limit = len(self.neg_samples)
+        self.num_samples = len(self.samples)
 
         self.possible_pos_samples = None
         self.possible_neg_samples = None
-    
-    def _get_pos_neg_limits(self, new_json, pos_limit, neg_limit) -> None:
-        _, pos_mask = self._get_mask(new_json, get_true=self.get_true)
-        _, neg_mask = self._get_mask(new_json, get_true=not self.get_true)
 
-        self.possible_pos_samples = pos_mask.sum()
-        self.possible_neg_samples = neg_mask.sum()
+    def _get_pos_neg_limits(self, new_json, pos_limit, neg_limit) -> None:
+        pos_df, neg_df = self._get_pos_neg_df(new_json)
+        
+        self.possible_pos_samples = pos_df.shape[0]
+        self.possible_neg_samples = neg_df.shape[0]
 
         pos_limit = pos_limit if pos_limit is not None else self.possible_pos_samples
         neg_limit = neg_limit if neg_limit is not None else self.possible_neg_samples
 
-        balanced_lim = min(pos_limit, neg_limit)
+        balanced_lim = min(pos_limit // 2, neg_limit // 2, 15000)
 
         self.pos_limit, self.neg_limit = balanced_lim, balanced_lim
-
-    def _get_pos_neg_limits(concept_filter: str) -> Tuple[int, int]:
-        temp_ds = ConceptDataset(split="train", concept_filter=concept_filter, get_true=True)
-
-        pos_lim = temp_ds.possible_pos_samples
-        neg_lim = temp_ds.possible_neg_samples
-
-        return min(pos_lim, neg_lim), min(pos_lim, neg_lim)
-
-    def _get_mask(self, new_json: Dict, get_true: bool) -> pd.Series:
-        df = pd.DataFrame.from_dict(new_json, orient="index")
-        mask = pd.Series(True, index=df.index)  \
-            & (df[self.concept_filter] == get_true) \
-            & (df[self.concept_padder] == get_true)
-        return df, mask
-
+    
     def _write_csv(self, new_json: Dict) -> None:
-        df, pos_mask = self._get_mask(new_json, get_true=self.get_true)
-        _, neg_mask = self._get_mask(new_json, get_true=not self.get_true)
-
-        self.possible_pos_samples = pos_mask.sum()
-        self.possible_neg_samples = neg_mask.sum()
-
-        if self.pos_limit is not None and self.pos_limit > self.possible_pos_samples:
-            warnings.warn(f"Positive limit {self.pos_limit} exceeds possible positive samples {self.possible_pos_samples}")
-        if self.neg_limit is not None and self.neg_limit > self.possible_neg_samples:
-            warnings.warn(f"Negative limit {self.neg_limit} exceeds possible negative samples {self.possible_neg_samples}")
-
-        pos_df = df[pos_mask]
-        neg_df = df[neg_mask]
+        pos_df, neg_df = self._get_pos_neg_df(new_json)
 
         if self.pos_limit is not None:
             pos_df = pos_df.copy().sample(n=self.pos_limit, random_state=None)
@@ -174,45 +156,68 @@ class ConceptDataset(NSynthDataset):
         self.num_samples = len(self.samples)
     
         self.samples.to_csv(self.csv_path, index=False)
+
+    def _get_pos_neg_df(self, new_json) -> None:
+        df = pd.DataFrame.from_dict(new_json, orient="index")
+
+        pos_paths = [fpath for fpath, sample in new_json.items()
+                 if sample.get(self.concept_filter, True) and sample.get(self.concept_padder, True)]
+        neg_paths = [fpath for fpath, sample in new_json.items()
+                 if not sample.get(self.concept_filter, False) and not sample.get(self.concept_padder, False)]
+        
+        pos_df = df.loc[pos_paths].copy()
+        neg_df = df.loc[neg_paths].copy()
+
+        return pos_df, neg_df
     
     def get_embeds(self, 
                    model_name: str,
                    save: bool = False,
+                   cache = None,
+                   save_path: Optional[str] = None,
                    device: str = "cuda" if torch.cuda.is_available() else "cpu",
                    ):
         
-        # Loading the model and processor
-        # We rip this code from embeddings.load_model
-        cache = cache_model(model_name=model_name)
-
-        if model_name == "laion-clap":
-            model = ClapModel.from_pretrained(cache, local_files_only=True).to(device).eval()
-            processor = AutoProcessor.from_pretrained(cache, local_files_only=True)
-            new_sr = 48000
-            embed_dim = 512
-            num_seconds = 10
+        # Make sure save_path is none for ease
+        save_path = save_path if save_path is not None else f"{self.dir_path}/{model_name}_embeddings.pt"
         
-        elif model_name == "muq":
-            model = MuQMuLan.from_pretrained(cache, local_files_only=True).to(device).eval()
-            processor = None
-            new_sr = 24000
-            embed_dim = None
-            num_seconds = None
-
-        old_sr, audio_tensor = self._load_audios_to_batch(self.samples["audio_fpath"].tolist())
-        processed_audio_tensor = self._preprocess_audio_tensor(audio_tensor=audio_tensor,
-                                                               old_sr=old_sr, new_sr=new_sr,
-                                                               num_seconds=num_seconds)
+        if os.path.exists(save_path) and not self.overwrite:
+            print(f"Embeddings exist at {save_path}")
+            embeds = torch.load(save_path)
         
-        embeds = self._get_embeds_from_model(model=model, processor=processor,
-                                            device=device,
-                                            new_sr=new_sr,
-                                            num_seconds=num_seconds,
-                                            audio_tensor=processed_audio_tensor,
-                                            embed_dim=embed_dim,
-                                            )
-        if save:
-            self._save_embeds(embeds, model_name=model_name, save_path=None)
+        else:
+            # Loading the model and processor
+            # We rip this code from embeddings.load_model
+            cache = cache if cache is not None else cache_model(model_name=model_name)
+
+            if model_name == "laion-clap":
+                model = ClapModel.from_pretrained(cache, local_files_only=True).to(device).eval()
+                processor = AutoProcessor.from_pretrained(cache, local_files_only=True)
+                new_sr = 48000
+                embed_dim = 512
+                num_seconds = 10
+            
+            elif model_name == "muq":
+                model = MuQMuLan.from_pretrained(cache, local_files_only=True).to(device).eval()
+                processor = None
+                new_sr = 24000
+                embed_dim = None
+                num_seconds = None
+
+            old_sr, audio_tensor = self._load_audios_to_batch(self.samples["audio_fpath"].tolist())
+            processed_audio_tensor = self._preprocess_audio_tensor(audio_tensor=audio_tensor,
+                                                                old_sr=old_sr, new_sr=new_sr,
+                                                                num_seconds=num_seconds)
+            
+            embeds = self._get_embeds_from_model(model=model, processor=processor,
+                                                device=device,
+                                                new_sr=new_sr,
+                                                num_seconds=num_seconds,
+                                                audio_tensor=processed_audio_tensor,
+                                                embed_dim=embed_dim,
+                                                )
+            if save:
+                self._save_embeds(embeds, model_name=model_name, save_path=save_path)
 
         return embeds
 
@@ -288,11 +293,8 @@ class ConceptDataset(NSynthDataset):
         if save_path is None:
             save_path = f"{self.dir_path}/{model_name}_embeddings.pt"
 
-        if os.path.exists(save_path) and not self.overwrite:
-            raise FileExistsError(f"Embeddings already saved for {model_name}, concept dataset")
-        else:
-            torch.save(embeds, save_path)
-            print(f"Embeddings saved to {save_path}")
+        torch.save(embeds, save_path)
+        print(f"Embeddings saved to {save_path}")
 
 def cache_model(model_name: str) -> str:
         cache_dir = f"models/{model_name}"

@@ -1,8 +1,9 @@
 import torch
 import yaml
 
-from concept_datasets import ConceptDataset, get_pos_neg_limits
+from concept_datasets import ConceptDataset, cache_model
 from models import BinaryClassifier
+from concept_filters import get_all_concepts
 
 with open('interp/config.yaml', 'r') as file:
     config = yaml.safe_load(file)
@@ -16,48 +17,48 @@ overwrite = config["overwrite"]
 hparams = {k: v for c in config["hparams"] for k, v in c.items()}
 
 results_dict = {}
+limit_dict = {}
 
-def main():
+# concepts = get_all_concepts()
+concepts = ['is_bass',]
+
+def process_embeds():
+
+    print(f"Started caching {embed_model}...")
+    cache = cache_model(model_name=embed_model)
+    print(f"...Finished caching {embed_model}")
+
     for concept in concepts:
+
+        print(f"Processing {concept} dataset")
         cds = ConceptDataset(split="train", concept_filter=concept,
                              pos_limit=None, neg_limit=None, overwrite=overwrite)
         
-        pos_lim, neg_lim = cds.pos_limit, cds.neg_limit
+        limit_dict[concept] = (cds.pos_limit, cds.neg_limit)
+        
+        print(f"Getting {concept} embeddings from {embed_model}")
+        cds.get_embeds(model_name=embed_model, save=True, cache=cache)
 
+def interp():
+    for concept in concepts:
         for class_model in class_models:
             hparams["model_type"] = class_model
+
             binary_classifier = BinaryClassifier(
                         concept_filter=concept,
-                        num_pos_samples=pos_lim,
-                        num_neg_samples=neg_lim,
+                        num_pos_samples=limit_dict[concept][0],
+                        num_neg_samples=limit_dict[concept][1],
                         model_name=embed_model,
                         hparams=hparams,
                     )
+            
             binary_classifier.train(csv_path=None)
 
-            concept_results = {
-                "concept_train_accuracy": binary_classifier.concept_train_accuracy,
-                "concept_test_accuracy": binary_classifier.concept_test_accuracy,
-                "class_model": binary_classifier.model,
-            }
-
-            for step in truncation_ts:
-                path = f"data/generated/diff_step_{step}/{embed_model}_embeddings.pt"
-                tpr, tnr, acc = binary_classifier.inference(pt_path=path)
-                
-                gen_audio_dict = {
-                    "tpr": tpr,
-                    "tnr": tnr,
-                    "accuracy": acc
-                }
-
-                concept_results[f"diff_step_{step}_results"] = gen_audio_dict
-
-            results_dict[(concept, class_model)] = concept_results
-
-    
-    return results_dict
+            for diff_step in truncation_ts:
+                binary_classifier.inference(diff_step=diff_step, embed_model=embed_model, save=True)
+                fig = binary_classifier.get_pca(diff_step=diff_step, embed_model=embed_model)
+                fig.savefig(f"data/concepts/{concept}/PCA_{diff_step}", dpi=300, bbox_inches="tight")
 
 if __name__ == "__main__":
-    results_dict = main()
-    print(results_dict)
+    process_embeds()
+    interp()
