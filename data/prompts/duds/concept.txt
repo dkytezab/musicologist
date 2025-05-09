@@ -1,0 +1,24 @@
+bass
+brass
+flute
+guitar
+keyboard
+mallet
+organ
+reed
+string
+synth_lead
+vocal
+bright sound
+warm sound
+distortion
+fast_decay
+long_release
+multiphonic
+nonlinear_env
+percussive
+reverb
+tempo-synced
+acoustic
+electronic
+synthetic

@@ -4,6 +4,8 @@ import imageio.v2 as imageio
 import io
 from PIL import Image
 import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
 
 from concept_datasets import ConceptDataset, cache_model
 from models import BinaryClassifier
@@ -23,8 +25,8 @@ hparams = {k: v for c in config["hparams"] for k, v in c.items()}
 results_dict = {}
 limit_dict = {}
 
-# concepts = get_all_concepts()
-concepts = ['is_electronic', 'is_synthetic', 'is_orchestral', 'is_acoustic_band', 'is_percussion', 'is_techno', 'is_plucked', 'is_blown', 'is_hit', 'is_atmospheric']
+concepts = get_all_concepts()
+# concepts = ['is_electronic', 'is_synthetic', 'is_orchestral', 'is_acoustic_band', 'is_percussion', 'is_techno', 'is_plucked', 'is_blown', 'is_hit', 'is_atmospheric']
 
 
 def process_embeds():
@@ -83,10 +85,61 @@ def fig_to_pil(fig):
 
 def results_to_im():
     for concept in concepts:
-        json_path = f"data/generated/{concept}/concept_results.json"
-        json = pd.read_json(json_path)
+        json_path = f"data/concepts/{concept}/concept_results.json"
+        df = pd.read_json(json_path)
+
+        log_acc = df.loc[df["class_model_type"] == "logistic", "acc"]
+        log_tpr = df.loc[df["class_model_type"] == "logistic", "tpr"]
+        log_tnr = df.loc[df["class_model_type"] == "logistic", "tnr"]
+
+        svm_acc = df.loc[df["class_model_type"] == "svm", "acc"]
+        svm_tpr = df.loc[df["class_model_type"] == "svm", "tpr"]
+        svm_tnr = df.loc[df["class_model_type"] == "svm", "tnr"]
+
+        num_pos = df.iloc[0]["pos_gen_audio_samples"]
+        num_neg = df.iloc[0]["neg_gen_audio_samples"]
+
+        log_train_acc = df.loc[df["class_model_type"] == "logistic", "class_model_train_acc"].iloc[0]
+        log_test_acc = df.loc[df["class_model_type"] == "logistic", "class_model_test_acc"].iloc[0]
+
+        svm_train_acc = df.loc[df["class_model_type"] == "svm", "class_model_train_acc"].iloc[0]
+        svm_test_acc = df.loc[df["class_model_type"] == "svm", "class_model_test_acc"].iloc[0]
+
+        fig1, ax1 = plt.subplots(figsize=(10, 6))
+        fig2, ax2 = plt.subplots(figsize=(10, 6))
+
+        ax1.plot(truncation_ts, log_acc, marker='o', color='black', label="Logistic Accuracy")
+        ax1.plot(truncation_ts, log_tpr, marker='s', linestyle='--', color='green', label="Logistic TPR")
+        ax1.plot(truncation_ts, log_tnr, marker='^', linestyle='--', color='firebrick', label='Logistic TNR')
+
+        ax2.plot(truncation_ts, svm_acc, marker='o', color='black', label="SVM Accuracy")
+        ax2.plot(truncation_ts, svm_tpr, marker='s', linestyle='--', color='green', label="SVM TPR")
+        ax2.plot(truncation_ts, svm_tnr, marker='^', linestyle='--', color='firebrick', label='SVM TNR')
+
+
+        for k in [ax1, ax2]:
+            k.set_xticks(truncation_ts)
+            k.set_xlabel("Diffusion Timestep")
+            k.set_ylim(0, 1)
+            k.set_yticks(np.arange(0, 1, 0.1))
+            k.set_title(f"{concept} classifier performance on diffusion-generated audio with {num_pos} positive samples, {num_neg} negative samples")
+            k.legend(loc='best')
+            k.grid()
+
+        fig1.text(0.5, 0, f"Concept train accuracy: {round(log_train_acc, 3)}, Concept test accuracy: {round(log_test_acc, 3)}",
+             ha='center', va='bottom', fontsize=9)
+        fig2.text(0.5, 0, f"Concept train accuracy: {round(svm_train_acc, 3)}, Concept test accuracy: {round(svm_test_acc, 3)}",
+             ha='center', va='bottom', fontsize=9)
+        
+        fig1.tight_layout()
+        fig2.tight_layout()
+        
+
+        fig1.savefig(f"data/concepts/{concept}/logistic_results.png", dpi=300, bbox_inches="tight")
+        fig2.savefig(f"data/concepts/{concept}/svm_results.png", dpi=300, bbox_inches="tight")
 
 
 if __name__ == "__main__":
-    process_embeds()
-    interp()
+    # process_embeds()
+    # interp()
+    results_to_im()

@@ -1,0 +1,4773 @@
+[
+  {
+    "prompt": "A smooth jazz quartet featuring saxophone, upright bass, piano, and brush drums at 90 BPM. The mood is relaxed and intimate.",
+    "aspects": [
+      "bass",
+      "reed",
+      "keyboard",
+      "drum",
+      "vocal",
+      "warm sound",
+      "acoustic"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A classical string quartet playing a brisk allegro at 130 BPM with a joyful and elegant mood.",
+    "aspects": [
+      "string",
+      "acoustic",
+      "fast_decay"
+    ],
+    "bpm": 130
+  },
+  {
+    "prompt": "A folk song with acoustic guitar, harmonica, and light percussion at 100 BPM. The mood is nostalgic and warm.",
+    "aspects": [
+      "guitar",
+      "reed",
+      "drum",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "A high-energy EDM track with heavy bass, synth leads, and a tempo of 128 BPM. The mood is club-ready and intense.",
+    "aspects": [
+      "bass",
+      "synth_lead",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 128
+  },
+  {
+    "prompt": "A solo cello piece with a slow tempo of 50 BPM, evoking a somber and reflective atmosphere.",
+    "aspects": [
+      "string",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 50
+  },
+  {
+    "prompt": "A reggae track with offbeat guitar chops, deep bass, and a tempo of 75 BPM. The mood is chill and positive.",
+    "aspects": [
+      "guitar",
+      "bass",
+      "drum",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 75
+  },
+  {
+    "prompt": "An upbeat pop song at 120 BPM featuring electric guitar, bright synths, and catchy vocal harmonies. The mood is fun and uplifting.",
+    "aspects": [
+      "guitar",
+      "synth_lead",
+      "vocal",
+      "bright sound",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 120
+  },
+  {
+    "prompt": "A traditional flamenco guitar piece with rapid fingerpicking and hand claps, tempo around 140 BPM. The mood is passionate and fiery.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "acoustic",
+      "fast_decay",
+      "percussive"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "A cinematic orchestral composition with sweeping strings, brass fanfares, and timpani at an epic 110 BPM. The mood is heroic and inspiring.",
+    "aspects": [
+      "string",
+      "brass",
+      "drum",
+      "acoustic",
+      "reverb"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A lo-fi hip hop beat at 85 BPM with soft piano loops, vinyl crackle, and smooth drum patterns. The mood is calm and introspective.",
+    "aspects": [
+      "keyboard",
+      "drum",
+      "warm sound",
+      "acoustic",
+      "electronic"
+    ],
+    "bpm": 85
+  },
+  {
+    "prompt": "A grunge rock song with distorted electric guitars, driving drums at 115 BPM, and a raw, angsty mood.",
+    "aspects": [
+      "guitar",
+      "distortion",
+      "drum",
+      "bass",
+      "electronic"
+    ],
+    "bpm": 115
+  },
+  {
+    "prompt": "A minimal techno track with repetitive synth bassline and percussive elements at 125 BPM. The mood is hypnotic and steady.",
+    "aspects": [
+      "bass",
+      "synth_lead",
+      "drum",
+      "electronic",
+      "tempo-synced",
+      "percussive"
+    ],
+    "bpm": 125
+  },
+  {
+    "prompt": "A soulful R&B ballad featuring warm Rhodes piano, gentle percussion, and smooth vocals at 70 BPM. The mood is romantic and tender.",
+    "aspects": [
+      "keyboard",
+      "drum",
+      "vocal",
+      "warm sound",
+      "acoustic"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A bluegrass ensemble with banjo, fiddle, mandolin, and upright bass playing a fast 140 BPM tune. The mood is lively and energetic.",
+    "aspects": [
+      "string",
+      "acoustic",
+      "fast_decay",
+      "bright sound"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "A cinematic horror soundtrack with dissonant strings and eerie synth textures at a slow 60 BPM. The mood is suspenseful and unsettling.",
+    "aspects": [
+      "string",
+      "synth_lead",
+      "reverb",
+      "electronic",
+      "slow_decay",
+      "acoustic"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "An ambient electronic piece with lush pads, soft bells, and no clear beat, designed for a dreamy, tranquil mood.",
+    "aspects": [
+      "keyboard",
+      "mallet",
+      "synth_lead",
+      "electronic",
+      "long_release",
+      "reverb"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "A punk rock song with fast, chugging electric guitars and aggressive vocals at 180 BPM. The mood is rebellious and raw.",
+    "aspects": [
+      "guitar",
+      "distortion",
+      "vocal",
+      "drum",
+      "bass"
+    ],
+    "bpm": 180
+  },
+  {
+    "prompt": "A salsa track featuring brass section, congas, bongos, and piano montunos at 180 BPM. The mood is festive and danceable.",
+    "aspects": [
+      "brass",
+      "drum",
+      "keyboard",
+      "percussive",
+      "acoustic",
+      "fast_decay"
+    ],
+    "bpm": 180
+  },
+  {
+    "prompt": "A vintage swing jazz big band piece with vibrant brass and walking bass at 160 BPM. The mood is upbeat and swinging.",
+    "aspects": [
+      "brass",
+      "bass",
+      "drum",
+      "acoustic",
+      "fast_decay",
+      "bright sound"
+    ],
+    "bpm": 160
+  },
+  {
+    "prompt": "A solo acoustic fingerstyle guitar piece with a slow 60 BPM tempo, evoking introspection and melancholy.",
+    "aspects": [
+      "guitar",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A synthwave track at 110 BPM with retro analog synths, drum machine beats, and neon-lit nostalgia. The mood is futuristic yet nostalgic.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "electronic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A gospel choir song backed by piano and organ, with strong vocals and a 90 BPM uplifting tempo. The mood is soulful and celebratory.",
+    "aspects": [
+      "vocal",
+      "keyboard",
+      "organ",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A metalcore song featuring heavy guitars, double kick drums at 190 BPM, and harsh vocals. The mood is aggressive and intense.",
+    "aspects": [
+      "guitar",
+      "distortion",
+      "drum",
+      "vocal",
+      "bass",
+      "fast_decay"
+    ],
+    "bpm": 190
+  },
+  {
+    "prompt": "A Celtic folk instrumental with tin whistle, fiddle, and bodhran at a brisk 140 BPM. The mood is lively and spirited.",
+    "aspects": [
+      "flute",
+      "string",
+      "drum",
+      "acoustic",
+      "fast_decay"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "A chillout downtempo track with synth pads, soft beats at 75 BPM, and smooth saxophone melodies. The mood is relaxed and soothing.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "reed",
+      "electronic",
+      "warm sound"
+    ],
+    "bpm": 75
+  },
+  {
+    "prompt": "A baroque harpsichord piece in fast tempo, intricate ornamentation, and a bright, formal mood.",
+    "aspects": [
+      "keyboard",
+      "acoustic",
+      "fast_decay",
+      "bright sound"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "A smooth Latin jazz fusion tune with electric piano, congas, and smooth saxophone solos at 100 BPM. The mood is laid-back and vibrant.",
+    "aspects": [
+      "keyboard",
+      "drum",
+      "reed",
+      "electronic",
+      "warm sound"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "An experimental noise piece with distorted feedback, drone elements, and irregular rhythm patterns. The mood is chaotic and unsettling.",
+    "aspects": [
+      "distortion",
+      "electronic",
+      "nonlinear_env",
+      "reverb"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "A bossa nova song featuring nylon-string guitar, soft percussion, and gentle vocals at 90 BPM. The mood is mellow and romantic.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "vocal",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A cinematic sci-fi soundtrack featuring pulsating synths, metallic percussion, and a steady 120 BPM beat. The mood is mysterious and futuristic.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "electronic",
+      "tempo-synced",
+      "percussive",
+      "reverb"
+    ],
+    "bpm": 120
+  },
+  {
+    "prompt": "A gospel-inspired country song with acoustic guitar, pedal steel, and choirs at 85 BPM. The mood is heartfelt and uplifting.",
+    "aspects": [
+      "guitar",
+      "vocal",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 85
+  },
+  {
+    "prompt": "A classic blues shuffle with electric guitar, harmonica, upright bass, and drums at 110 BPM. The mood is gritty and soulful.",
+    "aspects": [
+      "guitar",
+      "reed",
+      "bass",
+      "drum",
+      "acoustic"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A modern pop ballad with piano, strings, and synthesizers at 70 BPM. The mood is emotional and hopeful.",
+    "aspects": [
+      "keyboard",
+      "string",
+      "synth_lead",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A fast-paced bluegrass jam with banjo rolls and fiddle improvisations at 160 BPM. The mood is joyful and energetic.",
+    "aspects": [
+      "string",
+      "fast_decay",
+      "acoustic",
+      "bright sound"
+    ],
+    "bpm": 160
+  },
+  {
+    "prompt": "A dreamy indie pop track with jangly guitars, synths, and laid-back drums at 95 BPM. The mood is wistful and upbeat.",
+    "aspects": [
+      "guitar",
+      "synth_lead",
+      "drum",
+      "electronic",
+      "bright sound"
+    ],
+    "bpm": 95
+  },
+  {
+    "prompt": "A dark ambient piece featuring deep drones, sparse piano notes, and a cold, eerie atmosphere.",
+    "aspects": [
+      "keyboard",
+      "electronic",
+      "long_release",
+      "reverb"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "A mambo orchestral track with lively brass, percussion, and piano montuno at 150 BPM. The mood is festive and energetic.",
+    "aspects": [
+      "brass",
+      "drum",
+      "keyboard",
+      "acoustic",
+      "fast_decay"
+    ],
+    "bpm": 150
+  },
+  {
+    "prompt": "A solo saxophone ballad with slow, expressive phrasing at 60 BPM. The mood is melancholic and romantic.",
+    "aspects": [
+      "reed",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A trap beat at 140 BPM with heavy 808 bass, hi-hats, and dark atmospheric pads. The mood is moody and intense.",
+    "aspects": [
+      "bass",
+      "drum",
+      "synth_lead",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "A reggae dub instrumental with echo effects, deep bass, and laid-back drum rhythms at 70 BPM. The mood is relaxed and hypnotic.",
+    "aspects": [
+      "bass",
+      "drum",
+      "guitar",
+      "electronic",
+      "reverb"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A high-energy K-pop influenced dance track with bright synths, strong beats at 130 BPM, and catchy hooks. The mood is fun and vibrant.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "electronic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 130
+  },
+  {
+    "prompt": "An acoustic singer-songwriter track featuring fingerpicked guitar and soft vocals at 75 BPM. The mood is intimate and reflective.",
+    "aspects": [
+      "guitar",
+      "vocal",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 75
+  },
+  {
+    "prompt": "A cinematic orchestral piece focused on strings and choir, building tension at a slow 60 BPM tempo. The mood is dramatic and suspenseful.",
+    "aspects": [
+      "string",
+      "vocal",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A funk groove featuring slap bass, wah guitar, horns section, and syncopated drums at 110 BPM. The mood is funky and playful.",
+    "aspects": [
+      "bass",
+      "guitar",
+      "drum",
+      "brass",
+      "electronic",
+      "bright sound"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A minimalist piano \u00e9tude with repetitive motifs and a steady tempo of 90 BPM. The mood is meditative and focused.",
+    "aspects": [
+      "keyboard",
+      "acoustic",
+      "fast_decay"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A mariachi band piece with trumpets, violins, vihuela, and guitarr\u00f3n at a lively 140 BPM. The mood is festive and celebratory.",
+    "aspects": [
+      "brass",
+      "string",
+      "bass",
+      "acoustic",
+      "fast_decay"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "A chill trap instrumental with mellow synth chords, slow 70 BPM tempo, and soft, punchy drums. The mood is smooth and laid-back.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "electronic",
+      "warm sound"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A progressive rock track with odd time signatures, electric guitar solos, and dynamic tempo changes around 110 BPM. The mood is adventurous and complex.",
+    "aspects": [
+      "guitar",
+      "keyboard",
+      "drum",
+      "bass",
+      "electronic"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A romantic tango featuring bandoneon, violin, piano, and double bass at 130 BPM. The mood is passionate and dramatic.",
+    "aspects": [
+      "reed",
+      "string",
+      "keyboard",
+      "bass",
+      "acoustic",
+      "fast_decay"
+    ],
+    "bpm": 130
+  },
+  {
+    "prompt": "A solo harp composition with flowing arpeggios and a calm, serene atmosphere at 60 BPM.",
+    "aspects": [
+      "mallet",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A hard rock anthem featuring crunchy electric guitars, driving bass, and vigorous drums at 120 BPM. The mood is bold and rebellious.",
+    "aspects": [
+      "guitar",
+      "bass",
+      "drum",
+      "distortion",
+      "electronic"
+    ],
+    "bpm": 120
+  },
+  {
+    "prompt": "A neo-classical piano piece combining classical technique with modern harmonies at 80 BPM. The mood is contemplative and uplifting.",
+    "aspects": [
+      "keyboard",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 80
+  },
+  {
+    "prompt": "A tropical house track with bright marimbas, smooth synths, and a steady 115 BPM groove. The mood is sunny and relaxed.",
+    "aspects": [
+      "mallet",
+      "synth_lead",
+      "electronic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 115
+  },
+  {
+    "prompt": "A slow dubstep track at 70 BPM with heavy wobbles, dark bass, and sparse percussion. The mood is brooding and intense.",
+    "aspects": [
+      "bass",
+      "drum",
+      "synth_lead",
+      "electronic",
+      "slow_decay"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A gospel soul track with powerful choir, organ, and rhythmic clapping at 85 BPM. The mood is joyful and spiritual.",
+    "aspects": [
+      "vocal",
+      "organ",
+      "drum",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 85
+  },
+  {
+    "prompt": "A traditional Indian raga performed on sitar and tabla with a slow tempo creating a meditative mood.",
+    "aspects": [
+      "string",
+      "drum",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "An orchestral waltz with lush strings, woodwinds, and a tempo of 90 BPM. The mood is elegant and romantic.",
+    "aspects": [
+      "string",
+      "reed",
+      "acoustic",
+      "tempo-synced",
+      "warm sound"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A synthpop track at 120 BPM with catchy melodies, electronic drums, and bright, nostalgic atmosphere.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "electronic",
+      "bright sound",
+      "tempo-synced"
+    ],
+    "bpm": 120
+  },
+  {
+    "prompt": "A high-energy ska punk song with brass section, fast guitar riffs, and 160 BPM tempo. The mood is energetic and fun.",
+    "aspects": [
+      "brass",
+      "guitar",
+      "drum",
+      "electronic",
+      "fast_decay"
+    ],
+    "bpm": 160
+  },
+  {
+    "prompt": "A slow blues ballad featuring electric guitar with slide, harmonica, and laid-back drums at 65 BPM. The mood is soulful and wistful.",
+    "aspects": [
+      "guitar",
+      "reed",
+      "drum",
+      "electric",
+      "warm sound"
+    ],
+    "bpm": 65
+  },
+  {
+    "prompt": "A cinematic fantasy soundtrack with choir, harp, and shimmering strings at a moderate 100 BPM. The mood is magical and ethereal.",
+    "aspects": [
+      "vocal",
+      "mallet",
+      "string",
+      "acoustic",
+      "reverb"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "A bouncy electro-funk track featuring funky basslines, synth stabs, and punchy drums at 110 BPM. The mood is playful and groovy.",
+    "aspects": [
+      "bass",
+      "synth_lead",
+      "drum",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A bluegrass gospel hymn with banjo, dobro, mandolin, and vocal harmonies at 120 BPM. The mood is uplifting and heartfelt.",
+    "aspects": [
+      "string",
+      "vocal",
+      "acoustic",
+      "tempo-synced",
+      "warm sound"
+    ],
+    "bpm": 120
+  },
+  {
+    "prompt": "A trap-influenced pop song with melodic synths and a mid-tempo 90 BPM beat. The mood is catchy and trendy.",
+    "aspects": [
+      "synth_lead",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A solo violin piece with fast, virtuosic runs and expressive dynamics at 140 BPM. The mood is dramatic and energizing.",
+    "aspects": [
+      "string",
+      "acoustic",
+      "fast_decay",
+      "bright sound"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "An ambient drone piece with evolving textures, no defined rhythm, evoking calm and spaciousness.",
+    "aspects": [
+      "synth_lead",
+      "electronic",
+      "long_release",
+      "reverb"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "A dancehall track at 95 BPM with riddim bass, syncopated beats, and catchy vocal hooks. The mood is party-ready and energetic.",
+    "aspects": [
+      "bass",
+      "drum",
+      "vocal",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 95
+  },
+  {
+    "prompt": "A romantic classical piano nocturne with flowing melodies and tempo rubato around 70 BPM.",
+    "aspects": [
+      "keyboard",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "An indie folk track with acoustic guitar, soft percussion, and mellow vocals at 80 BPM. The mood is warm and intimate.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "vocal",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 80
+  },
+  {
+    "prompt": "A heavy metal instrumental featuring shredding electric guitars, double bass, and aggressive rhythms at 180 BPM. The mood is intense and powerful.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "bass",
+      "distortion",
+      "fast_decay"
+    ],
+    "bpm": 180
+  },
+  {
+    "prompt": "A disco-inspired dance track with funky bass, four-on-the-floor drums, and string stabs at 125 BPM. The mood is energetic and glamorous.",
+    "aspects": [
+      "bass",
+      "drum",
+      "string",
+      "electronic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 125
+  },
+  {
+    "prompt": "A soulful jazz ballad with trumpet, upright bass, and piano at 65 BPM. The mood is smooth and nostalgic.",
+    "aspects": [
+      "brass",
+      "bass",
+      "keyboard",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 65
+  },
+  {
+    "prompt": "A progressive house track with uplifting synths, steady 128 BPM beat, and euphoric melodies. The mood is energetic and hopeful.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "electronic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 128
+  },
+  {
+    "prompt": "A traditional Japanese koto and shakuhachi duet with slow, meditative tempo. The mood is serene and contemplative.",
+    "aspects": [
+      "mallet",
+      "flute",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "A psychedelic rock song with fuzz guitar, wah effects, and a groovy 110 BPM rhythm. The mood is trippy and lively.",
+    "aspects": [
+      "guitar",
+      "distortion",
+      "drum",
+      "bass",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A minimalist electronic track with glitchy percussion, subtle synth lines, and a moderate tempo of 100 BPM. The mood is experimental and cool.",
+    "aspects": [
+      "drum",
+      "synth_lead",
+      "electronic",
+      "tempo-synced",
+      "nonlinear_env",
+      "percussive"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "A romantic mariachi ballad with soft trumpet, guitar, and emotional vocals at 70 BPM. The mood is tender and heartfelt.",
+    "aspects": [
+      "brass",
+      "guitar",
+      "vocal",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A dynamic symphonic metal piece with orchestral elements, heavy guitars, and dual vocal styles at 120 BPM. The mood is dramatic and intense.",
+    "aspects": [
+      "string",
+      "guitar",
+      "vocal",
+      "drum",
+      "brass",
+      "acoustic",
+      "electronic",
+      "tempo-synced",
+      "distortion"
+    ],
+    "bpm": 120
+  },
+  {
+    "prompt": "A laid-back surf rock instrumental with reverb-drenched electric guitar and simple drum beats at 110 BPM. The mood is carefree and sunny.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "bass",
+      "electronic",
+      "reverb"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A melancholic piano solo with sparse notes and slow 50 BPM tempo emphasizing minor keys.",
+    "aspects": [
+      "keyboard",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 50
+  },
+  {
+    "prompt": "A vibrant Afrobeat track featuring polyrhythmic drums, horns, and electric guitar at 115 BPM. The mood is lively and celebratory.",
+    "aspects": [
+      "brass",
+      "guitar",
+      "drum",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 115
+  },
+  {
+    "prompt": "A chiptune electronic track with 8-bit synth sounds, fast tempo of 140 BPM, and playful mood.",
+    "aspects": [
+      "synth_lead",
+      "electronic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "A gentle lullaby featuring music box melodies and soft strings at 60 BPM. The mood is soothing and peaceful.",
+    "aspects": [
+      "mallet",
+      "string",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A funk rock fusion track with syncopated guitar riffs, punchy bass, and energetic drums at 100 BPM. The mood is lively and cool.",
+    "aspects": [
+      "guitar",
+      "bass",
+      "drum",
+      "electronic",
+      "bright sound"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "A traditional Scottish bagpipe march with snare drums at a brisk 140 BPM. The mood is proud and uplifting.",
+    "aspects": [
+      "reed",
+      "drum",
+      "acoustic",
+      "fast_decay"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "An introspective indie rock ballad with electric guitar, soft drums, and ambient synths at 75 BPM. The mood is moody and thoughtful.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "synth_lead",
+      "electronic",
+      "warm sound"
+    ],
+    "bpm": 75
+  },
+  {
+    "prompt": "A fast-paced Cajun zydeco track featuring accordion, washboard, and fiddle at 150 BPM. The mood is festive and energetic.",
+    "aspects": [
+      "keyboard",
+      "mallet",
+      "string",
+      "drum",
+      "acoustic",
+      "fast_decay"
+    ],
+    "bpm": 150
+  },
+  {
+    "prompt": "A dramatic film score featuring brass fanfares, intense strings, and timpani at 120 BPM. The mood is suspenseful and heroic.",
+    "aspects": [
+      "brass",
+      "string",
+      "drum",
+      "acoustic",
+      "tempo-synced",
+      "reverb"
+    ],
+    "bpm": 120
+  },
+  {
+    "prompt": "A reggae-inspired chillhop track with laid-back beats, warm bass, and jazzy keys at 80 BPM. The mood is relaxed and soothing.",
+    "aspects": [
+      "bass",
+      "keyboard",
+      "drum",
+      "acoustic",
+      "electronic",
+      "warm sound"
+    ],
+    "bpm": 80
+  },
+  {
+    "prompt": "A swing era big band tune featuring trumpet solos, walking bass, and swing drums at 170 BPM. The mood is joyous and danceable.",
+    "aspects": [
+      "brass",
+      "bass",
+      "drum",
+      "acoustic",
+      "fast_decay",
+      "bright sound"
+    ],
+    "bpm": 170
+  },
+  {
+    "prompt": "A futuristic synth orchestral hybrid track with layered pads, arpeggiated synths, and dynamic rhythm at 115 BPM. The mood is awe-inspiring and epic.",
+    "aspects": [
+      "synth_lead",
+      "string",
+      "drum",
+      "electronic",
+      "tempo-synced",
+      "reverb"
+    ],
+    "bpm": 115
+  },
+  {
+    "prompt": "A solo blues guitar piece with slow bends, vibrato, and expressive phrasing at 60 BPM. The mood is soulful and melancholic.",
+    "aspects": [
+      "guitar",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "An upbeat indie pop track with bright acoustic guitars, synth layers, and catchy vocal hooks at 100 BPM. The mood is cheerful and lighthearted.",
+    "aspects": [
+      "guitar",
+      "synth_lead",
+      "vocal",
+      "electronic",
+      "bright sound"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "A brooding trip-hop track with dark basslines, slow 80 BPM tempo, and atmospheric samples. The mood is moody and mysterious.",
+    "aspects": [
+      "bass",
+      "synth_lead",
+      "electronic",
+      "slow_decay"
+    ],
+    "bpm": 80
+  },
+  {
+    "prompt": "A Baroque chamber music piece featuring harpsichord, violin, and cello at a moderate 100 BPM with an elegant mood.",
+    "aspects": [
+      "keyboard",
+      "string",
+      "acoustic",
+      "tempo-synced"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "A driving techno track with repetitive four-on-the-floor kick drum, synth stabs, and 130 BPM tempo. The mood is energetic and hypnotic.",
+    "aspects": [
+      "drum",
+      "synth_lead",
+      "electronic",
+      "tempo-synced",
+      "percussive"
+    ],
+    "bpm": 130
+  },
+  {
+    "prompt": "A heartfelt country ballad with acoustic guitar, pedal steel, and soft drums at 70 BPM. The mood is nostalgic and emotional.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A Latin jazz fusion piece with complex percussion, electric piano, and brass at 110 BPM. The mood is sophisticated and lively.",
+    "aspects": [
+      "keyboard",
+      "drum",
+      "brass",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A solo marimba composition with rhythmic patterns at 90 BPM evoking warmth and earthiness.",
+    "aspects": [
+      "mallet",
+      "percussive",
+      "acoustic",
+      "tempo-synced",
+      "warm sound"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A powerful post-rock instrumental with layered guitars swelling slowly into a climactic 100 BPM tempo. The mood is epic and emotional.",
+    "aspects": [
+      "guitar",
+      "string",
+      "electronic",
+      "tempo-synced",
+      "long_release",
+      "reverb"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "An old-school hip-hop beat with boom bap drums, vinyl scratches, and jazzy samples at 90 BPM. The mood is cool and laid-back.",
+    "aspects": [
+      "drum",
+      "electronic",
+      "warm sound"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A dreamy synth ballad with lush pads, slow tempo 65 BPM, and airy vocal effects. The mood is ethereal and tender.",
+    "aspects": [
+      "synth_lead",
+      "vocal",
+      "electronic",
+      "long_release",
+      "reverb"
+    ],
+    "bpm": 65
+  },
+  {
+    "prompt": "An energetic merengue dance track featuring accordion, percussion, and horns at 160 BPM. The mood is festive and joyful.",
+    "aspects": [
+      "keyboard",
+      "drum",
+      "brass",
+      "acoustic",
+      "fast_decay"
+    ],
+    "bpm": 160
+  },
+  {
+    "prompt": "A relaxing acoustic fingerstyle guitar instrumental at 70 BPM emphasizing melodic phrasing. The mood is peaceful and meditative.",
+    "aspects": [
+      "guitar",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A melancholic electronic ballad featuring sparse piano, soft synths, and a slow 60 BPM tempo. The mood is introspective and emotional.",
+    "aspects": [
+      "keyboard",
+      "synth_lead",
+      "electronic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A joyful children's choir song with simple piano accompaniment and upbeat 100 BPM tempo. The mood is innocent and cheerful.",
+    "aspects": [
+      "vocal",
+      "keyboard",
+      "acoustic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "A fast punk rock song with distorted guitars, driving bass, and energetic drums at 190 BPM. The mood is rebellious and raw.",
+    "aspects": [
+      "guitar",
+      "bass",
+      "drum",
+      "distortion",
+      "fast_decay"
+    ],
+    "bpm": 190
+  },
+  {
+    "prompt": "A smooth jazz ballad featuring muted trumpet, walking bass, and brushed drums at 70 BPM. The mood is romantic and intimate.",
+    "aspects": [
+      "brass",
+      "bass",
+      "drum",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A wild west-style country instrumental with banjo, fiddle, and acoustic guitar at 110 BPM. The mood is lively and rustic.",
+    "aspects": [
+      "string",
+      "acoustic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A slow, ethereal new age piano and synth piece with a calming 60 BPM tempo. The mood is serene and spacious.",
+    "aspects": [
+      "keyboard",
+      "synth_lead",
+      "electronic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A high-tempo drum and bass track at 175 BPM with rolling breakbeats, deep bass, and synth stabs. The mood is energetic and intense.",
+    "aspects": [
+      "bass",
+      "drum",
+      "synth_lead",
+      "electronic",
+      "fast_decay",
+      "tempo-synced"
+    ],
+    "bpm": 175
+  },
+  {
+    "prompt": "A blues rock track with gritty electric guitar riffs, driving drums, and a tempo of 120 BPM. The mood is raw and soulful.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "bass",
+      "distortion",
+      "tempo-synced"
+    ],
+    "bpm": 120
+  },
+  {
+    "prompt": "A soft indie folk song with gentle fingerpicking on acoustic guitar and emotional vocals at 80 BPM. The mood is tender and reflective.",
+    "aspects": [
+      "guitar",
+      "vocal",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 80
+  },
+  {
+    "prompt": "A melancholic classical guitar solo featuring complex fingerstyle at a slow tempo of 60 BPM. The mood is poignant and intimate.",
+    "aspects": [
+      "guitar",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A tropical reggae pop fusion with smooth vocals, laid-back beats, and steel drums at 90 BPM. The mood is relaxed and sunny.",
+    "aspects": [
+      "vocal",
+      "drum",
+      "mallet",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A grand orchestral waltz featuring sweeping strings, woodwinds, and harp at 90 BPM. The mood is elegant and nostalgic.",
+    "aspects": [
+      "string",
+      "reed",
+      "mallet",
+      "acoustic",
+      "tempo-synced",
+      "warm sound"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A catchy synthpop dance track with bright melodies, thumping beats, and 120 BPM tempo. The mood is fun and lively.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "electronic",
+      "bright sound",
+      "tempo-synced"
+    ],
+    "bpm": 120
+  },
+  {
+    "prompt": "A powerful gospel choir anthem with strong harmonies, organ, and rhythmic claps at 85 BPM. The mood is uplifting and joyful.",
+    "aspects": [
+      "vocal",
+      "organ",
+      "drum",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 85
+  },
+  {
+    "prompt": "A dark ambient soundscape with evolving drones, metallic textures, and no discernible beat. The mood is ominous and mysterious.",
+    "aspects": [
+      "synth_lead",
+      "electronic",
+      "long_release",
+      "reverb",
+      "nonlinear_env"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "A lively zydeco tune with accordion, rubboard, and energetic percussion at 150 BPM. The mood is festive and upbeat.",
+    "aspects": [
+      "keyboard",
+      "mallet",
+      "drum",
+      "acoustic",
+      "fast_decay"
+    ],
+    "bpm": 150
+  },
+  {
+    "prompt": "A gentle lullaby with soft acoustic guitar and soothing vocals at 60 BPM. The mood is calm and comforting.",
+    "aspects": [
+      "guitar",
+      "vocal",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "An intense progressive metal composition with complex rhythms, double kick drums, and intricate guitar playing at 140 BPM. The mood is aggressive and technical.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "bass",
+      "distortion",
+      "fast_decay",
+      "tempo-synced"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "A romantic flamenco piece featuring passionate guitar strums and hand claps at 130 BPM. The mood is fiery and emotional.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "acoustic",
+      "fast_decay",
+      "percussive"
+    ],
+    "bpm": 130
+  },
+  {
+    "prompt": "A traditional Chinese pipa and erhu duet with delicate melodies and slow tempo conveying serene beauty.",
+    "aspects": [
+      "string",
+      "acoustic",
+      "warm sound",
+      "long_release"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "A disco-funk groove with slap bass, rhythmic guitar, and vibrant horns at 122 BPM. The mood is danceable and upbeat.",
+    "aspects": [
+      "bass",
+      "guitar",
+      "brass",
+      "drum",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 122
+  },
+  {
+    "prompt": "A melancholic solo violin piece with expressive vibrato and slow tempo 55 BPM. The mood is sorrowful and reflective.",
+    "aspects": [
+      "string",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 55
+  },
+  {
+    "prompt": "A fast-paced bluegrass instrumental featuring banjo rolls, fiddle, and mandolin at 160 BPM. The mood is energetic and joyful.",
+    "aspects": [
+      "string",
+      "acoustic",
+      "fast_decay",
+      "bright sound"
+    ],
+    "bpm": 160
+  },
+  {
+    "prompt": "A nostalgic lo-fi hip hop beat with dusty drum samples, soft jazz chords, and a slow 75 BPM rhythm. The mood is chill and introspective.",
+    "aspects": [
+      "keyboard",
+      "drum",
+      "electronic",
+      "warm sound"
+    ],
+    "bpm": 75
+  },
+  {
+    "prompt": "A cinematic fantasy orchestral piece with soaring strings, choir, and light percussion at 100 BPM. The mood is magical and inspiring.",
+    "aspects": [
+      "string",
+      "vocal",
+      "drum",
+      "acoustic"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "A soulful R&B groove with smooth electric piano, bass, and steady 90 BPM tempo. The mood is sensual and mellow.",
+    "aspects": [
+      "keyboard",
+      "bass",
+      "drum",
+      "warm sound",
+      "electronic"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "An electronic synthwave track with pulsing bass, bright arpeggios, and 115 BPM tempo. The mood is vibrant and nostalgic.",
+    "aspects": [
+      "bass",
+      "synth_lead",
+      "electronic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 115
+  },
+  {
+    "prompt": "A traditional Irish folk song with tin whistle, fiddle, and bodhran at a lively 130 BPM. The mood is cheerful and spirited.",
+    "aspects": [
+      "flute",
+      "string",
+      "drum",
+      "acoustic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 130
+  },
+  {
+    "prompt": "A hypnotic minimal techno piece with repetitive synth loops, muted percussion, and steady 125 BPM beat. The mood is trance-like and steady.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "electronic",
+      "tempo-synced",
+      "percussive"
+    ],
+    "bpm": 125
+  },
+  {
+    "prompt": "A dramatic orchestral trailer score with heavy brass, percussion hits, and swelling strings at 110 BPM. The mood is intense and epic.",
+    "aspects": [
+      "brass",
+      "drum",
+      "string",
+      "acoustic",
+      "tempo-synced",
+      "reverb"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A mellow jazz ballad featuring upright bass, piano, and soft brushes at 65 BPM. The mood is intimate and soothing.",
+    "aspects": [
+      "bass",
+      "keyboard",
+      "drum",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 65
+  },
+  {
+    "prompt": "A fast-paced punk rock anthem with distorted guitars, fast drum beats at 180 BPM, and aggressive vocals. The mood is rebellious and energetic.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "vocal",
+      "distortion",
+      "fast_decay"
+    ],
+    "bpm": 180
+  },
+  {
+    "prompt": "A sultry bossa nova song with nylon-string guitar, soft percussion, and gentle vocals at 90 BPM. The mood is smooth and romantic.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "vocal",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A melodic indie pop track with jangly electric guitars, airy synths, and mid-tempo 100 BPM groove. The mood is bright and uplifting.",
+    "aspects": [
+      "guitar",
+      "synth_lead",
+      "electronic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "A heavy dubstep track featuring distorted bass drops, half-time drums at 70 BPM, and dark synths. The mood is intense and energetic.",
+    "aspects": [
+      "bass",
+      "drum",
+      "synth_lead",
+      "distortion",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A peaceful classical piano nocturne with flowing legato lines and rubato tempo around 70 BPM. The mood is dreamy and reflective.",
+    "aspects": [
+      "keyboard",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "An aggressive thrash metal track with fast riffs, double bass drums at 200 BPM, and harsh vocals. The mood is furious and intense.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "vocal",
+      "bass",
+      "distortion",
+      "fast_decay"
+    ],
+    "bpm": 200
+  },
+  {
+    "prompt": "A gentle folk ballad with acoustic guitar, subtle strings, and heartfelt vocals at 75 BPM. The mood is warm and nostalgic.",
+    "aspects": [
+      "guitar",
+      "string",
+      "vocal",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 75
+  },
+  {
+    "prompt": "A vibrant salsa dance track with piano montuno, brass, congas, and a fast 180 BPM tempo. The mood is festive and lively.",
+    "aspects": [
+      "keyboard",
+      "brass",
+      "drum",
+      "acoustic",
+      "fast_decay"
+    ],
+    "bpm": 180
+  },
+  {
+    "prompt": "A synthetic ambient track with dreamy pads, soft bell tones, and no clear rhythm designed for relaxation.",
+    "aspects": [
+      "synth_lead",
+      "mallet",
+      "electronic",
+      "long_release",
+      "reverb"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "A lively Celtic reel featuring fiddle, flute, and accordion at 140 BPM. The mood is energetic and celebratory.",
+    "aspects": [
+      "string",
+      "flute",
+      "keyboard",
+      "acoustic",
+      "fast_decay"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "A melancholy solo piano piece exploring minor keys and slow, expressive tempo of 60 BPM.",
+    "aspects": [
+      "keyboard",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A funky groove with wah guitar, slap bass, and tight drums at 100 BPM. The mood is playful and rhythmic.",
+    "aspects": [
+      "guitar",
+      "bass",
+      "drum",
+      "electronic"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "A traditional Middle Eastern oud and darbuka duet with intricate rhythms and expressive melodies at a moderate tempo.",
+    "aspects": [
+      "string",
+      "drum",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "An upbeat electro-pop song with catchy synth hooks, steady 120 BPM beat, and bright vocals. The mood is cheerful and fun.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "vocal",
+      "electronic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 120
+  },
+  {
+    "prompt": "A cinematic suspense track with tense strings, pulsating synth bass, and slow build at 70 BPM. The mood is ominous and thrilling.",
+    "aspects": [
+      "string",
+      "bass",
+      "synth_lead",
+      "electronic",
+      "long_release",
+      "tempo-synced",
+      "reverb"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A soulful blues number featuring slide guitar, harmonica, bass, and steady 90 BPM groove. The mood is raw and heartfelt.",
+    "aspects": [
+      "guitar",
+      "reed",
+      "bass",
+      "drum",
+      "acoustic"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A dreamy chillout track with airy pads, soft beats at 80 BPM, and gentle guitar melodies. The mood is calm and serene.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "guitar",
+      "electronic",
+      "warm sound"
+    ],
+    "bpm": 80
+  },
+  {
+    "prompt": "A fast-paced ska rhythm with brass section, rhythmic guitars, and an energetic 160 BPM tempo. The mood is fun and lively.",
+    "aspects": [
+      "brass",
+      "guitar",
+      "drum",
+      "fast_decay",
+      "electronic"
+    ],
+    "bpm": 160
+  },
+  {
+    "prompt": "A tender acoustic folk song featuring fingerpicked guitar and soft, emotive vocals at 70 BPM. The mood is intimate and nostalgic.",
+    "aspects": [
+      "guitar",
+      "vocal",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A progressive metal instrumental with complex time signatures, heavy guitar riffs, and dynamic 110 BPM tempo. The mood is intense and technical.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "bass",
+      "electronic",
+      "tempo-synced",
+      "fast_decay"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A mellow jazz fusion piece with electric piano, smooth bass lines, and laid-back drums at 90 BPM. The mood is sophisticated and relaxed.",
+    "aspects": [
+      "keyboard",
+      "bass",
+      "drum",
+      "electronic",
+      "warm sound"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "An orchestral waltz with elegant strings, harp, and woodwinds at 80 BPM. The mood is graceful and romantic.",
+    "aspects": [
+      "string",
+      "mallet",
+      "reed",
+      "acoustic",
+      "tempo-synced",
+      "warm sound"
+    ],
+    "bpm": 80
+  },
+  {
+    "prompt": "A dark ambient composition featuring drones, metallic percussion, and slow evolving textures with no clear beat. The mood is mysterious and haunting.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "electronic",
+      "long_release",
+      "nonlinear_env",
+      "reverb"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "A joyous mariachi tune with trumpets, violins, vihuela, and upbeat 140 BPM rhythm. The mood is festive and exuberant.",
+    "aspects": [
+      "brass",
+      "string",
+      "guitar",
+      "acoustic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "A gentle piano ballad with flowing arpeggios, soft dynamics, and slow 60 BPM tempo. The mood is tender and introspective.",
+    "aspects": [
+      "keyboard",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "An energetic funk rock track featuring rhythmic guitar, punchy bass, and lively drums at 110 BPM. The mood is lively and playful.",
+    "aspects": [
+      "guitar",
+      "bass",
+      "drum",
+      "electronic",
+      "bright sound"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A smooth R&B slow jam with warm synths, deep bass, and 70 BPM laid-back tempo. The mood is sensual and relaxed.",
+    "aspects": [
+      "synth_lead",
+      "bass",
+      "electronic",
+      "warm sound"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A traditional reggae song with offbeat rhythm guitar, melodic bass, and steady 80 BPM groove. The mood is chill and positive.",
+    "aspects": [
+      "guitar",
+      "bass",
+      "drum",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 80
+  },
+  {
+    "prompt": "A high-tempo electronic trance track with driving synths, pulsating bass, and fast 138 BPM beat. The mood is energetic and euphoric.",
+    "aspects": [
+      "synth_lead",
+      "bass",
+      "drum",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 138
+  },
+  {
+    "prompt": "A soft indie acoustic track with gentle fingerpicking, ambient guitar effects, and calm vocals at 75 BPM. The mood is introspective and warm.",
+    "aspects": [
+      "guitar",
+      "vocal",
+      "electronic",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 75
+  },
+  {
+    "prompt": "A cinematic orchestral piece with pounding percussion, soaring brass, and string ensembles at 115 BPM. The mood is epic and heroic.",
+    "aspects": [
+      "drum",
+      "brass",
+      "string",
+      "acoustic",
+      "tempo-synced",
+      "reverb"
+    ],
+    "bpm": 115
+  },
+  {
+    "prompt": "A funky disco groove with rhythmic guitar, tight bass, and four-on-the-floor drums at 124 BPM. The mood is danceable and vibrant.",
+    "aspects": [
+      "guitar",
+      "bass",
+      "drum",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 124
+  },
+  {
+    "prompt": "A slow solo clarinet piece with expressive phrasing and a melancholic mood at 60 BPM.",
+    "aspects": [
+      "reed",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A bright tropical house track featuring mallets, synth pads, and steady 115 BPM tempo. The mood is sunny and upbeat.",
+    "aspects": [
+      "mallet",
+      "synth_lead",
+      "electronic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 115
+  },
+  {
+    "prompt": "A lively zydeco blues fusion track with accordion, fiddle, and washboard at 150 BPM. The mood is fun and energetic.",
+    "aspects": [
+      "keyboard",
+      "string",
+      "mallet",
+      "drum",
+      "acoustic",
+      "tempo-synced"
+    ],
+    "bpm": 150
+  },
+  {
+    "prompt": "An experimental electronic piece using glitch effects, abstract samples, and irregular rhythms around 100 BPM. The mood is edgy and avant-garde.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "electronic",
+      "nonlinear_env",
+      "tempo-synced",
+      "percussive"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "A romantic tango with dramatic bandoneon, violin, and piano parts at 130 BPM. The mood is sultry and passionate.",
+    "aspects": [
+      "reed",
+      "string",
+      "keyboard",
+      "acoustic",
+      "tempo-synced"
+    ],
+    "bpm": 130
+  },
+  {
+    "prompt": "A joyous gospel choir with piano, organ, and rhythmic hand clapping at 90 BPM. The mood is uplifting and spiritual.",
+    "aspects": [
+      "vocal",
+      "keyboard",
+      "organ",
+      "drum",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A melancholic solo flute meditation with slow melodic lines at 60 BPM. The mood is peaceful and reflective.",
+    "aspects": [
+      "flute",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "An upbeat indie electronic track with synth bass, bright melodies, and 125 BPM tempo. The mood is youthful and energetic.",
+    "aspects": [
+      "bass",
+      "synth_lead",
+      "electronic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 125
+  },
+  {
+    "prompt": "A traditional African drum ensemble featuring djembe, talking drum, and polyrhythms at 110 BPM. The mood is vibrant and celebratory.",
+    "aspects": [
+      "drum",
+      "acoustic",
+      "tempo-synced",
+      "percussive"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A slow progressive rock ballad with electric guitar solos, mellotron, and soft drums at 70 BPM. The mood is emotional and expansive.",
+    "aspects": [
+      "guitar",
+      "keyboard",
+      "drum",
+      "bass",
+      "electronic",
+      "warm sound"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "An upbeat pop-punk song with distorted guitars, catchy hooks, and 160 BPM tempo. The mood is energetic and youthful.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "electric",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 160
+  },
+  {
+    "prompt": "A tranquil new age harp and flute duet with slow flowing melodies at 60 BPM. The mood is calming and airy.",
+    "aspects": [
+      "mallet",
+      "flute",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A retro 80s synthpop dance track with electronic drum machine beats and 120 BPM tempo. The mood is nostalgic and fun.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "electronic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 120
+  },
+  {
+    "prompt": "A dramatic orchestral trailer music with heavy percussion, brass blasts, and rising strings at 110 BPM. The mood is intense and epic.",
+    "aspects": [
+      "drum",
+      "brass",
+      "string",
+      "acoustic",
+      "tempo-synced",
+      "reverb"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A soulful jazz guitar ballad with gentle comping, walking bass, and brushes at 65 BPM. The mood is intimate and warm.",
+    "aspects": [
+      "guitar",
+      "bass",
+      "drum",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 65
+  },
+  {
+    "prompt": "An electronic chillwave track with lo-fi synths, slow beats at 80 BPM, and dreamy ambiance. The mood is relaxing and nostalgic.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "electronic",
+      "slow_decay",
+      "warm sound"
+    ],
+    "bpm": 80
+  },
+  {
+    "prompt": "A fast bluegrass fiddle tune with energetic bowing and banjo rolls at 160 BPM. The mood is lively and spirited.",
+    "aspects": [
+      "string",
+      "acoustic",
+      "fast_decay",
+      "bright sound"
+    ],
+    "bpm": 160
+  },
+  {
+    "prompt": "A moody trip-hop beat with deep bass, vinyl crackle, and a slow 75 BPM tempo. The mood is mysterious and contemplative.",
+    "aspects": [
+      "bass",
+      "drum",
+      "electronic",
+      "warm sound"
+    ],
+    "bpm": 75
+  },
+  {
+    "prompt": "A bouncy Brazilian samba track with congas, surdo, and bright brass at 140 BPM. The mood is festive and joyful.",
+    "aspects": [
+      "drum",
+      "brass",
+      "acoustic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "A delicate solo piano \u00e9tude with flowing arpeggios and moderate 90 BPM tempo. The mood is peaceful and melodic.",
+    "aspects": [
+      "keyboard",
+      "acoustic",
+      "tempo-synced",
+      "warm sound"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A high-energy drum and bass track with rapid breakbeats, rolling bass, and 175 BPM tempo. The mood is intense and exhilarating.",
+    "aspects": [
+      "bass",
+      "drum",
+      "electronic",
+      "fast_decay",
+      "tempo-synced"
+    ],
+    "bpm": 175
+  },
+  {
+    "prompt": "A soulful ballad with acoustic guitar, subtle strings, and emotional vocals at 70 BPM. The mood is heartfelt and intimate.",
+    "aspects": [
+      "guitar",
+      "string",
+      "vocal",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A cinematic fantasy theme with lush orchestration, choir, and dynamic tempo shifts around 110 BPM. The mood is magical and epic.",
+    "aspects": [
+      "string",
+      "vocal",
+      "acoustic",
+      "tempo-synced",
+      "reverb"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A soft indie folk instrumental with fingerpicked guitar and warm harmonica at 75 BPM. The mood is cozy and reflective.",
+    "aspects": [
+      "guitar",
+      "reed",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 75
+  },
+  {
+    "prompt": "A funky acid jazz track featuring electric piano, groove bass, and syncopated drums at 100 BPM. The mood is cool and sophisticated.",
+    "aspects": [
+      "keyboard",
+      "bass",
+      "drum",
+      "electronic"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "A dramatic horror soundtrack with dissonant strings, eerie synths, and slow tempo around 60 BPM. The mood is tense and frightening.",
+    "aspects": [
+      "string",
+      "synth_lead",
+      "electronic",
+      "acoustic",
+      "long_release",
+      "reverb"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A lively Latin pop fusion with salsa rhythms, brass, and electric guitar at 120 BPM. The mood is festive and vibrant.",
+    "aspects": [
+      "brass",
+      "guitar",
+      "drum",
+      "keyboard",
+      "acoustic",
+      "tempo-synced"
+    ],
+    "bpm": 120
+  },
+  {
+    "prompt": "A gentle lullaby with music box sounds, soft synth pads, and slow tempo at 60 BPM. The mood is soothing and dreamy.",
+    "aspects": [
+      "mallet",
+      "synth_lead",
+      "electronic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A fiery flamenco guitar solo with rhythmic percussive elements and rapid tempo at 140 BPM. The mood is passionate and intense.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "fast_decay",
+      "acoustic",
+      "percussive"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "A mellow electronica track with shimmering pads, soft beats, and 85 BPM tempo. The mood is tranquil and chill.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "electronic",
+      "warm sound"
+    ],
+    "bpm": 85
+  },
+  {
+    "prompt": "A classic swing jazz tune with big band brass, walking bass, and a fast 170 BPM tempo. The mood is fun and upbeat.",
+    "aspects": [
+      "brass",
+      "bass",
+      "drum",
+      "bright sound",
+      "acoustic",
+      "fast_decay"
+    ],
+    "bpm": 170
+  },
+  {
+    "prompt": "A dark industrial track with heavy drums, distorted synths, and 120 BPM tempo. The mood is aggressive and ominous.",
+    "aspects": [
+      "drum",
+      "synth_lead",
+      "electronic",
+      "distortion",
+      "tempo-synced"
+    ],
+    "bpm": 120
+  },
+  {
+    "prompt": "A pastoral classical piano piece with gentle melodies and flowing arpeggios at 80 BPM. The mood is peaceful and gentle.",
+    "aspects": [
+      "keyboard",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 80
+  },
+  {
+    "prompt": "A lively Cajun folk dance with fiddle, accordion, and rhythmic foot stomps at 150 BPM. The mood is energetic and festive.",
+    "aspects": [
+      "string",
+      "keyboard",
+      "drum",
+      "acoustic",
+      "fast_decay"
+    ],
+    "bpm": 150
+  },
+  {
+    "prompt": "A hypnotic drone ambient piece featuring layered synths, no beats, and slow evolving textures. The mood is meditative and spacious.",
+    "aspects": [
+      "synth_lead",
+      "electronic",
+      "long_release",
+      "reverb",
+      "nonlinear_env"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "A modern trap beat with heavy 808s, hi-hat rolls, and dark synths at 140 BPM. The mood is intense and moody.",
+    "aspects": [
+      "bass",
+      "drum",
+      "synth_lead",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "A soulful gospel ballad with piano, choir harmonies, and slow 70 BPM rhythm. The mood is heartfelt and uplifting.",
+    "aspects": [
+      "keyboard",
+      "vocal",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A playful children\u2019s song with ukulele, simple percussion, and bright vocals at 100 BPM. The mood is joyful and innocent.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "vocal",
+      "bright sound",
+      "acoustic"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "A fast punk rock track with aggressive guitars, rapid drums at 190 BPM, and rebellious spirit.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "distortion",
+      "fast_decay"
+    ],
+    "bpm": 190
+  },
+  {
+    "prompt": "A smooth jazz funk tune with electric bass, wah guitar, and steady 110 BPM groove. The mood is cool and lively.",
+    "aspects": [
+      "bass",
+      "guitar",
+      "drum",
+      "electronic",
+      "warm sound"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A poetic classical string trio with cello, violin, and viola, slow tempo 60 BPM, and emotional mood.",
+    "aspects": [
+      "string",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A catchy synthpop track with punchy beats, bright synths, and vibrant 120 BPM tempo. The mood is energetic and fun.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "electronic",
+      "bright sound",
+      "tempo-synced"
+    ],
+    "bpm": 120
+  },
+  {
+    "prompt": "A traditional African kora and percussion duet with soothing rhythms at 85 BPM. The mood is spiritual and lively.",
+    "aspects": [
+      "string",
+      "drum",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 85
+  },
+  {
+    "prompt": "An intense metalcore song with heavy riffs, screaming vocals, and aggressive 180 BPM tempo. The mood is powerful and raw.",
+    "aspects": [
+      "guitar",
+      "vocal",
+      "drum",
+      "distortion",
+      "fast_decay"
+    ],
+    "bpm": 180
+  },
+  {
+    "prompt": "A jazzy bossa nova with guitar, piano, soft percussion, and mellow tempo of 90 BPM. The mood is smooth and romantic.",
+    "aspects": [
+      "guitar",
+      "keyboard",
+      "drum",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "An electronic chillout track with downtempo beats, soft synths, and relaxing 80 BPM rhythm. The mood is calm and dreamy.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "electronic",
+      "warm sound"
+    ],
+    "bpm": 80
+  },
+  {
+    "prompt": "A lively mariachi-inspired pop song with trumpets, guitars, and festive 130 BPM groove. The mood is celebratory and fun.",
+    "aspects": [
+      "brass",
+      "guitar",
+      "acoustic",
+      "tempo-synced"
+    ],
+    "bpm": 130
+  },
+  {
+    "prompt": "A minimal piano composition with repeating motifs, sparse notes, and contemplative mood at 75 BPM.",
+    "aspects": [
+      "keyboard",
+      "acoustic",
+      "tempo-synced"
+    ],
+    "bpm": 75
+  },
+  {
+    "prompt": "A retro video game chiptune with fast tempo 140 BPM and playful 8-bit melodies. The mood is energetic and nostalgic.",
+    "aspects": [
+      "synth_lead",
+      "electronic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "A deep house track with smooth basslines, soft synths, and steady 120 BPM beat. The mood is relaxed and groovy.",
+    "aspects": [
+      "bass",
+      "synth_lead",
+      "electronic",
+      "tempo-synced",
+      "warm sound"
+    ],
+    "bpm": 120
+  },
+  {
+    "prompt": "A dreamy indie pop ballad with ambient guitar effects and soft vocals at 70 BPM. The mood is tender and wistful.",
+    "aspects": [
+      "guitar",
+      "vocal",
+      "electronic",
+      "warm sound"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "An epic orchestral adventure theme with bold brass, soaring strings, and 110 BPM tempo. The mood is heroic and grand.",
+    "aspects": [
+      "brass",
+      "string",
+      "acoustic",
+      "tempo-synced",
+      "reverb"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A funky disco track with slap bass, rhythmic guitar, vibrant horns, and 125 BPM tempo. The mood is energetic and danceable.",
+    "aspects": [
+      "bass",
+      "guitar",
+      "brass",
+      "drum",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 125
+  },
+  {
+    "prompt": "A melancholy solo piano nocturne with gentle melodies and slow 60 BPM tempo. The mood is peaceful and reflective.",
+    "aspects": [
+      "keyboard",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A high-energy drum and bass track with rolling breaks, deep bass, and 175 BPM tempo. The mood is intense and thrilling.",
+    "aspects": [
+      "bass",
+      "drum",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 175
+  },
+  {
+    "prompt": "An acoustic folk song with warm guitar, light percussion, and heartfelt vocals at 80 BPM. The mood is intimate and nostalgic.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "vocal",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 80
+  },
+  {
+    "prompt": "A psychedelic rock instrumental with fuzz guitar, wah effects, and groovy 110 BPM rhythm. The mood is trippy and upbeat.",
+    "aspects": [
+      "guitar",
+      "distortion",
+      "drum",
+      "bass",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A cinematic horror score with dissonant strings, eerie synth pads, and slow 60 BPM tempo. The mood is suspenseful and creepy.",
+    "aspects": [
+      "string",
+      "synth_lead",
+      "electronic",
+      "drum",
+      "acoustic",
+      "long_release",
+      "reverb"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A smooth R&B slow jam with jazzy chords, soft drums, and 70 BPM tempo. The mood is romantic and sensual.",
+    "aspects": [
+      "keyboard",
+      "drum",
+      "electronic",
+      "warm sound"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A lively ska track with brass, upstroke guitar, and fast 160 BPM tempo. The mood is fun and energetic.",
+    "aspects": [
+      "brass",
+      "guitar",
+      "drum",
+      "fast_decay",
+      "electronic"
+    ],
+    "bpm": 160
+  },
+  {
+    "prompt": "A soulful blues performance with slide guitar, harmonica, and laid-back 90 BPM groove. The mood is heartfelt and gritty.",
+    "aspects": [
+      "guitar",
+      "reed",
+      "drum",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A futuristic synthwave track with pulsing arpeggios, retro drum machines, and 115 BPM tempo. The mood is nostalgic and vibrant.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "electronic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 115
+  },
+  {
+    "prompt": "A traditional Celtic folk tune with fiddle, flute, and bodhran at 140 BPM. The mood is spirited and lively.",
+    "aspects": [
+      "string",
+      "flute",
+      "drum",
+      "acoustic",
+      "tempo-synced"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "An ambient drone piece with evolving synth textures, no clear beat, and meditative mood.",
+    "aspects": [
+      "synth_lead",
+      "electronic",
+      "long_release",
+      "reverb"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "A pop punk anthem with distorted guitars, catchy hooks, and fast 170 BPM tempo. The mood is rebellious and fun.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "vocal",
+      "distortion",
+      "fast_decay"
+    ],
+    "bpm": 170
+  },
+  {
+    "prompt": "A jazzy ballad featuring muted trumpet, upright bass, and soft brushes at 65 BPM. The mood is intimate and romantic.",
+    "aspects": [
+      "brass",
+      "bass",
+      "drum",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 65
+  },
+  {
+    "prompt": "A tropical house track with marimbas, synth pads, and smooth 115 BPM beat. The mood is sunny and relaxed.",
+    "aspects": [
+      "mallet",
+      "synth_lead",
+      "electronic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 115
+  },
+  {
+    "prompt": "A high-energy trap beat with booming 808s, hi-hats, and dark synth leads at 140 BPM. The mood is intense and moody.",
+    "aspects": [
+      "bass",
+      "drum",
+      "synth_lead",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "A classical chamber piece with piano, violin, and cello at a moderate 90 BPM tempo with warm, elegant mood.",
+    "aspects": [
+      "string",
+      "keyboard",
+      "acoustic",
+      "warm sound",
+      "tempo-synced"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A folk rock song with acoustic and electric guitars, steady drums, and upbeat 100 BPM rhythm. The mood is uplifting and heartfelt.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "acoustic",
+      "electric",
+      "tempo-synced",
+      "warm sound"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "A slow dubstep track featuring deep wobbly bass, minimal percussion, and 70 BPM tempo. The mood is dark and heavy.",
+    "aspects": [
+      "bass",
+      "drum",
+      "electronic",
+      "slow_decay",
+      "tempo-synced"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "An epic orchestral trailer track with brass fanfares, pounding drums, and swelling strings at 110 BPM. The mood is heroic and suspenseful.",
+    "aspects": [
+      "brass",
+      "drum",
+      "string",
+      "acoustic",
+      "tempo-synced",
+      "reverb"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A laid-back jazz trio with piano, upright bass, and brushes at 80 BPM. The mood is smooth and soothing.",
+    "aspects": [
+      "keyboard",
+      "bass",
+      "drum",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 80
+  },
+  {
+    "prompt": "A lively Cajun two-step with accordion, fiddle, and rhythmic percussion at 150 BPM. The mood is joyful and festive.",
+    "aspects": [
+      "keyboard",
+      "string",
+      "drum",
+      "acoustic",
+      "tempo-synced"
+    ],
+    "bpm": 150
+  },
+  {
+    "prompt": "A dreamy indie pop instrumental with gentle synths, light percussion, and 85 BPM tempo. The mood is soft and sentimental.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "electronic",
+      "tempo-synced",
+      "warm sound"
+    ],
+    "bpm": 85
+  },
+  {
+    "prompt": "A high-tempo electronic dance track with driving bass, synth leads, and 130 BPM beat. The mood is energetic and uplifting.",
+    "aspects": [
+      "bass",
+      "synth_lead",
+      "drum",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 130
+  },
+  {
+    "prompt": "A gentle lullaby featuring harp, music box tones, and slow 60 BPM tempo. The mood is calming and sweet.",
+    "aspects": [
+      "mallet",
+      "mallet",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A cinematic fantasy soundtrack with choir, strings, and dynamic tempo changes around 100 BPM. The mood is magical and epic.",
+    "aspects": [
+      "vocal",
+      "string",
+      "acoustic",
+      "tempo-synced",
+      "reverb"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "A reggae rhythm track with offbeat guitar, deep bass, and steady 75 BPM groove. The mood is chill and positive.",
+    "aspects": [
+      "guitar",
+      "bass",
+      "drum",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 75
+  },
+  {
+    "prompt": "A soulful jazz fusion piece with electric piano, groove bass, and syncopated drums at 90 BPM. The mood is cool and sophisticated.",
+    "aspects": [
+      "keyboard",
+      "bass",
+      "drum",
+      "electronic",
+      "warm sound"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A traditional Indian classical piece featuring sitar, tabla, and drone with slow, meditative tempo. The mood is spiritual and contemplative.",
+    "aspects": [
+      "string",
+      "drum",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "An electronic ambient piece with evolving pads, gentle percussion, and no defined tempo. The mood is serene and spacious.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "electronic",
+      "long_release",
+      "reverb"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "A rockabilly track with slap bass, twangy electric guitar, and energetic drums at 140 BPM. The mood is fun and vintage.",
+    "aspects": [
+      "bass",
+      "guitar",
+      "drum",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "A smooth jazz ensemble featuring saxophone, upright bass, and brushes on drums. Tempo 90 BPM, mood relaxed and intimate.",
+    "aspects": [
+      "reed",
+      "bass",
+      "drum",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A smooth jazz quartet featuring saxophone, upright bass, piano, and brush drums at 90 BPM. The mood is relaxed and intimate.",
+    "aspects": [
+      "bass",
+      "reed",
+      "keyboard",
+      "drum",
+      "vocal",
+      "warm sound",
+      "acoustic"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A classical string quartet playing a brisk allegro at 130 BPM with a joyful and elegant mood.",
+    "aspects": [
+      "string",
+      "acoustic",
+      "fast_decay"
+    ],
+    "bpm": 130
+  },
+  {
+    "prompt": "A folk song with acoustic guitar, harmonica, and light percussion at 100 BPM. The mood is nostalgic and warm.",
+    "aspects": [
+      "guitar",
+      "reed",
+      "drum",
+      "warm sound",
+      "acoustic"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "A high-energy EDM track with heavy bass, synth leads, and a tempo of 128 BPM. The mood is club-ready and intense.",
+    "aspects": [
+      "bass",
+      "synth_lead",
+      "electronic",
+      "tempo-synced",
+      "distortion"
+    ],
+    "bpm": 128
+  },
+  {
+    "prompt": "A solo cello piece with a slow tempo of 50 BPM, evoking a somber and reflective atmosphere.",
+    "aspects": [
+      "string",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 50
+  },
+  {
+    "prompt": "A reggae track with offbeat guitar chops, deep bass, and a tempo of 75 BPM. The mood is chill and positive.",
+    "aspects": [
+      "guitar",
+      "bass",
+      "drum",
+      "warm sound",
+      "acoustic"
+    ],
+    "bpm": 75
+  },
+  {
+    "prompt": "An upbeat pop song at 120 BPM featuring electric guitar, bright synths, and catchy vocal harmonies. The mood is fun and uplifting.",
+    "aspects": [
+      "guitar",
+      "synth_lead",
+      "vocal",
+      "bright sound",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 120
+  },
+  {
+    "prompt": "A traditional flamenco guitar piece with rapid fingerpicking and hand claps, tempo around 140 BPM. The mood is passionate and fiery.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "acoustic",
+      "fast_decay",
+      "percussive"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "A cinematic orchestral composition with sweeping strings, brass fanfares, and timpani at an epic 110 BPM. The mood is heroic and inspiring.",
+    "aspects": [
+      "string",
+      "brass",
+      "drum",
+      "acoustic",
+      "long_release",
+      "bright sound",
+      "percussive"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A lo-fi hip hop beat at 85 BPM with soft piano loops, vinyl crackle, and smooth drum patterns. The mood is calm and introspective.",
+    "aspects": [
+      "keyboard",
+      "drum",
+      "warm sound",
+      "acoustic",
+      "electronic",
+      "reverb"
+    ],
+    "bpm": 85
+  },
+  {
+    "prompt": "A grunge rock song with distorted electric guitars, driving drums at 115 BPM, and a raw, angsty mood.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "distortion",
+      "bass",
+      "warm sound",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 115
+  },
+  {
+    "prompt": "A minimal techno track with repetitive synth bassline and percussive elements at 125 BPM. The mood is hypnotic and steady.",
+    "aspects": [
+      "bass",
+      "synth_lead",
+      "electronic",
+      "tempo-synced",
+      "percussive"
+    ],
+    "bpm": 125
+  },
+  {
+    "prompt": "A soulful R&B ballad featuring warm Rhodes piano, gentle percussion, and smooth vocals at 70 BPM. The mood is romantic and tender.",
+    "aspects": [
+      "keyboard",
+      "drum",
+      "vocal",
+      "warm sound",
+      "acoustic",
+      "long_release"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A bluegrass ensemble with banjo, fiddle, mandolin, and upright bass playing a fast 140 BPM tune. The mood is lively and energetic.",
+    "aspects": [
+      "string",
+      "acoustic",
+      "fast_decay",
+      "bass",
+      "percussive"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "A cinematic horror soundtrack with dissonant strings and eerie synth textures at a slow 60 BPM. The mood is suspenseful and unsettling.",
+    "aspects": [
+      "string",
+      "synth_lead",
+      "electronic",
+      "long_release",
+      "reverb",
+      "dark sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "An ambient electronic piece with lush pads, soft bells, and no clear beat, designed for a dreamy, tranquil mood.",
+    "aspects": [
+      "synth_lead",
+      "mallet",
+      "electronic",
+      "long_release",
+      "reverb",
+      "warm sound"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "A punk rock song with fast, chugging electric guitars and aggressive vocals at 180 BPM. The mood is rebellious and raw.",
+    "aspects": [
+      "guitar",
+      "vocal",
+      "drum",
+      "distortion",
+      "fast_decay",
+      "electric"
+    ],
+    "bpm": 180
+  },
+  {
+    "prompt": "A salsa track featuring brass section, congas, bongos, and piano montunos at 180 BPM. The mood is festive and danceable.",
+    "aspects": [
+      "brass",
+      "drum",
+      "keyboard",
+      "percussive",
+      "acoustic"
+    ],
+    "bpm": 180
+  },
+  {
+    "prompt": "A vintage swing jazz big band piece with vibrant brass and walking bass at 160 BPM. The mood is upbeat and swinging.",
+    "aspects": [
+      "brass",
+      "bass",
+      "drum",
+      "acoustic",
+      "bright sound",
+      "fast_decay"
+    ],
+    "bpm": 160
+  },
+  {
+    "prompt": "A solo acoustic fingerstyle guitar piece with a slow 60 BPM tempo, evoking introspection and melancholy.",
+    "aspects": [
+      "guitar",
+      "acoustic",
+      "warm sound",
+      "long_release"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A synthwave track at 110 BPM with retro analog synths, drum machine beats, and neon-lit nostalgia. The mood is futuristic yet nostalgic.",
+    "aspects": [
+      "synth_lead",
+      "electronic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A gospel choir song backed by piano and organ, with strong vocals and a 90 BPM uplifting tempo. The mood is soulful and celebratory.",
+    "aspects": [
+      "vocal",
+      "keyboard",
+      "organ",
+      "warm sound",
+      "acoustic"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A metalcore song featuring heavy guitars, double kick drums at 190 BPM, and harsh vocals. The mood is aggressive and intense.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "distortion",
+      "vocal",
+      "fast_decay",
+      "electric"
+    ],
+    "bpm": 190
+  },
+  {
+    "prompt": "A Celtic folk instrumental with tin whistle, fiddle, and bodhran at a brisk 140 BPM. The mood is lively and spirited.",
+    "aspects": [
+      "reed",
+      "string",
+      "drum",
+      "acoustic",
+      "fast_decay"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "A chillout downtempo track with synth pads, soft beats at 75 BPM, and smooth saxophone melodies. The mood is relaxed and soothing.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "reed",
+      "electronic",
+      "soft",
+      "reverb"
+    ],
+    "bpm": 75
+  },
+  {
+    "prompt": "A baroque harpsichord piece in fast tempo, intricate ornamentation, and a bright, formal mood.",
+    "aspects": [
+      "keyboard",
+      "acoustic",
+      "bright sound",
+      "fast_decay"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "A smooth Latin jazz fusion tune with electric piano, congas, and smooth saxophone solos at 100 BPM. The mood is laid-back and vibrant.",
+    "aspects": [
+      "keyboard",
+      "drum",
+      "reed",
+      "electric",
+      "warm sound"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "An experimental noise piece with distorted feedback, drone elements, and irregular rhythm patterns. The mood is chaotic and unsettling.",
+    "aspects": [
+      "electronic",
+      "distortion",
+      "nonlinear_env",
+      "long_release",
+      "percussive"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "A bossa nova song featuring nylon-string guitar, soft percussion, and gentle vocals at 90 BPM. The mood is mellow and romantic.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "vocal",
+      "warm sound",
+      "acoustic"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A cinematic sci-fi soundtrack featuring pulsating synths, metallic percussion, and a steady 120 BPM beat. The mood is mysterious and futuristic.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "electronic",
+      "percussive",
+      "tempo-synced"
+    ],
+    "bpm": 120
+  },
+  {
+    "prompt": "A gospel-inspired country song with acoustic guitar, pedal steel, and choirs at 85 BPM. The mood is heartfelt and uplifting.",
+    "aspects": [
+      "guitar",
+      "string",
+      "vocal",
+      "warm sound",
+      "acoustic"
+    ],
+    "bpm": 85
+  },
+  {
+    "prompt": "A classic blues shuffle with electric guitar, harmonica, upright bass, and drums at 110 BPM. The mood is gritty and soulful.",
+    "aspects": [
+      "guitar",
+      "reed",
+      "bass",
+      "drum",
+      "electric",
+      "warm sound"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A modern pop ballad with piano, strings, and synthesizers at 70 BPM. The mood is emotional and hopeful.",
+    "aspects": [
+      "keyboard",
+      "string",
+      "synth_lead",
+      "warm sound",
+      "acoustic"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A fast-paced bluegrass jam with banjo rolls and fiddle improvisations at 160 BPM. The mood is joyful and energetic.",
+    "aspects": [
+      "string",
+      "acoustic",
+      "fast_decay"
+    ],
+    "bpm": 160
+  },
+  {
+    "prompt": "A dreamy indie pop track with jangly guitars, synths, and laid-back drums at 95 BPM. The mood is wistful and upbeat.",
+    "aspects": [
+      "guitar",
+      "synth_lead",
+      "drum",
+      "electronic",
+      "bright sound"
+    ],
+    "bpm": 95
+  },
+  {
+    "prompt": "A dark ambient piece featuring deep drones, sparse piano notes, and a cold, eerie atmosphere.",
+    "aspects": [
+      "synth_lead",
+      "keyboard",
+      "long_release",
+      "reverb",
+      "electronic"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "A mambo orchestral track with lively brass, percussion, and piano montuno at 150 BPM. The mood is festive and energetic.",
+    "aspects": [
+      "brass",
+      "drum",
+      "keyboard",
+      "acoustic",
+      "percussive"
+    ],
+    "bpm": 150
+  },
+  {
+    "prompt": "A solo saxophone ballad with slow, expressive phrasing at 60 BPM. The mood is melancholic and romantic.",
+    "aspects": [
+      "reed",
+      "acoustic",
+      "warm sound",
+      "long_release"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A trap beat at 140 BPM with heavy 808 bass, hi-hats, and dark atmospheric pads. The mood is moody and intense.",
+    "aspects": [
+      "bass",
+      "drum",
+      "synth_lead",
+      "electronic",
+      "tempo-synced",
+      "distortion"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "A reggae dub instrumental with echo effects, deep bass, and laid-back drum rhythms at 70 BPM. The mood is relaxed and hypnotic.",
+    "aspects": [
+      "bass",
+      "drum",
+      "electronic",
+      "acoustic",
+      "reverb"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A high-energy K-pop influenced dance track with bright synths, strong beats at 130 BPM, and catchy hooks. The mood is fun and vibrant.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "vocal",
+      "bright sound",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 130
+  },
+  {
+    "prompt": "An acoustic singer-songwriter track featuring fingerpicked guitar and soft vocals at 75 BPM. The mood is intimate and reflective.",
+    "aspects": [
+      "guitar",
+      "vocal",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 75
+  },
+  {
+    "prompt": "A cinematic orchestral piece focused on strings and choir, building tension at a slow 60 BPM tempo. The mood is dramatic and suspenseful.",
+    "aspects": [
+      "string",
+      "vocal",
+      "long_release",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A funk groove featuring slap bass, wah guitar, horns section, and syncopated drums at 110 BPM. The mood is funky and playful.",
+    "aspects": [
+      "bass",
+      "guitar",
+      "brass",
+      "drum",
+      "electric",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A minimalist piano \u00e9tude with repetitive motifs and a steady tempo of 90 BPM. The mood is meditative and focused.",
+    "aspects": [
+      "keyboard",
+      "acoustic",
+      "fast_decay",
+      "warm sound"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A mariachi band piece with trumpets, violins, vihuela, and guitarr\u00f3n at a lively 140 BPM. The mood is festive and celebratory.",
+    "aspects": [
+      "brass",
+      "string",
+      "guitar",
+      "bass",
+      "acoustic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "A chill trap instrumental with mellow synth chords, slow 70 BPM tempo, and soft, punchy drums. The mood is smooth and laid-back.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "electronic",
+      "warm sound",
+      "tempo-synced"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A progressive rock track with odd time signatures, electric guitar solos, and dynamic tempo changes around 110 BPM. The mood is adventurous and complex.",
+    "aspects": [
+      "guitar",
+      "keyboard",
+      "drum",
+      "electric",
+      "tempo-synced"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A romantic tango featuring bandoneon, violin, piano, and double bass at 130 BPM. The mood is passionate and dramatic.",
+    "aspects": [
+      "reed",
+      "string",
+      "keyboard",
+      "bass",
+      "acoustic",
+      "tempo-synced"
+    ],
+    "bpm": 130
+  },
+  {
+    "prompt": "A solo harp composition with flowing arpeggios and a calm, serene atmosphere at 60 BPM.",
+    "aspects": [
+      "string",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A hard rock anthem featuring crunchy electric guitars, driving bass, and vigorous drums at 120 BPM. The mood is bold and rebellious.",
+    "aspects": [
+      "guitar",
+      "bass",
+      "drum",
+      "distortion",
+      "electric",
+      "tempo-synced"
+    ],
+    "bpm": 120
+  },
+  {
+    "prompt": "A neo-classical piano piece combining classical technique with modern harmonies at 80 BPM. The mood is contemplative and uplifting.",
+    "aspects": [
+      "keyboard",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 80
+  },
+  {
+    "prompt": "A tropical house track with bright marimbas, smooth synths, and a steady 115 BPM groove. The mood is sunny and relaxed.",
+    "aspects": [
+      "mallet",
+      "synth_lead",
+      "electronic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 115
+  },
+  {
+    "prompt": "A slow dubstep track at 70 BPM with heavy wobbles, dark bass, and sparse percussion. The mood is brooding and intense.",
+    "aspects": [
+      "bass",
+      "drum",
+      "synth_lead",
+      "electronic",
+      "tempo-synced",
+      "distortion"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A gospel soul track with powerful choir, organ, and rhythmic clapping at 85 BPM. The mood is joyful and spiritual.",
+    "aspects": [
+      "vocal",
+      "organ",
+      "percussive",
+      "warm sound",
+      "acoustic"
+    ],
+    "bpm": 85
+  },
+  {
+    "prompt": "A traditional Indian raga performed on sitar and tabla with a slow tempo creating a meditative mood.",
+    "aspects": [
+      "string",
+      "drum",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "An orchestral waltz with lush strings, woodwinds, and a tempo of 90 BPM. The mood is elegant and romantic.",
+    "aspects": [
+      "string",
+      "reed",
+      "acoustic",
+      "bright sound",
+      "tempo-synced"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A synthpop track at 120 BPM with catchy melodies, electronic drums, and bright, nostalgic atmosphere.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "electronic",
+      "bright sound",
+      "tempo-synced"
+    ],
+    "bpm": 120
+  },
+  {
+    "prompt": "A high-energy ska punk song with brass section, fast guitar riffs, and 160 BPM tempo. The mood is energetic and fun.",
+    "aspects": [
+      "brass",
+      "guitar",
+      "drum",
+      "bright sound",
+      "electric",
+      "tempo-synced"
+    ],
+    "bpm": 160
+  },
+  {
+    "prompt": "A slow blues ballad featuring electric guitar with slide, harmonica, and laid-back drums at 65 BPM. The mood is soulful and wistful.",
+    "aspects": [
+      "guitar",
+      "reed",
+      "drum",
+      "electric",
+      "warm sound"
+    ],
+    "bpm": 65
+  },
+  {
+    "prompt": "A cinematic fantasy soundtrack with choir, harp, and shimmering strings at a moderate 100 BPM. The mood is magical and ethereal.",
+    "aspects": [
+      "vocal",
+      "string",
+      "acoustic",
+      "long_release",
+      "reverb",
+      "tempo-synced"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "A bouncy electro-funk track featuring funky basslines, synth stabs, and punchy drums at 110 BPM. The mood is playful and groovy.",
+    "aspects": [
+      "bass",
+      "synth_lead",
+      "drum",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A bluegrass gospel hymn with banjo, dobro, mandolin, and vocal harmonies at 120 BPM. The mood is uplifting and heartfelt.",
+    "aspects": [
+      "string",
+      "vocal",
+      "acoustic",
+      "bright sound",
+      "tempo-synced"
+    ],
+    "bpm": 120
+  },
+  {
+    "prompt": "A trap-influenced pop song with melodic synths and a mid-tempo 90 BPM beat. The mood is catchy and trendy.",
+    "aspects": [
+      "synth_lead",
+      "electronic",
+      "vocal",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A solo violin piece with fast, virtuosic runs and expressive dynamics at 140 BPM. The mood is dramatic and energizing.",
+    "aspects": [
+      "string",
+      "acoustic",
+      "fast_decay",
+      "bright sound"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "An ambient drone piece with evolving textures, no defined rhythm, evoking calm and spaciousness.",
+    "aspects": [
+      "synth_lead",
+      "electronic",
+      "long_release",
+      "reverb",
+      "warm sound"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "A dancehall track at 95 BPM with riddim bass, syncopated beats, and catchy vocal hooks. The mood is party-ready and energetic.",
+    "aspects": [
+      "bass",
+      "drum",
+      "vocal",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 95
+  },
+  {
+    "prompt": "A romantic classical piano nocturne with flowing melodies and tempo rubato around 70 BPM.",
+    "aspects": [
+      "keyboard",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "An indie folk track with acoustic guitar, soft percussion, and mellow vocals at 80 BPM. The mood is warm and intimate.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "vocal",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 80
+  },
+  {
+    "prompt": "A heavy metal instrumental featuring shredding electric guitars, double bass, and aggressive rhythms at 180 BPM. The mood is intense and powerful.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "electric",
+      "distortion",
+      "tempo-synced"
+    ],
+    "bpm": 180
+  },
+  {
+    "prompt": "A disco-inspired dance track with funky bass, four-on-the-floor drums, and string stabs at 125 BPM. The mood is energetic and glamorous.",
+    "aspects": [
+      "bass",
+      "drum",
+      "string",
+      "bright sound",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 125
+  },
+  {
+    "prompt": "A soulful jazz ballad with trumpet, upright bass, and piano at 65 BPM. The mood is smooth and nostalgic.",
+    "aspects": [
+      "brass",
+      "bass",
+      "keyboard",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 65
+  },
+  {
+    "prompt": "A progressive house track with uplifting synths, steady 128 BPM beat, and euphoric melodies. The mood is energetic and hopeful.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "electronic",
+      "bright sound",
+      "tempo-synced"
+    ],
+    "bpm": 128
+  },
+  {
+    "prompt": "A traditional Japanese koto and shakuhachi duet with slow, meditative tempo. The mood is serene and contemplative.",
+    "aspects": [
+      "string",
+      "reed",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "A psychedelic rock song with fuzz guitar, wah effects, and a groovy 110 BPM rhythm. The mood is trippy and lively.",
+    "aspects": [
+      "guitar",
+      "distortion",
+      "drum",
+      "electric",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A minimalist electronic track with glitchy percussion, subtle synth lines, and a moderate tempo of 100 BPM. The mood is experimental and cool.",
+    "aspects": [
+      "drum",
+      "synth_lead",
+      "electronic",
+      "tempo-synced",
+      "nonlinear_env"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "A romantic mariachi ballad with soft trumpet, guitar, and emotional vocals at 70 BPM. The mood is tender and heartfelt.",
+    "aspects": [
+      "brass",
+      "guitar",
+      "vocal",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A dynamic symphonic metal piece with orchestral elements, heavy guitars, and dual vocal styles at 120 BPM. The mood is dramatic and intense.",
+    "aspects": [
+      "string",
+      "brass",
+      "guitar",
+      "vocal",
+      "drum",
+      "electric",
+      "tempo-synced"
+    ],
+    "bpm": 120
+  },
+  {
+    "prompt": "A laid-back surf rock instrumental with reverb-drenched electric guitar and simple drum beats at 110 BPM. The mood is carefree and sunny.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "electric",
+      "reverb",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A melancholic piano solo with sparse notes and slow 50 BPM tempo emphasizing minor keys.",
+    "aspects": [
+      "keyboard",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 50
+  },
+  {
+    "prompt": "A vibrant Afrobeat track featuring polyrhythmic drums, horns, and electric guitar at 115 BPM. The mood is lively and celebratory.",
+    "aspects": [
+      "drum",
+      "brass",
+      "guitar",
+      "electric",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 115
+  },
+  {
+    "prompt": "A chiptune electronic track with 8-bit synth sounds, fast tempo of 140 BPM, and playful mood.",
+    "aspects": [
+      "synth_lead",
+      "electronic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "A gentle lullaby featuring music box melodies and soft strings at 60 BPM. The mood is soothing and peaceful.",
+    "aspects": [
+      "mallet",
+      "string",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A funk rock fusion track with syncopated guitar riffs, punchy bass, and energetic drums at 100 BPM. The mood is lively and cool.",
+    "aspects": [
+      "guitar",
+      "bass",
+      "drum",
+      "electric",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "A traditional Scottish bagpipe march with snare drums at a brisk 140 BPM. The mood is proud and uplifting.",
+    "aspects": [
+      "reed",
+      "drum",
+      "acoustic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "An introspective indie rock ballad with electric guitar, soft drums, and ambient synths at 75 BPM. The mood is moody and thoughtful.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "synth_lead",
+      "electric",
+      "warm sound"
+    ],
+    "bpm": 75
+  },
+  {
+    "prompt": "A fast-paced Cajun zydeco track featuring accordion, washboard, and fiddle at 150 BPM. The mood is festive and energetic.",
+    "aspects": [
+      "reed",
+      "mallet",
+      "string",
+      "acoustic",
+      "fast_decay",
+      "bright sound"
+    ],
+    "bpm": 150
+  },
+  {
+    "prompt": "A dramatic film score featuring brass fanfares, intense strings, and timpani at 120 BPM. The mood is suspenseful and heroic.",
+    "aspects": [
+      "brass",
+      "string",
+      "drum",
+      "acoustic",
+      "bright sound",
+      "tempo-synced"
+    ],
+    "bpm": 120
+  },
+  {
+    "prompt": "A reggae-inspired chillhop track with laid-back beats, warm bass, and jazzy keys at 80 BPM. The mood is relaxed and soothing.",
+    "aspects": [
+      "bass",
+      "keyboard",
+      "drum",
+      "electronic",
+      "warm sound"
+    ],
+    "bpm": 80
+  },
+  {
+    "prompt": "A swing era big band tune featuring trumpet solos, walking bass, and swing drums at 170 BPM. The mood is joyous and danceable.",
+    "aspects": [
+      "brass",
+      "bass",
+      "drum",
+      "acoustic",
+      "bright sound",
+      "tempo-synced"
+    ],
+    "bpm": 170
+  },
+  {
+    "prompt": "A futuristic synth orchestral hybrid track with layered pads, arpeggiated synths, and dynamic rhythm at 115 BPM. The mood is awe-inspiring and epic.",
+    "aspects": [
+      "string",
+      "synth_lead",
+      "electronic",
+      "tempo-synced",
+      "bright sound",
+      "reverb"
+    ],
+    "bpm": 115
+  },
+  {
+    "prompt": "A solo blues guitar piece with slow bends, vibrato, and expressive phrasing at 60 BPM. The mood is soulful and melancholic.",
+    "aspects": [
+      "guitar",
+      "acoustic",
+      "warm sound",
+      "long_release"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "An upbeat indie pop track with bright acoustic guitars, synth layers, and catchy vocal hooks at 100 BPM. The mood is cheerful and lighthearted.",
+    "aspects": [
+      "guitar",
+      "synth_lead",
+      "vocal",
+      "bright sound",
+      "electronica"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "A brooding trip-hop track with dark basslines, slow 80 BPM tempo, and atmospheric samples. The mood is moody and mysterious.",
+    "aspects": [
+      "bass",
+      "synth_lead",
+      "electronic",
+      "slow_decay",
+      "reverb"
+    ],
+    "bpm": 80
+  },
+  {
+    "prompt": "A Baroque chamber music piece featuring harpsichord, violin, and cello at a moderate 100 BPM with an elegant mood.",
+    "aspects": [
+      "keyboard",
+      "string",
+      "acoustic",
+      "bright sound"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "A driving techno track with repetitive four-on-the-floor kick drum, synth stabs, and 130 BPM tempo. The mood is energetic and hypnotic.",
+    "aspects": [
+      "drum",
+      "synth_lead",
+      "electronic",
+      "tempo-synced",
+      "percussive"
+    ],
+    "bpm": 130
+  },
+  {
+    "prompt": "A heartfelt country ballad with acoustic guitar, pedal steel, and soft drums at 70 BPM. The mood is nostalgic and emotional.",
+    "aspects": [
+      "guitar",
+      "string",
+      "drum",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A Latin jazz fusion piece with complex percussion, electric piano, and brass at 110 BPM. The mood is sophisticated and lively.",
+    "aspects": [
+      "drum",
+      "keyboard",
+      "brass",
+      "electric",
+      "tempo-synced"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A solo marimba composition with rhythmic patterns at 90 BPM evoking warmth and earthiness.",
+    "aspects": [
+      "mallet",
+      "acoustic",
+      "percussive",
+      "tempo-synced",
+      "warm sound"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A powerful post-rock instrumental with layered guitars swelling slowly into a climactic 100 BPM tempo. The mood is epic and emotional.",
+    "aspects": [
+      "guitar",
+      "acoustic",
+      "electronic",
+      "long_release",
+      "reverb"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "An old-school hip-hop beat with boom bap drums, vinyl scratches, and jazzy samples at 90 BPM. The mood is cool and laid-back.",
+    "aspects": [
+      "drum",
+      "electronic",
+      "warm sound",
+      "percussive",
+      "tempo-synced"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A dreamy synth ballad with lush pads, slow tempo 65 BPM, and airy vocal effects. The mood is ethereal and tender.",
+    "aspects": [
+      "synth_lead",
+      "vocal",
+      "electronic",
+      "long_release",
+      "reverb"
+    ],
+    "bpm": 65
+  },
+  {
+    "prompt": "An energetic merengue dance track featuring accordion, percussion, and horns at 160 BPM. The mood is festive and joyful.",
+    "aspects": [
+      "reed",
+      "drum",
+      "brass",
+      "acoustic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 160
+  },
+  {
+    "prompt": "A relaxing acoustic fingerstyle guitar instrumental at 70 BPM emphasizing melodic phrasing. The mood is peaceful and meditative.",
+    "aspects": [
+      "guitar",
+      "acoustic",
+      "warm sound",
+      "long_release"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A melancholic electronic ballad featuring sparse piano, soft synths, and a slow 60 BPM tempo. The mood is introspective and emotional.",
+    "aspects": [
+      "keyboard",
+      "synth_lead",
+      "electronic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A joyful children's choir song with simple piano accompaniment and upbeat 100 BPM tempo. The mood is innocent and cheerful.",
+    "aspects": [
+      "vocal",
+      "keyboard",
+      "bright sound",
+      "acoustic",
+      "tempo-synced"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "A fast punk rock song with distorted guitars, driving bass, and energetic drums at 190 BPM. The mood is rebellious and raw.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "bass",
+      "distortion",
+      "electric",
+      "fast_decay"
+    ],
+    "bpm": 190
+  },
+  {
+    "prompt": "A smooth jazz ballad featuring muted trumpet, walking bass, and brushed drums at 70 BPM. The mood is romantic and intimate.",
+    "aspects": [
+      "brass",
+      "bass",
+      "drum",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A wild west-style country instrumental with banjo, fiddle, and acoustic guitar at 110 BPM. The mood is lively and rustic.",
+    "aspects": [
+      "string",
+      "acoustic",
+      "bright sound",
+      "tempo-synced"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A slow, ethereal new age piano and synth piece with a calming 60 BPM tempo. The mood is serene and spacious.",
+    "aspects": [
+      "keyboard",
+      "synth_lead",
+      "long_release",
+      "warm sound",
+      "electronic"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A high-tempo drum and bass track at 175 BPM with rolling breakbeats, deep bass, and synth stabs. The mood is energetic and intense.",
+    "aspects": [
+      "drum",
+      "bass",
+      "synth_lead",
+      "electronic",
+      "tempo-synced",
+      "fast_decay"
+    ],
+    "bpm": 175
+  },
+  {
+    "prompt": "A blues rock track with gritty electric guitar riffs, driving drums, and a tempo of 120 BPM. The mood is raw and soulful.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "electric",
+      "distortion",
+      "tempo-synced"
+    ],
+    "bpm": 120
+  },
+  {
+    "prompt": "A soft indie folk song with gentle fingerpicking on acoustic guitar and emotional vocals at 80 BPM. The mood is tender and reflective.",
+    "aspects": [
+      "guitar",
+      "vocal",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 80
+  },
+  {
+    "prompt": "A melancholic classical guitar solo featuring complex fingerstyle at a slow tempo of 60 BPM. The mood is poignant and intimate.",
+    "aspects": [
+      "guitar",
+      "acoustic",
+      "warm sound",
+      "long_release"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A tropical reggae pop fusion with smooth vocals, laid-back beats, and steel drums at 90 BPM. The mood is relaxed and sunny.",
+    "aspects": [
+      "vocal",
+      "drum",
+      "mallet",
+      "bass",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A grand orchestral waltz featuring sweeping strings, woodwinds, and harp at 90 BPM. The mood is elegant and nostalgic.",
+    "aspects": [
+      "string",
+      "reed",
+      "mallet",
+      "acoustic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A catchy synthpop dance track with bright melodies, thumping beats, and 120 BPM tempo. The mood is fun and lively.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "electronic",
+      "bright sound",
+      "tempo-synced"
+    ],
+    "bpm": 120
+  },
+  {
+    "prompt": "A powerful gospel choir anthem with strong harmonies, organ, and rhythmic claps at 85 BPM. The mood is uplifting and joyful.",
+    "aspects": [
+      "vocal",
+      "organ",
+      "percussive",
+      "warm sound",
+      "acoustic"
+    ],
+    "bpm": 85
+  },
+  {
+    "prompt": "A dark ambient soundscape with evolving drones, metallic textures, and no discernible beat. The mood is ominous and mysterious.",
+    "aspects": [
+      "synth_lead",
+      "electronic",
+      "long_release",
+      "reverb",
+      "nonlinear_env"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "A lively zydeco tune with accordion, rubboard, and energetic percussion at 150 BPM. The mood is festive and upbeat.",
+    "aspects": [
+      "reed",
+      "mallet",
+      "drum",
+      "acoustic",
+      "fast_decay"
+    ],
+    "bpm": 150
+  },
+  {
+    "prompt": "A gentle lullaby with soft acoustic guitar and soothing vocals at 60 BPM. The mood is calm and comforting.",
+    "aspects": [
+      "guitar",
+      "vocal",
+      "acoustic",
+      "warm sound",
+      "long_release"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "An intense progressive metal composition with complex rhythms, double kick drums, and intricate guitar playing at 140 BPM. The mood is aggressive and technical.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "electric",
+      "distortion",
+      "tempo-synced",
+      "fast_decay"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "A romantic flamenco piece featuring passionate guitar strums and hand claps at 130 BPM. The mood is fiery and emotional.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "acoustic",
+      "fast_decay",
+      "percussive"
+    ],
+    "bpm": 130
+  },
+  {
+    "prompt": "A traditional Chinese pipa and erhu duet with delicate melodies and slow tempo conveying serene beauty.",
+    "aspects": [
+      "string",
+      "reed",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "A disco-funk groove with slap bass, rhythmic guitar, and vibrant horns at 122 BPM. The mood is danceable and upbeat.",
+    "aspects": [
+      "bass",
+      "guitar",
+      "brass",
+      "electric",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 122
+  },
+  {
+    "prompt": "A melancholic solo violin piece with expressive vibrato and slow tempo 55 BPM. The mood is sorrowful and reflective.",
+    "aspects": [
+      "string",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 55
+  },
+  {
+    "prompt": "A fast-paced bluegrass instrumental featuring banjo rolls, fiddle, and mandolin at 160 BPM. The mood is energetic and joyful.",
+    "aspects": [
+      "string",
+      "acoustic",
+      "fast_decay"
+    ],
+    "bpm": 160
+  },
+  {
+    "prompt": "A nostalgic lo-fi hip hop beat with dusty drum samples, soft jazz chords, and a slow 75 BPM rhythm. The mood is chill and introspective.",
+    "aspects": [
+      "drum",
+      "keyboard",
+      "electronic",
+      "warm sound",
+      "percussive"
+    ],
+    "bpm": 75
+  },
+  {
+    "prompt": "A cinematic fantasy orchestral piece with soaring strings, choir, and light percussion at 100 BPM. The mood is magical and inspiring.",
+    "aspects": [
+      "string",
+      "vocal",
+      "drum",
+      "acoustic",
+      "bright sound",
+      "tempo-synced"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "A soulful R&B groove with smooth electric piano, bass, and steady 90 BPM tempo. The mood is sensual and mellow.",
+    "aspects": [
+      "keyboard",
+      "bass",
+      "electronic",
+      "warm sound",
+      "tempo-synced"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "An electronic synthwave track with pulsing bass, bright arpeggios, and 115 BPM tempo. The mood is vibrant and nostalgic.",
+    "aspects": [
+      "bass",
+      "synth_lead",
+      "electronic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 115
+  },
+  {
+    "prompt": "A traditional Irish folk song with tin whistle, fiddle, and bodhran at a lively 130 BPM. The mood is cheerful and spirited.",
+    "aspects": [
+      "reed",
+      "string",
+      "drum",
+      "acoustic",
+      "tempo-synced"
+    ],
+    "bpm": 130
+  },
+  {
+    "prompt": "A hypnotic minimal techno piece with repetitive synth loops, muted percussion, and steady 125 BPM beat. The mood is trance-like and steady.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "electronic",
+      "tempo-synced",
+      "percussive"
+    ],
+    "bpm": 125
+  },
+  {
+    "prompt": "A dramatic orchestral trailer score with heavy brass, percussion hits, and swelling strings at 110 BPM. The mood is intense and epic.",
+    "aspects": [
+      "brass",
+      "drum",
+      "string",
+      "acoustic",
+      "bright sound",
+      "tempo-synced"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A mellow jazz ballad featuring upright bass, piano, and soft brushes at 65 BPM. The mood is intimate and soothing.",
+    "aspects": [
+      "bass",
+      "keyboard",
+      "drum",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 65
+  },
+  {
+    "prompt": "A fast-paced punk rock anthem with distorted guitars, fast drum beats at 180 BPM, and aggressive vocals. The mood is rebellious and energetic.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "vocal",
+      "distortion",
+      "tempo-synced"
+    ],
+    "bpm": 180
+  },
+  {
+    "prompt": "A sultry bossa nova song with nylon-string guitar, soft percussion, and gentle vocals at 90 BPM. The mood is smooth and romantic.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "vocal",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A melodic indie pop track with jangly electric guitars, airy synths, and mid-tempo 100 BPM groove. The mood is bright and uplifting.",
+    "aspects": [
+      "guitar",
+      "synth_lead",
+      "bright sound",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "A heavy dubstep track featuring distorted bass drops, half-time drums at 70 BPM, and dark synths. The mood is intense and energetic.",
+    "aspects": [
+      "bass",
+      "synth_lead",
+      "drum",
+      "distortion",
+      "electronic",
+      "tempo-synced"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A peaceful classical piano nocturne with flowing legato lines and rubato tempo around 70 BPM. The mood is dreamy and reflective.",
+    "aspects": [
+      "keyboard",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "An aggressive thrash metal track with fast riffs, double bass drums at 200 BPM, and harsh vocals. The mood is furious and intense.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "vocal",
+      "distortion",
+      "fast_decay",
+      "electric",
+      "tempo-synced"
+    ],
+    "bpm": 200
+  },
+  {
+    "prompt": "A gentle folk ballad with acoustic guitar, subtle strings, and heartfelt vocals at 75 BPM. The mood is warm and nostalgic.",
+    "aspects": [
+      "guitar",
+      "string",
+      "vocal",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 75
+  },
+  {
+    "prompt": "A vibrant salsa dance track with piano montuno, brass, congas, and a fast 180 BPM tempo. The mood is festive and lively.",
+    "aspects": [
+      "keyboard",
+      "brass",
+      "drum",
+      "percussive",
+      "acoustic",
+      "tempo-synced"
+    ],
+    "bpm": 180
+  },
+  {
+    "prompt": "A synthetic ambient track with dreamy pads, soft bell tones, and no clear rhythm designed for relaxation.",
+    "aspects": [
+      "synth_lead",
+      "mallet",
+      "electronic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "A lively Celtic reel featuring fiddle, flute, and accordion at 140 BPM. The mood is energetic and celebratory.",
+    "aspects": [
+      "string",
+      "reed",
+      "mallet",
+      "acoustic",
+      "tempo-synced"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "A melancholy solo piano piece exploring minor keys and slow, expressive tempo of 60 BPM.",
+    "aspects": [
+      "keyboard",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A funky groove with wah guitar, slap bass, and tight drums at 100 BPM. The mood is playful and rhythmic.",
+    "aspects": [
+      "guitar",
+      "bass",
+      "drum",
+      "electric",
+      "tempo-synced"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "A traditional Middle Eastern oud and darbuka duet with intricate rhythms and expressive melodies at a moderate tempo.",
+    "aspects": [
+      "string",
+      "drum",
+      "acoustic"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "An upbeat electro-pop song with catchy synth hooks, steady 120 BPM beat, and bright vocals. The mood is cheerful and fun.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "vocal",
+      "electronic",
+      "bright sound",
+      "tempo-synced"
+    ],
+    "bpm": 120
+  },
+  {
+    "prompt": "A cinematic suspense track with tense strings, pulsating synth bass, and slow build at 70 BPM. The mood is ominous and thrilling.",
+    "aspects": [
+      "string",
+      "synth_lead",
+      "bass",
+      "electronic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A soulful blues number featuring slide guitar, harmonica, bass, and steady 90 BPM groove. The mood is raw and heartfelt.",
+    "aspects": [
+      "guitar",
+      "reed",
+      "bass",
+      "drum",
+      "acoustic",
+      "warm sound",
+      "tempo-synced"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A dreamy chillout track with airy pads, soft beats at 80 BPM, and gentle guitar melodies. The mood is calm and serene.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "guitar",
+      "electronic",
+      "warm sound",
+      "tempo-synced"
+    ],
+    "bpm": 80
+  },
+  {
+    "prompt": "A fast-paced ska rhythm with brass section, rhythmic guitars, and an energetic 160 BPM tempo. The mood is fun and lively.",
+    "aspects": [
+      "brass",
+      "guitar",
+      "drum",
+      "bright sound",
+      "tempo-synced"
+    ],
+    "bpm": 160
+  },
+  {
+    "prompt": "A tender acoustic folk song featuring fingerpicked guitar and soft, emotive vocals at 70 BPM. The mood is intimate and nostalgic.",
+    "aspects": [
+      "guitar",
+      "vocal",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A progressive metal instrumental with complex time signatures, heavy guitar riffs, and dynamic 110 BPM tempo. The mood is intense and technical.",
+    "aspects": [
+      "guitar",
+      "drum",
+      "electric",
+      "tempo-synced",
+      "fast_decay"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A mellow jazz fusion piece with electric piano, smooth bass lines, and laid-back drums at 90 BPM. The mood is sophisticated and relaxed.",
+    "aspects": [
+      "keyboard",
+      "bass",
+      "drum",
+      "electric",
+      "warm sound",
+      "tempo-synced"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "An orchestral waltz with elegant strings, harp, and woodwinds at 80 BPM. The mood is graceful and romantic.",
+    "aspects": [
+      "string",
+      "mallet",
+      "reed",
+      "acoustic",
+      "tempo-synced"
+    ],
+    "bpm": 80
+  },
+  {
+    "prompt": "A dark ambient composition featuring drones, metallic percussion, and slow evolving textures with no clear beat. The mood is mysterious and haunting.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "electronic",
+      "long_release",
+      "reverb",
+      "nonlinear_env"
+    ],
+    "bpm": 0
+  },
+  {
+    "prompt": "A joyous mariachi tune with trumpets, violins, vihuela, and upbeat 140 BPM rhythm. The mood is festive and exuberant.",
+    "aspects": [
+      "brass",
+      "string",
+      "guitar",
+      "acoustic",
+      "tempo-synced"
+    ],
+    "bpm": 140
+  },
+  {
+    "prompt": "A gentle piano ballad with flowing arpeggios, soft dynamics, and slow 60 BPM tempo. The mood is tender and introspective.",
+    "aspects": [
+      "keyboard",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "An energetic funk rock track featuring rhythmic guitar, punchy bass, and lively drums at 110 BPM. The mood is lively and playful.",
+    "aspects": [
+      "guitar",
+      "bass",
+      "drum",
+      "electric",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A smooth R&B slow jam with warm synths, deep bass, and 70 BPM laid-back tempo. The mood is sensual and relaxed.",
+    "aspects": [
+      "synth_lead",
+      "bass",
+      "electronic",
+      "warm sound",
+      "tempo-synced"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "A traditional reggae song with offbeat rhythm guitar, melodic bass, and steady 80 BPM groove. The mood is chill and positive.",
+    "aspects": [
+      "guitar",
+      "bass",
+      "drum",
+      "acoustic",
+      "warm sound",
+      "tempo-synced"
+    ],
+    "bpm": 80
+  },
+  {
+    "prompt": "A high-tempo electronic trance track with driving synths, pulsating bass, and fast 138 BPM beat. The mood is energetic and euphoric.",
+    "aspects": [
+      "synth_lead",
+      "bass",
+      "electronic",
+      "tempo-synced",
+      "bright sound"
+    ],
+    "bpm": 138
+  },
+  {
+    "prompt": "A soft indie acoustic track with gentle fingerpicking, ambient guitar effects, and calm vocals at 75 BPM. The mood is introspective and warm.",
+    "aspects": [
+      "guitar",
+      "vocal",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 75
+  },
+  {
+    "prompt": "A cinematic orchestral piece with pounding percussion, soaring brass, and string ensembles at 115 BPM. The mood is epic and heroic.",
+    "aspects": [
+      "drum",
+      "brass",
+      "string",
+      "acoustic",
+      "bright sound",
+      "tempo-synced"
+    ],
+    "bpm": 115
+  },
+  {
+    "prompt": "A funky disco groove with rhythmic guitar, tight bass, and four-on-the-floor drums at 124 BPM. The mood is danceable and vibrant.",
+    "aspects": [
+      "guitar",
+      "bass",
+      "drum",
+      "acoustic",
+      "bright sound",
+      "tempo-synced"
+    ],
+    "bpm": 124
+  },
+  {
+    "prompt": "A slow solo clarinet piece with expressive phrasing and a melancholic mood at 60 BPM.",
+    "aspects": [
+      "reed",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A bright tropical house track featuring mallets, synth pads, and steady 115 BPM tempo. The mood is sunny and upbeat.",
+    "aspects": [
+      "mallet",
+      "synth_lead",
+      "electronic",
+      "bright sound",
+      "tempo-synced"
+    ],
+    "bpm": 115
+  },
+  {
+    "prompt": "A lively zydeco blues fusion track with accordion, fiddle, and washboard at 150 BPM. The mood is fun and energetic.",
+    "aspects": [
+      "reed",
+      "string",
+      "mallet",
+      "acoustic",
+      "tempo-synced"
+    ],
+    "bpm": 150
+  },
+  {
+    "prompt": "An experimental electronic piece using glitch effects, abstract samples, and irregular rhythms around 100 BPM. The mood is edgy and avant-garde.",
+    "aspects": [
+      "electronic",
+      "nonlinear_env",
+      "tempo-synced",
+      "percussive"
+    ],
+    "bpm": 100
+  },
+  {
+    "prompt": "A romantic tango with dramatic bandoneon, violin, and piano parts at 130 BPM. The mood is sultry and passionate.",
+    "aspects": [
+      "reed",
+      "string",
+      "keyboard",
+      "acoustic",
+      "tempo-synced"
+    ],
+    "bpm": 130
+  },
+  {
+    "prompt": "A joyous gospel choir with piano, organ, and rhythmic hand clapping at 90 BPM. The mood is uplifting and spiritual.",
+    "aspects": [
+      "vocal",
+      "keyboard",
+      "organ",
+      "percussive",
+      "warm sound",
+      "acoustic"
+    ],
+    "bpm": 90
+  },
+  {
+    "prompt": "A melancholic solo flute meditation with slow melodic lines at 60 BPM. The mood is peaceful and reflective.",
+    "aspects": [
+      "reed",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "An upbeat indie electronic track with synth bass, bright melodies, and 125 BPM tempo. The mood is youthful and energetic.",
+    "aspects": [
+      "bass",
+      "synth_lead",
+      "electronic",
+      "bright sound",
+      "tempo-synced"
+    ],
+    "bpm": 125
+  },
+  {
+    "prompt": "A traditional African drum ensemble featuring djembe, talking drum, and polyrhythms at 110 BPM. The mood is vibrant and celebratory.",
+    "aspects": [
+      "drum",
+      "acoustic",
+      "percussive",
+      "tempo-synced"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A slow progressive rock ballad with electric guitar solos, mellotron, and soft drums at 70 BPM. The mood is emotional and expansive.",
+    "aspects": [
+      "guitar",
+      "keyboard",
+      "drum",
+      "electric",
+      "warm sound",
+      "tempo-synced"
+    ],
+    "bpm": 70
+  },
+  {
+    "prompt": "An upbeat pop-punk song with distorted guitars, catchy hooks, and 160 BPM tempo. The mood is energetic and youthful.",
+    "aspects": [
+      "guitar",
+      "vocal",
+      "drum",
+      "electric",
+      "tempo-synced"
+    ],
+    "bpm": 160
+  },
+  {
+    "prompt": "A tranquil new age harp and flute duet with slow flowing melodies at 60 BPM. The mood is calming and airy.",
+    "aspects": [
+      "string",
+      "reed",
+      "acoustic",
+      "long_release",
+      "warm sound"
+    ],
+    "bpm": 60
+  },
+  {
+    "prompt": "A retro 80s synthpop dance track with electronic drum machine beats and 120 BPM tempo. The mood is nostalgic and fun.",
+    "aspects": [
+      "synth_lead",
+      "drum",
+      "electronic",
+      "bright sound",
+      "tempo-synced"
+    ],
+    "bpm": 120
+  },
+  {
+    "prompt": "A dramatic orchestral trailer music with heavy percussion, brass blasts, and rising strings at 110 BPM. The mood is intense and epic.",
+    "aspects": [
+      "drum",
+      "brass",
+      "string",
+      "acoustic",
+      "bright sound",
+      "tempo-synced"
+    ],
+    "bpm": 110
+  },
+  {
+    "prompt": "A soulful jazz guitar ballad with gentle comping, walking bass, and brushes at 65 BPM. The mood is intimate and warm.",
+    "aspects": [
+      "guitar",
+      "bass",
+      "drum",
+      "acoustic",
+      "warm sound"
+    ],
+    "bpm": 65
+  }
+]
