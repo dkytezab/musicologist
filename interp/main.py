@@ -1,5 +1,9 @@
 import torch
 import yaml
+import imageio.v2 as imageio
+import io
+from PIL import Image
+import pandas as pd
 
 from concept_datasets import ConceptDataset, cache_model
 from models import BinaryClassifier
@@ -20,7 +24,8 @@ results_dict = {}
 limit_dict = {}
 
 # concepts = get_all_concepts()
-concepts = ['is_bass',]
+concepts = ['is_electronic', 'is_synthetic', 'is_orchestral', 'is_acoustic_band', 'is_percussion', 'is_techno', 'is_plucked', 'is_blown', 'is_hit', 'is_atmospheric']
+
 
 def process_embeds():
 
@@ -56,8 +61,31 @@ def interp():
 
             for diff_step in truncation_ts:
                 binary_classifier.inference(diff_step=diff_step, embed_model=embed_model, save=True)
-                fig = binary_classifier.get_pca(diff_step=diff_step, embed_model=embed_model)
-                fig.savefig(f"data/concepts/{concept}/PCA_{diff_step}", dpi=300, bbox_inches="tight")
+                
+                # Only logistic PCA gif for computational ease
+                if class_model=="logistic":
+                    ims = binary_classifier.get_pca(diff_steps=truncation_ts, embed_model=embed_model)
+
+                    figs = [fig_to_pil(im) for im in ims]
+                    figs[0].save(
+                        f'data/concepts/{concept}/pca_{class_model}.gif',
+                        save_all=True,
+                        append_images=figs[1:],
+                        duration=500,  # ms per frame
+                        loop=0  # loop forever
+                        )
+
+def fig_to_pil(fig):
+    buf = io.BytesIO()
+    fig.savefig(buf, format="png", dpi=150, bbox_inches="tight")
+    buf.seek(0)
+    return Image.open(buf)
+
+def results_to_im():
+    for concept in concepts:
+        json_path = f"data/generated/{concept}/concept_results.json"
+        json = pd.read_json(json_path)
+
 
 if __name__ == "__main__":
     process_embeds()

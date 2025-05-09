@@ -12,6 +12,7 @@ import json
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 from torchmetrics import Accuracy
+from matplotlib.colors import ListedColormap
 
 from concept_filters import GEN_AUDIO_FILTER_DICT, GEN_AUDIO_PADDER_DICT, create_concept_filter
 
@@ -277,8 +278,8 @@ class BinaryClassifier(object):
         col_dict, get_true, logic = GEN_AUDIO_FILTER_DICT[self.concept_filter]
         concept_filter_func = create_concept_filter(col_dict, get_true, logic)
 
-        col_dict, get_true, logic = GEN_AUDIO_PADDER_DICT[self.concept_padder]
-        concept_padder_func = create_concept_filter(col_dict, get_true, logic)
+        col_dict, _, logic = GEN_AUDIO_PADDER_DICT[self.concept_padder]
+        concept_padder_func = create_concept_filter(col_dict, False, logic)
 
         pos_samps = concept_filter_func(refined_csv)
         neg_samps = concept_padder_func(refined_csv)
@@ -300,55 +301,58 @@ class BinaryClassifier(object):
 
         return (pos_tensor, neg_tensor)
     
-    def get_pca(self, diff_step: int, embed_model: str, resolution: int = 200,):
+    def get_pca(self, diff_steps: List[int], embed_model: str, resolution: int = 200,):
         # In future change this
-        pt_path = f"{self.dir_path}/{embed_model}_embeddings.pt"
-        concept_embeds, concept_labels = self._load_concept_embeds(csv_path=f"{self.dir_path}/audio_info.csv", 
-                                                                   model_name=embed_model,
-                                                                   pt_path=pt_path)
-        pos_tensor, neg_tensor = self._load_gen_audio_embeds(diff_step=diff_step, embed_model=embed_model, pt_path=f"data/generated/diff_step_{diff_step}/{embed_model}_embeddings.pt", csv_path=f"data/generated/audio_info.csv")
-        gen_audio_embeds = torch.concat([pos_tensor, neg_tensor]).numpy()
-        gen_audio_labels = np.concatenate([np.ones(pos_tensor.shape[0]), np.zeros(neg_tensor.shape[0])])
-
         pca = PCA(n_components=2)
-        train2d = pca.fit_transform(concept_embeds)
-        test2d = pca.transform(gen_audio_embeds)
+        figs = []
+        for diff_step in diff_steps:
+            pt_path = f"{self.dir_path}/{embed_model}_embeddings.pt"
+            concept_embeds, concept_labels = self._load_concept_embeds(csv_path=f"{self.dir_path}/audio_info.csv", 
+                                                                    model_name=embed_model,
+                                                                    pt_path=pt_path)
+            pos_tensor, neg_tensor = self._load_gen_audio_embeds(diff_step=diff_step, embed_model=embed_model, 
+                                                                 pt_path=f"data/generated/diff_step_{diff_step}/{embed_model}_embeddings.pt", csv_path=f"data/generated/audio_info.csv")
+            gen_audio_embeds = torch.concat([pos_tensor, neg_tensor]).numpy()
+            gen_audio_labels = np.concatenate([np.ones(pos_tensor.shape[0]), np.zeros(neg_tensor.shape[0])], axis=0)
 
-        x0_min, x0_max = train2d[:,0].min()-1, train2d[:,0].max()+1
-        x1_min, x1_max = train2d[:,1].min()-1, train2d[:,1].max()+1
-        xx, yy = np.meshgrid(
-            np.linspace(x0_min, x0_max, resolution),
-            np.linspace(x1_min, x1_max, resolution)
-        )
-        grid2d = np.c_[xx.ravel(), yy.ravel()]
+            train2d = pca.fit_transform(concept_embeds) if diff_step == 5 else pca.transform(concept_embeds)
+            test2d = pca.transform(gen_audio_embeds) 
 
-        # Computing predictions
-        grid_orig = pca.inverse_transform(grid2d)
-        if self.hparams["model_type"] in ("logistic", "svm"):
-            Z = self.model.predict(grid_orig)
-        else:  # mlp
-            self.model.eval()
-            with torch.no_grad():
-                preds = self.model(torch.tensor(grid_orig, dtype=torch.float32))
-        Z = Z.reshape(xx.shape)
+            x0_min, x0_max = train2d[:,0].min()-0.1, train2d[:,0].max()+0.1
+            x1_min, x1_max = train2d[:,1].min()-0.1, train2d[:,1].max()+0.1
+            xx, yy = np.meshgrid(
+                np.linspace(x0_min, x0_max, resolution),
+                np.linspace(x1_min, x1_max, resolution)
+            )
+            grid2d = np.c_[xx.ravel(), yy.ravel()]
 
-        # Plotting
-        fig, ax = plt.subplots(figsize=(8, 8))
+            # Computing predictions
+            grid_orig = pca.inverse_transform(grid2d)
+            if self.hparams["model_type"] in ("logistic", "svm"):
+                Z = self.model.predict(grid_orig)
+            else:  # mlp
+                self.model.eval()
+                with torch.no_grad():
+                    Z = self.model(torch.tensor(grid_orig, dtype=torch.float32))
+            Z = Z.reshape(xx.shape)
 
-        model_type = self.hparams["model_type"]
+            # Plotting
+            fig, ax = plt.subplots(figsize=(8, 8))
 
-        ax.contourf(xx, yy, Z, alpha=0.2)
-        ax.scatter(train2d[concept_labels==1,0], train2d[concept_labels==1,1],
-               marker="o", edgecolor="k", facecolor="tab:green", label="Concept +")
-        ax.scatter(train2d[concept_labels==0,0], train2d[concept_labels==0,1],
-               marker="x", edgecolor="k", facecolor="tab:red", label="Concept -")
-        ax.scatter(test2d[gen_audio_labels==1,0], test2d[gen_audio_labels==1,1],
-               marker="o", edgecolor="tab:green", facecolor="none", label="Diffusion Audio +")
-        ax.scatter(test2d[gen_audio_labels==0,0], test2d[gen_audio_labels==0,1],
-                marker="x", edgecolor="tab:red",  facecolor="none", label="Diffusion Audio -")
-        ax.set_xlabel("PC1")
-        ax.set_ylabel("PC2")
-        ax.set_title(f"{model_type} decision boundary on PCA projection")
-        ax.legend(loc="best")
-        plt.tight_layout()
-        return fig
+            model_type = self.hparams["model_type"]
+
+            ax.contourf(xx, yy, Z, alpha=0.2,)
+            ax.scatter(train2d[concept_labels==1,0], train2d[concept_labels==1,1], s=6,
+                marker="o", edgecolor="mediumseagreen", facecolor="mediumseagreen", label="Concept +")
+            ax.scatter(train2d[concept_labels==0,0], train2d[concept_labels==0,1], s=6,
+                marker="x", edgecolor="k", facecolor="tomato", label="Concept -")
+            ax.scatter(test2d[gen_audio_labels==1,0], test2d[gen_audio_labels==1,1], s=8,
+                marker="o", edgecolor="black", facecolor="black", label="Diffusion Audio +")
+            
+            ax.set_xlabel("PC1")
+            ax.set_ylabel("PC2")
+            ax.set_title(f"PCA projection of CLAP concept, generated audio embeds with {model_type} decision boundary")
+            ax.legend(loc="best")
+            plt.tight_layout()
+            figs.append(fig)
+        return figs

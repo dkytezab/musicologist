@@ -38,7 +38,6 @@ def create_concept_filter(cols_aspects_dict: Dict[str, str],
 
     return filter_function
             
-
 def get_all_concepts():
     return list(NSYNTH_FILTER_DICT.keys())
 
@@ -81,8 +80,8 @@ NSYNTH_FILTER_DICT = {
     "is_plucked":       [{"instrument_family_str": ["string", "bass", "guitar",]}, True, "or"],
     "is_blown":         [{"instrument_family_str": ["brass", "flute", "reed"],}, True, "or"],
     "is_hit":           [{"instrument_family_str": ["mallet", "keyboard", "synth_lead"]}, True, "or"],
-    "is_atmospheric":   [{"instrument_family_str": ["organ", "synth_lead", "vocal"]},
-                         {"qualities_str": ["long_release", "reverb", "nonlinear_env"]}, True, "and"],
+    "is_atmospheric":   [{"instrument_family_str": ["organ", "synth_lead", "vocal"],
+                         "qualities_str": ["long_release", "reverb", "nonlinear_env"]}, True, "and"],
 }
 
 NSYNTH_PADDER_DICT = {
@@ -124,8 +123,8 @@ NSYNTH_PADDER_DICT = {
     "is_plucked_like":       [{"instrument_family_str": ["string", "bass", "guitar", "keyboard"]}, True, "or"],
     "is_blown_like":         [{"instrument_family_str": ["brass", "flute", "reed", "organ", "vocal"],}, True, "or"],
     "is_hit_like":           [{"instrument_family_str": ["mallet", "keyboard", "synth_lead", "organ",]}, True, "or"],
-    "is_atmospheric_like":   [{"instrument_family_str": ["organ", "synth_lead", "vocal"]},
-                              {"qualities_str": ["long_release", "reverb", "nonlinear_env"]}, True, "and"],
+    "is_atmospheric_like":   [{"instrument_family_str": ["organ", "synth_lead", "vocal"],
+                              "qualities_str": ["long_release", "reverb", "nonlinear_env"]}, True, "and"],
 }
 
 GEN_AUDIO_FILTER_DICT = {
@@ -157,9 +156,9 @@ GEN_AUDIO_FILTER_DICT = {
 
     # Higher-level concepts - 8 total
     "is_orchestral":    [{"tag.aspects": ["bass", "string", "brass", "reed",]}, True, "or"],
-    "is_acoustic_band": [{"instrument_family_str": ["bass", "brass", "reed", "keyboard", "guitar",]}, True, "or"],
-    "is_percussion":    [{"instrument_family_str": ["mallet", "percussive", "drum", "drums"]}, True, "or"],
-    "is_techno":        [{"instrument_family_str": ["synth_lead", "mallet", "drum", "drums", "brass", "synthetic"]}, True, "or",],
+    "is_acoustic_band": [{"tag.aspects": ["bass", "brass", "reed", "keyboard", "guitar",]}, True, "or"],
+    "is_percussion":    [{"tag.aspects": ["mallet", "percussive", "drum", "drums"]}, True, "or"],
+    "is_techno":        [{"tag.aspects": ["synth_lead", "mallet", "drum", "drums", "brass", "synthetic"]}, True, "or",],
     "is_plucked":       [{"tag.aspects": ["string", "bass", "guitar",]}, True, "or"],
     "is_blown":         [{"tag.aspects": ["brass", "flute", "reed"],}, True, "or"],
     "is_hit":           [{"tag.aspects": ["mallet", "keyboard", "synth_lead"]}, True, "or"],
@@ -203,182 +202,3 @@ GEN_AUDIO_PADDER_DICT = {
     "is_hit_like":           [{"tag.aspects": ["mallet", "keyboard", "synth_lead", "organ",]}, True, "or"],
     "is_atmospheric_like":   [{"tag.aspects": ["organ", "synth_lead", "vocal", "long_release", "reverb", "nonlinear_env"]}, True, "or"],
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# # Loading in concept filters
-# def load_concept_filter(func_name: str, concept_filter_path: Optional[str] = None,) -> Callable:
-#         concept_filter_path = concept_filter_path if concept_filter_path is not None else "interp/concept_filters.py"
-        
-#         spec = importlib.util.spec_from_file_location(func_name, concept_filter_path)
-#         func_file = importlib.util.module_from_spec(spec)
-#         spec.loader.exec_module(func_file)
-#         func = getattr(func_file, func_name, None)
-#         if func == None:
-#             raise AttributeError("Specified concept filter/padder not found in file")
-#         else:
-#             return func
-
-# # Functions for processing NSynth
-# def is_in_instrument_family(families: List[str], example_audio: Dict[str, Any]) -> bool:
-#     return example_audio["instrument_family_str"] in families
-
-# def has_quality(qualities: List[str], example_audio: Dict[str, Any]) -> bool:
-#     for quality in qualities:
-#         if quality in example_audio["qualities_str"]:
-#             return True
-
-# def has_source(sources: List[str], example_audio: Dict[str, Any]) -> bool:
-#     return example_audio["instrument_source_str"] in sources
-
-# # Explicit filters
-# def is_brass(example_audio: Dict[str, Any]) -> bool:
-#     return is_in_instrument_family(
-#         ["brass"], example_audio
-#     )
-
-# def is_brass_like(example_audio: Dict[str, Any]) -> bool:
-#     return is_in_instrument_family(
-#         ["brass", "reed"], example_audio
-#     )
-
-# def is_string(example_audio: Dict[str, Any]) -> bool:
-#     return is_in_instrument_family(
-#         ["string"], example_audio
-#     )
-
-# def is_string_like(example_audio: Dict[str, Any]) -> bool:
-#     return is_in_instrument_family(
-#         ["string"], example_audio
-#     )
-
-# def is_drum(example_audio: Dict[str, Any]) -> bool:
-#     return is_in_instrument_family(["mallet"], example_audio) or has_quality(["percussive"], example_audio)
-
-# def is_drum_like(example_audio: Dict[str, Any]) -> bool:
-#     return is_in_instrument_family(["mallet"], example_audio) or has_quality(["percussive"], example_audio)
-        
-# def is_blown(example_audio: Dict[str, Any]) -> bool:
-#     return is_in_instrument_family(
-#         ["brass", "flute", "reed", "vocal"], example_audio
-#         )
-
-# def is_blown_like(example_audio: Dict[str, Any]) -> bool:
-#     return is_in_instrument_family(
-#         ["brass", "flute", "reed", "vocal", "organ"], example_audio
-#         )
-
-# def is_electronic(example_audio: Dict[str, Any]) -> bool:
-#     return has_source(["electronic"], example_audio)
-
-# def is_electronic_like(example_audio: Dict[str, Any]) -> bool:
-#     return has_source(["electronic", "synthetic"], example_audio)
-
-# def is_orchestral(example_audio: Dict[str, Any]) -> bool:
-#     return is_in_instrument_family(["string", "brass", "reed", "mallet"], example_audio) and has_source(["acoustic"], example_audio)
-
-# def is_orchestral_like(example_audio: Dict[str, Any]) -> bool:
-#     return is_in_instrument_family(["string", "brass", "reed", "mallet", "vocal"], example_audio) and has_source(["acoustic"], example_audio)
-
-# def is_vocal(example_audio: Dict[str, Any]) -> bool:
-#     return is_in_instrument_family(["vocal"], example_audio) 
-
-# def is_vocal_like(example_audio: Dict[str, Any]) -> bool:
-#     return is_in_instrument_family(["vocal"], example_audio)
-
-# def is_distorted(example_audio: Dict[str, Any]) -> bool:
-#     return has_quality(["distortion"], example_audio) 
-
-# def is_distorted_like(example_audio: Dict[str, Any]) -> bool:
-#     return has_quality(["distortion"], example_audio) 
-
-# # Make this all streamlined in the future please
-# # Functions for processing generated data
-# def has_aspect(df: pd.DataFrame, aspects: List[str], get_true: bool, logic: str,) -> pd.DataFrame:
-#     mask = pd.Series(False, index=df.index)
-
-#     if logic == "or":
-#         for aspect in aspects:
-#             mask |= (df["tag.aspects"].str.contains(aspect, na=False))
-#         mask = mask if get_true else ~mask
-#         return df[mask]
-    
-#     elif logic == "and":
-#         for aspect in aspects:
-#             mask &= (df["tag.aspects"].str.contains(aspect, na=False))
-#         mask = mask if get_true else ~mask
-#         return df[mask]
-    
-#     else:
-#         raise("Current logic not supported. Try 'and' or 'or' ")
-
-# # Returns all audio that has brass in it
-# def gen_audio_is_brass(df: pd.DataFrame) -> pd.DataFrame:
-#     return has_aspect(df=df, aspects=["brass",], get_true=True, logic="or")
-
-# # Returns all audio that doesn't have brass, reed or flute aspects
-# def gen_audio_not_is_brass_like(df: pd.DataFrame) -> pd.DataFrame:
-#     return has_aspect(df=df, aspects=["brass",], get_true=False, logic="or")
-
-# def gen_audio_is_string(df: pd.DataFrame) -> pd.DataFrame:
-#     return has_aspect(df=df, aspects=["string",], get_true=True, logic="or")
-
-# def gen_audio_not_is_string_like(df: pd.DataFrame) -> pd.DataFrame:
-#     return has_aspect(df=df, aspects=["string",], get_true=False, logic="or")
-
-# def gen_audio_is_blown(df: pd.DataFrame) -> pd.DataFrame:
-#     return has_aspect(df=df, aspects=["brass", "flute", "reed", "vocal",], get_true=True, logic="or")
-
-# def gen_audio_not_is_blown_like(df: pd.DataFrame) -> pd.DataFrame:
-#     return has_aspect(df=df, aspects=["brass", "flute", "reed", "vocal", "organ",], get_true=False, logic="or")
-
-# def gen_audio_is_drum(df: pd.DataFrame) -> pd.DataFrame:
-#     return has_aspect(df=df, aspects=["mallet", "percussive", "drum", "drums",], get_true=True, logic="or")
-
-# def gen_audio_not_is_drum_like(df: pd.DataFrame) -> pd.DataFrame:
-#     return has_aspect(df=df, aspects=["mallet", "percussive", "drum", "drums",], get_true=False, logic="or")
-
-# def gen_audio_is_orchestral(df: pd.DataFrame) -> pd.DataFrame:
-#     inst = has_aspect(df=df, aspects=["brass", "flute", "reed", "strings"], get_true=True, logic="or")
-#     return inst
-        
-# def gen_audio_not_is_orchestral_like(df: pd.DataFrame) -> pd.DataFrame:
-#     return has_aspect(df=df, aspects=["brass", "flute", "reed", "strings", "vocal"], get_true=False, logic="or")
-
-# def gen_audio_is_electronic(df: pd.DataFrame) -> pd.DataFrame:
-#     return has_aspect(df=df, aspects=["electronic"], get_true=True, logic="or")
-
-# def gen_audio_not_is_electronic_like(df: pd.DataFrame) -> pd.DataFrame:
-#     return has_aspect(df=df, aspects=["electronic", "synthetic"], get_true=False, logic="or")
-
-# def gen_audio_is_vocal(df: pd.DataFrame) -> pd.DataFrame:
-#     return has_aspect(df=df, aspects=["vocal",], get_true=True, logic="or")
-
-# def gen_audio_not_is_vocal_like(df: pd.DataFrame) -> pd.DataFrame:
-#     return has_aspect(df=df, aspects=["vocal",], get_true=False, logic="or")
-
-# def gen_audio_is_distortion(df: pd.DataFrame) -> pd.DataFrame:
-#     return has_aspect(df=df, aspects=["distortion",], get_true=True, logic="or")
-
-# def gen_audio_not_is_distortion_like(df: pd.DataFrame) -> pd.DataFrame:
-#     return has_aspect(df=df, aspects=["distortion",], get_true=False, logic="or")

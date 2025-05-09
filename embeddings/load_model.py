@@ -22,11 +22,13 @@ def get_embed_model(
         return (model, processor)
     
     elif model_name == "muq":
-        model_path = "OpenMuQ/MuQ-MuLan-large"
-        local_dir = snapshot_download(model_path, cache_dir=cache_dir)
+        repo = "OpenMuQ/MuQ-MuLan-large"
+        local_dir = snapshot_download(repo, cache_dir=cache_dir, revision="8a081dbcf84edd47ea7db3c4ecb8fd1ec1ddacfe")
 
         #model = MuQMuLan.from_pretrained(model_path).to(device).eval()
-        model = MuQMuLan.from_pretrained(local_dir, local_files_only=True).to(device).eval()
+        model = (MuQMuLan.from_pretrained(
+                     local_dir,
+                     local_files_only=True,).to(device).eval())
         processor = None
         return (model, processor)
     

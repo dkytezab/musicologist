@@ -1,5 +1,5 @@
 ---
-model: 'laion-clap'
+model: 'muq'
 audio_dir: 'data/generated'
 output_dir: 'data/embeddings'
 num_seconds: 10
@@ -14,5 +14,5 @@ truncation_ts:
 - 40
 - 45
 - 49
-num_prompts: 500
-batch_size: 10
+num_prompts: 1000
+batch_size: 7

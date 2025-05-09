@@ -24,6 +24,7 @@ def get_conditioning_dict(
 
     for prompt in prompts:
         prompt = prompt.strip()
+        prompt = prompt.split('. ', 1)[-1] if '. ' in prompt else prompt
         conditioning.append({
             "prompt": prompt,
             "seconds_start": seconds_start,
@@ -55,11 +56,6 @@ def save_audio(
 
             print(f"Sample shape is {sample.shape}")
 
-            # if sample.ndim == 1:
-            #     sample = sample.unsqueeze(0)
-            # else:
-            #     sample = sample.to(torch.float32).mean(dim=0, keepdim=True).to(torch.int16)
-
             torchaudio.save(filename, sample.cpu(), sample_rate)
 
             if verbose:
@@ -67,7 +63,7 @@ def save_audio(
             
             write_sample_to_csv(
                 csv_path=Path(f"{output_dir}/audio_info.csv"),
-                tag_json_path=Path(f"data/prompts/prompt_tags.json"),
+                tag_json_path=Path(f"data/prompts/annotations.json"),
                 audio_file_path=Path(filename),
                 model="stable-diffusion",
                 prompt_index=prompt_index,

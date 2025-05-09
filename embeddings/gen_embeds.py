@@ -51,6 +51,8 @@ if __name__ == "__main__":
             
                 audio_tensor[prompt_index, sample, :] = audio_embed
         
+        print(f"Saving {DIFF_DIR} with {model}")
+
         save_embeddings(
             audio_tensor=audio_tensor,
             out_dir=DIFF_DIR,

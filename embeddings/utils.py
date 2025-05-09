@@ -54,6 +54,7 @@ def get_embedding(
         inputs = torch.tensor(sample_np).unsqueeze(0).to(device)
         with torch.no_grad():
             audio_embed = model(wavs = inputs).squeeze(0).cpu()
+        return audio_embed
         
 
     elif isinstance(model, ClapModel):

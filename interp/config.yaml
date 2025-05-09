@@ -3,7 +3,7 @@ embed_model: 'laion-clap'
 concepts:
 - 'is_staccato'
 class_models:
-- 'logistic'
+- 'svm'
 overwrite: False
 hparams:
 - num_layers: 4
