@@ -1,11 +1,12 @@
 ---
 model_name: "stable-diffusion"
 
+prompt_path: 'data/prompts/prompt.txt'
+output_dir: 'data/generated'
+
 batch_size: 7
 num_batches: 1
 
-prompt_path: 'data/prompts/prompt.txt'
-output_dir: 'data/generated'
 
 steps: 50
 sample_length: 10

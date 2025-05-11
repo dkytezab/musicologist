@@ -114,18 +114,6 @@ def generate_diffusion_cond_truncated(
         print(f"SAMPLING TRUNCATED w/ {truncation_t}")
         sampled = sample_k_truncated(model.model, noise, truncation_t, init_audio, steps, **sampler_kwargs, **conditioning_inputs, **negative_conditioning_tensors, cfg_scale=cfg_scale, batch_cfg=True, rescale_cfg=True, device=device)
 
-    # elif diff_objective == "rectified_flow":
-
-    #     if "sigma_min" in sampler_kwargs:
-    #         del sampler_kwargs["sigma_min"]
-
-    #     if "rho" in sampler_kwargs:
-    #         del sampler_kwargs["rho"]
-
-    #     sampled = sample_rf(model.model, noise, init_data=init_audio, steps=steps, **sampler_kwargs, **conditioning_inputs, **negative_conditioning_tensors, dist_shift=model.dist_shift, cfg_scale=cfg_scale, batch_cfg=True, rescale_cfg=True, device=device)
-
-    # v-diffusion: 
-    #sampled = sample(model.model, noise, steps, 0, **conditioning_tensors, embedding_scale=cfg_scale)
     del noise
     del conditioning_tensors
     del conditioning_inputs
@@ -247,18 +235,7 @@ def generate_truncated_seq(
         # k-diffusion denoising process go!
         sampled_seq = sample_k_truncated_seq(model.model, noise, truncation_ts, init_audio, steps, **sampler_kwargs, **conditioning_inputs, **negative_conditioning_tensors, cfg_scale=cfg_scale, batch_cfg=True, rescale_cfg=True, device=device)
 
-    # elif diff_objective == "rectified_flow":
-
-    #     if "sigma_min" in sampler_kwargs:
-    #         del sampler_kwargs["sigma_min"]
-
-    #     if "rho" in sampler_kwargs:
-    #         del sampler_kwargs["rho"]
-
-    #     sampled = sample_rf(model.model, noise, init_data=init_audio, steps=steps, **sampler_kwargs, **conditioning_inputs, **negative_conditioning_tensors, dist_shift=model.dist_shift, cfg_scale=cfg_scale, batch_cfg=True, rescale_cfg=True, device=device)
-
     # v-diffusion: 
-    #sampled = sample(model.model, noise, steps, 0, **conditioning_tensors, embedding_scale=cfg_scale)
     del noise
     del conditioning_tensors
     del conditioning_inputs

@@ -1,11 +1,10 @@
-import os
 import argparse
 import time
 import torch
 import yaml
 
-from load_model import get_diff_model
-from utils import get_conditioning_dict, diff_gen_flexible, save_audio
+from utils import get_diff_model, get_conditioning_dict, diff_gen_flexible, save_audio
+
 
 # Parse args and load config
 parser = argparse.ArgumentParser()
@@ -13,13 +12,16 @@ parser.add_argument("--job-index", type=int, required=True, help="SLURM array ta
 parser.add_argument("--num-jobs",  type=int, required=True, help="Total number of array tasks")
 args = parser.parse_args()
 
+
 with open('diffusion/diff_config.yml','r') as f:
     config = yaml.safe_load(f)
 
+
+# Loading in all the settings from the config
 MODEL_NAME    = config['model_name']
 NUM_BATCHES   = config['num_batches']
 BATCH_SIZE    = config['batch_size']
-PROMPT_PATH   = config['prompt_path']    # this should be your .txt with one prompt per line
+PROMPT_PATH   = config['prompt_path']   
 OUTPUT_DIR    = config['output_dir']
 SAMPLE_LENGTH = config['sample_length']
 STEPS         = config['steps']
@@ -27,21 +29,25 @@ EARLY_STOPPING= config['early_stopping']
 TRUNCATION_TS = config['truncation_ts']
 VERBOSE       = config['verbose']
 
+
 # Parsing prompts
 with open(PROMPT_PATH, 'r') as f:
     all_prompts = [l.strip() for l in f if l.strip()]
-total_prompts = len(all_prompts)
+num_prompts = len(all_prompts)
+
 
 # Assigning jobs to GPUs
-per_job = (total_prompts + args.num_jobs - 1) // args.num_jobs
+per_job = (num_prompts + args.num_jobs - 1) // args.num_jobs
 start    = args.job_index * per_job
-end      = min(total_prompts, start + per_job)
+end      = min(num_prompts, start + per_job)
 my_prompts = all_prompts[start:end]
 
-if not my_prompts:
-    raise RuntimeError(f"Job {args.job_index} has no prompts (range {start}–{end})")
 
-slice_path = f"data/prompts/prompts_job_{args.job_index}.txt"
+if not my_prompts:
+    raise RuntimeError(f"Job {args.job_index} has no prompts (range {start}-{end})")
+
+# Saving prompt section to relevant path
+slice_path = f"data/prompts/slices/prompts_job_{args.job_index}.txt"
 with open(slice_path, 'w') as f:
     f.write("\n".join(my_prompts))
 
@@ -60,9 +66,7 @@ if __name__ == "__main__":
     )
 
     for batch in range(NUM_BATCHES):
-
         batch_start_time = time.time()
-
         for i, condition in enumerate(conditioning):
 
                 outputs = diff_gen_flexible(
@@ -81,7 +85,6 @@ if __name__ == "__main__":
                     output_dir=OUTPUT_DIR,
                     prompt_index=i + start,
                     truncation_ts=TRUNCATION_TS,
-                    batch=batch,
                     sample_rate=sample_rate,
                     verbose=VERBOSE,
                     sample_length=SAMPLE_LENGTH,
