@@ -1,7 +1,8 @@
 ---
-model: 'muq'
+model: 'laion-clap'
+
 audio_dir: 'data/generated'
-output_dir: 'data/embeddings'
+
 num_seconds: 10
 truncation_ts:
 - 5

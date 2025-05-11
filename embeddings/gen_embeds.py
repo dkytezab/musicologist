@@ -8,29 +8,26 @@ import librosa
 import yaml
 import os
 
-from load_model import get_embed_model
-from utils import preprocess_audio, get_embedding, save_embeddings
+from utils import preprocess_audio, get_embedding, save_embeddings, get_embed_model
 
 with open("embeddings/embed_config.yml", "r") as file:
-    embed_config = yaml.safe_load(file)
+    config = yaml.safe_load(file)
 
-MODEL = embed_config['model']
-AUDIO_DIR = embed_config['audio_dir']
-OUTPUT_DIR = embed_config['output_dir']
-NUM_SECONDS = embed_config['num_seconds']
-TRUNCATION_TS = embed_config['truncation_ts']
-NUM_PROMPTS = embed_config['num_prompts']
-BATCH_SIZE = embed_config['batch_size']
+# Loading in settings from config
+MODEL =             config['model']
+AUDIO_DIR =         config['audio_dir']
+NUM_SECONDS =       config['num_seconds']
+TRUNCATION_TS =     config['truncation_ts']
+NUM_PROMPTS =       config['num_prompts']
+BATCH_SIZE =        config['batch_size']
 
 if __name__ == "__main__":
-
     model, processor = get_embed_model(model_name=MODEL)
-    print(model)
-
     for diff_step in TRUNCATION_TS:
 
         DIFF_DIR = f'{AUDIO_DIR}/diff_step_{diff_step}'
         # Embedding dimension of 512 for CLAP, may need to change for other models
+        # Initialize empty tensor for each diffusion step
         audio_tensor = torch.zeros((NUM_PROMPTS, BATCH_SIZE, 512))
 
         for prompt_index in range(NUM_PROMPTS):
@@ -48,10 +45,10 @@ if __name__ == "__main__":
                     processor=processor,
                     num_seconds=NUM_SECONDS,
                 )
-            
+
                 audio_tensor[prompt_index, sample, :] = audio_embed
         
-        print(f"Saving {DIFF_DIR} with {model}")
+        print(f"Saving {DIFF_DIR} with {model}...")
 
         save_embeddings(
             audio_tensor=audio_tensor,
@@ -60,4 +57,4 @@ if __name__ == "__main__":
             model_name=MODEL,
         )
 
-        print(f'Finished processing {DIFF_DIR}!')
+        print(f'...finished processing {DIFF_DIR}!')
