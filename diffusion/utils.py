@@ -1,15 +1,17 @@
-from stable_audio_tools import get_pretrained_model
-import torch
-from typing import Tuple, Optional
-from typing import Optional, Dict, List
 import os
 import torch
 import torchaudio
+import torch
+import pandas as pd
+
+from stable_audio_tools import get_pretrained_model
+from typing import Tuple, Optional
+from typing import Optional, Dict, List
 from stable_audio_tools import get_pretrained_model
 from stable_audio_tools.inference.generation import generate_diffusion_cond
-from truncation.gen_truncated import generate_truncated_seq
 from pathlib import Path
-import pandas as pd
+
+from truncation.gen_truncated import generate_truncated_seq
 
 DATA_DIR = "data/generated"
 

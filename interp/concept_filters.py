@@ -1,10 +1,25 @@
-from typing import List, Callable, Any, Dict, Optional
+from typing import Callable, Dict
 import pandas as pd
-import importlib.util
-from pathlib import Path
 import re
 
-# Gets a filter function
+'''
+We store all the filters used in the project/paper, in addition to helper functions, in the code below. We use four concept categories,
+which are tailored to NSynth.
+
+(1) Instrument family: which family of instruments, i.e. brass, keyboard, is playing in the NSynth sample
+
+(2) Note qualities: various combinations of acoustic features of a given sample. I (Daniel) chose the combinations, 
+using my background in music theory/production.
+
+(3) Instrument source: a rough generalization of (1), the mechanism of sound production.
+
+(4) High-level concepts: meaningful combinations of NSynth samples' features. Also chosen using background knowledge of music.
+
+For each filter, we use concept padding to get negative samples; we discard any samples that are too similar conceptually to the
+samples within the positive dataset. E.g. the negative dataset for 'is_brass' excludes samples from the brass, reed and flute
+families. These again were chosen using my background musical knowledge.
+'''
+
 def create_concept_filter(cols_aspects_dict: Dict[str, str],
                           get_true: bool = True, 
                           logic: str = "or") -> Callable[[pd.DataFrame], pd.DataFrame]:
@@ -42,7 +57,7 @@ def get_all_concepts():
     return list(NSYNTH_FILTER_DICT.keys())
 
 NSYNTH_FILTER_DICT = {
-    # Individual instrument families - 11 total
+    # Individual instrument families - 11 total 
     "is_brass":         [{"instrument_family_str": ["brass"]}, True, "or"],
     "is_bass":          [{"instrument_family_str": ["bass"]}, True, "or"],
     "is_flute":         [{"instrument_family_str": ["flute"]}, True, "or"],

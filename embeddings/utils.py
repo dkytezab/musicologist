@@ -1,10 +1,8 @@
 import torch
 import torchaudio
 import numpy as np
-from pathlib import Path
-from transformers import ClapModel, ClapProcessor, AutoProcessor, MusicgenForConditionalGeneration
-from muq import MuQMuLan
-import librosa
+
+from transformers import ClapModel, AutoProcessor
 from typing import Optional, Tuple
 import os
 from huggingface_hub import snapshot_download

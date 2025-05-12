@@ -1,20 +1,22 @@
-from typing import List, Dict, Any, Optional, Union, Callable, Tuple
-import importlib.util
-from json import loads
-from pathlib import Path
+import torchaudio
+import numpy as np
 import pandas as pd
 import os
 import torch
+
+from typing import List, Dict, Optional, Callable, Tuple
+from json import loads
+from pathlib import Path
 from huggingface_hub import snapshot_download
-from transformers import ClapModel, ClapProcessor, AutoProcessor, MusicgenForConditionalGeneration
-from muq import MuQMuLan
-import torchaudio
-import numpy as np
-import warnings
+from transformers import ClapModel, AutoProcessor
 
 from concept_filters import NSYNTH_FILTER_DICT, NSYNTH_PADDER_DICT, create_concept_filter
 
+CONCEPT_DIR = "data/concepts"
+
 class NSynthDataset(object):
+    '''Base class for processing NSynth. Valid splits are train, test and valid. We use train to train classifiers,
+       which contains ~300,000 samples.'''
     def __init__(self, split: str) -> None:
         self.split = split
         self.path = Path(f"data/nsynth/nsynth-{split}")
@@ -24,6 +26,7 @@ class NSynthDataset(object):
     def _dataset(self) -> Dict:
         return loads(self.json_path.read_text())
     
+    # Updates json with classification using concept filters
     def _get_new_json(self, 
                       concept_filters: Tuple[Callable[[dict], bool], ...],
                       concept_filter_names: Tuple[str, ...],) -> Dict:
@@ -49,8 +52,11 @@ class NSynthDataset(object):
             new_dataset[fpath] = sample
 
         return new_dataset
-    
+
 class ConceptDataset(NSynthDataset):
+    ''' Used for processing NSynth. Initializes a CSV w/ a random sampling of positive, negative samples. This CSV is used to
+    get concept embeddings from CLAP.
+    '''
     def __init__(self,
                 split: str,
                 concept_filter: str,
@@ -68,8 +74,8 @@ class ConceptDataset(NSynthDataset):
         self.concept_filter = concept_filter
         self.concept_padder = f"{concept_filter}_like" 
 
-        self.dir_path = dir_path if dir_path is not None else f"data/concepts/{concept_filter}"
-        self.csv_path = csv_path if csv_path is not None else f"data/concepts/{concept_filter}/audio_info.csv"
+        self.dir_path = dir_path if dir_path is not None else f"{CONCEPT_DIR}/{concept_filter}"
+        self.csv_path = csv_path if csv_path is not None else f"{CONCEPT_DIR}/{concept_filter}/audio_info.csv"
         self.concept_filter_path = concept_filter_path if concept_filter_path is not None else f"interp/concept_filters.py"
 
         self.overwrite = overwrite
@@ -92,6 +98,7 @@ class ConceptDataset(NSynthDataset):
             print("Getting new json...")
             new_json = self._get_new_json(concept_filters=[self.concept_filter_func, self.concept_padder_func],
                                           concept_filter_names=[self.concept_filter, self.concept_padder])
+            # Want some samples
             if len(new_json) < 1:
                 raise ValueError("Produced json is empty")
             print("Getting positive, negative limits...")
@@ -99,6 +106,7 @@ class ConceptDataset(NSynthDataset):
             print("Writing csv...")
             self._write_csv(new_json)
     
+    # Loads in filters, padders
     def _get_filters(self):
         col_dict, get_true, logic = NSYNTH_FILTER_DICT[self.concept_filter]
         self.concept_filter_func = create_concept_filter(col_dict, get_true, logic)
@@ -106,6 +114,7 @@ class ConceptDataset(NSynthDataset):
         col_dict, get_true, logic = NSYNTH_PADDER_DICT[self.concept_padder]
         self.concept_padder_func = create_concept_filter(col_dict, get_true, logic)
 
+    # Loads in class from a pre-existing CSV.
     def _load_from_csv(self):
         df = pd.read_csv(self.csv_path)
         
@@ -120,6 +129,7 @@ class ConceptDataset(NSynthDataset):
         self.possible_pos_samples = None
         self.possible_neg_samples = None
 
+    # Gets limits for sampling, training. Caps total possible samples to 30000 for ease of computation.
     def _get_pos_neg_limits(self, new_json, pos_limit, neg_limit) -> None:
         pos_df, neg_df = self._get_pos_neg_df(new_json)
         
@@ -129,10 +139,11 @@ class ConceptDataset(NSynthDataset):
         pos_limit = pos_limit if pos_limit is not None else self.possible_pos_samples
         neg_limit = neg_limit if neg_limit is not None else self.possible_neg_samples
 
-        balanced_lim = min(pos_limit // 2, neg_limit // 2, 15000)
+        balanced_lim = min(pos_limit, neg_limit, 15000)
 
         self.pos_limit, self.neg_limit = balanced_lim, balanced_lim
     
+    # Writes csv with sample info
     def _write_csv(self, new_json: Dict) -> None:
         pos_df, neg_df = self._get_pos_neg_df(new_json)
 
@@ -157,7 +168,8 @@ class ConceptDataset(NSynthDataset):
     
         self.samples.to_csv(self.csv_path, index=False)
 
-    def _get_pos_neg_df(self, new_json) -> None:
+    # Applies filters to get pos, neg samples
+    def _get_pos_neg_df(self, new_json) -> Tuple[pd.DataFrame, pd.DataFrame]:
         df = pd.DataFrame.from_dict(new_json, orient="index")
 
         pos_paths = [fpath for fpath, sample in new_json.items()
@@ -170,13 +182,14 @@ class ConceptDataset(NSynthDataset):
 
         return pos_df, neg_df
     
+    # Gets embeddings from CLAP.
     def get_embeds(self, 
                    model_name: str,
                    save: bool = False,
                    cache = None,
                    save_path: Optional[str] = None,
                    device: str = "cuda" if torch.cuda.is_available() else "cpu",
-                   ):
+                   ) -> torch.Tensor:
         
         # Make sure save_path is none for ease
         save_path = save_path if save_path is not None else f"{self.dir_path}/{model_name}_embeddings.pt"
@@ -197,12 +210,8 @@ class ConceptDataset(NSynthDataset):
                 embed_dim = 512
                 num_seconds = 10
             
-            elif model_name == "muq":
-                model = MuQMuLan.from_pretrained(cache, local_files_only=True).to(device).eval()
-                processor = None
-                new_sr = 24000
-                embed_dim = None
-                num_seconds = None
+            else:
+                raise NotImplemented("Specified model not implemented")
 
             old_sr, audio_tensor = self._load_audios_to_batch(self.samples["audio_fpath"].tolist())
             processed_audio_tensor = self._preprocess_audio_tensor(audio_tensor=audio_tensor,
@@ -220,6 +229,7 @@ class ConceptDataset(NSynthDataset):
                 self._save_embeds(embeds, model_name=model_name, save_path=save_path)
 
         return embeds
+
 
     def _load_audios_to_batch(self, audio_paths: List[str]) -> torch.Tensor:
         # Assumes all audio files are the same length and 2D
@@ -264,7 +274,7 @@ class ConceptDataset(NSynthDataset):
                                num_seconds: int,
                                embed_dim: int,
                                ) -> torch.Tensor:
-        batch_size, frames = audio_tensor.shape
+        batch_size, _ = audio_tensor.shape
         new_tens = torch.zeros([batch_size, embed_dim])
 
         audio_np = audio_tensor.cpu().numpy().astype(np.float32)
@@ -279,15 +289,12 @@ class ConceptDataset(NSynthDataset):
                 new_tens[idx, :] = audio_embed
                 print(f"Produced embeddings from index {idx}")
         
-        elif isinstance(model, MuQMuLan):
-            raise NotImplementedError("MuQMuLan model not supported yet")
-        
         else:
             raise ValueError("Specified model not presently supported")
         
         return new_tens
 
-
+    # Saves embeddings
     def _save_embeds(self, embeds: torch.Tensor, save_path: Optional[None], model_name: str,) -> None:
 
         if save_path is None:
@@ -296,6 +303,7 @@ class ConceptDataset(NSynthDataset):
         torch.save(embeds, save_path)
         print(f"Embeddings saved to {save_path}")
 
+# Caches model to models
 def cache_model(model_name: str) -> str:
         cache_dir = f"models/{model_name}"
         if not os.path.exists(cache_dir):
@@ -303,9 +311,6 @@ def cache_model(model_name: str) -> str:
         if model_name == "laion-clap":
             repo_id = "laion/larger_clap_general"
             downloaded_model = snapshot_download(repo_id, cache_dir=cache_dir)
-        elif model_name == "muq":
-            repo_id = "OpenMuQ/MuQ-MuLan-large"
-            downloaded_model = snapshot_download(repo_id, cache_dir=cache_dir)
         else:
-            raise NotImplemented("Specified embeddings model not supported. Try laion-clap or muq")
+            raise NotImplemented("Specified embeddings model not supported. Try laion-clap.")
         return downloaded_model

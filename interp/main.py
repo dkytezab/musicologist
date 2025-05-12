@@ -1,4 +1,3 @@
-import torch
 import yaml
 import imageio.v2 as imageio
 import io
@@ -16,7 +15,6 @@ with open('interp/config.yaml', 'r') as file:
 
 embed_model = config["embed_model"]
 class_models = config["class_models"]
-concepts = config["concepts"]
 truncation_ts = config["truncation_ts"]
 overwrite = config["overwrite"]
 
@@ -25,12 +23,17 @@ hparams = {k: v for c in config["hparams"] for k, v in c.items()}
 results_dict = {}
 limit_dict = {}
 
+# Change for specific concepts if desired
 concepts = get_all_concepts()
-# concepts = ['is_electronic', 'is_synthetic', 'is_orchestral', 'is_acoustic_band', 'is_percussion', 'is_techno', 'is_plucked', 'is_blown', 'is_hit', 'is_atmospheric']
 
 
-def process_embeds():
+def process_embeds() -> None:
+    '''First caches laion-clap; then partitions NSynth train to sample positive, negative concept samples; then gets the embeddings
+    for the selected embeddings which are saved.
 
+    To generate a new partition/set of embeddings, set overwrite = True. As a warning this is somewhat computationally hard as 
+    NSynth train is fairly large.
+    '''
     print(f"Started caching {embed_model}...")
     cache = cache_model(model_name=embed_model)
     print(f"...Finished caching {embed_model}")
@@ -46,11 +49,16 @@ def process_embeds():
         print(f"Getting {concept} embeddings from {embed_model}")
         cds.get_embeds(model_name=embed_model, save=True, cache=cache)
 
+
 def interp():
+    ''' Trains binary classifiers, iterating over all classifier model types (logistic, svm) and all concepts.
+
+    '''
     for concept in concepts:
         for class_model in class_models:
             hparams["model_type"] = class_model
 
+            # Initializes binary classifier
             binary_classifier = BinaryClassifier(
                         concept_filter=concept,
                         num_pos_samples=limit_dict[concept][0],
@@ -59,12 +67,14 @@ def interp():
                         hparams=hparams,
                     )
             
+            # Trains binary classifier using default csv path.
             binary_classifier.train(csv_path=None)
 
+            # Inference for each batch of diffusion steps
             for diff_step in truncation_ts:
                 binary_classifier.inference(diff_step=diff_step, embed_model=embed_model, save=True)
                 
-                # Only logistic PCA gif for computational ease
+                # Only logistic PCA gif 
                 if class_model=="logistic":
                     ims = binary_classifier.get_pca(diff_steps=truncation_ts, embed_model=embed_model)
 
@@ -73,21 +83,27 @@ def interp():
                         f'data/concepts/{concept}/pca_{class_model}.gif',
                         save_all=True,
                         append_images=figs[1:],
-                        duration=500,  # ms per frame
-                        loop=0  # loop forever
+                        duration=500,
+                        loop=0 
                         )
 
 def fig_to_pil(fig):
+    'Helper for creating gif'
     buf = io.BytesIO()
     fig.savefig(buf, format="png", dpi=150, bbox_inches="tight")
     buf.seek(0)
     return Image.open(buf)
 
+
 def results_to_im():
+    '''Produces graph of the accuracy, true positive rate and true negative rate for a given concept
+    taken over the diffusion process. Saves 2 separate figures in the relevant concept's folder.
+    '''
     for concept in concepts:
         json_path = f"data/concepts/{concept}/concept_results.json"
         df = pd.read_json(json_path)
 
+        # Getting computed results
         log_acc = df.loc[df["class_model_type"] == "logistic", "acc"]
         log_tpr = df.loc[df["class_model_type"] == "logistic", "tpr"]
         log_tnr = df.loc[df["class_model_type"] == "logistic", "tnr"]
@@ -96,6 +112,7 @@ def results_to_im():
         svm_tpr = df.loc[df["class_model_type"] == "svm", "tpr"]
         svm_tnr = df.loc[df["class_model_type"] == "svm", "tnr"]
 
+        # Number of positive, negative samples
         num_pos = df.iloc[0]["pos_gen_audio_samples"]
         num_neg = df.iloc[0]["neg_gen_audio_samples"]
 
@@ -116,7 +133,7 @@ def results_to_im():
         ax2.plot(truncation_ts, svm_tpr, marker='s', linestyle='--', color='green', label="SVM TPR")
         ax2.plot(truncation_ts, svm_tnr, marker='^', linestyle='--', color='firebrick', label='SVM TNR')
 
-
+        # Making plots look nice :D
         for k in [ax1, ax2]:
             k.set_xticks(truncation_ts)
             k.set_xlabel("Diffusion Timestep")
@@ -126,6 +143,7 @@ def results_to_im():
             k.legend(loc='best')
             k.grid()
 
+        # Including base performance on NSynth
         fig1.text(0.5, 0, f"Concept train accuracy: {round(log_train_acc, 3)}, Concept test accuracy: {round(log_test_acc, 3)}",
              ha='center', va='bottom', fontsize=9)
         fig2.text(0.5, 0, f"Concept train accuracy: {round(svm_train_acc, 3)}, Concept test accuracy: {round(svm_test_acc, 3)}",
@@ -134,12 +152,11 @@ def results_to_im():
         fig1.tight_layout()
         fig2.tight_layout()
         
-
         fig1.savefig(f"data/concepts/{concept}/logistic_results.png", dpi=300, bbox_inches="tight")
         fig2.savefig(f"data/concepts/{concept}/svm_results.png", dpi=300, bbox_inches="tight")
 
-
+# Main function
 if __name__ == "__main__":
-    # process_embeds()
-    # interp()
+    process_embeds()
+    interp()
     results_to_im()

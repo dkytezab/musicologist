@@ -1,0 +1,27 @@
+# List of dependencies (TBD) to create a conda environment.
+name: musicologist
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8.20
+  - numpy=1.23.5
+  - pandas
+  - matplotlib
+  - openai
+  - kagglehub
+  - pip
+  - pip:
+    - fsspec==2024.3.1
+    - s3fs==2024.3.1
+    - stable_audio_tools
+    - torch
+    - torchaudio
+    - transformers
+    - huggingfacehub
+    - imageio.v2
+    - pillow
+    - sklearn
+    - openai
