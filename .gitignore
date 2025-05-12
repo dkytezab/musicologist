@@ -9,3 +9,4 @@ __pycache__/
 data/nsynth
 logs
 data/concepts/*/audio_info.csv
+data/concepts_spare
