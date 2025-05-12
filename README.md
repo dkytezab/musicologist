@@ -42,9 +42,19 @@ And enter your HuggingFace access token. Note that creating the environment may 
 - s3fs==2024.3.1
 - stable_audio_tools
 ```
-# (1) — Prompts
+## (1) — Prompts
 
-# (2) — Audio Generation
+To generate new prompts, please run
+```bash
+python data/prompts/llm_promptgen.py
+```
+To annotate said prompts, attach one's `OPENAI_API_KEY` and then run
+```bash
+python data/prompts/annotate.py
+```
+Please note that this will use up one's OpenAI credits — we set our prompt batch size to 5 to avoid hallucinations + forgetting, which used up about one dollar in credits.
+
+## (2) — Audio Generation
 
 To generate the audio from prompts stored at `data/prompts/prompt.txt`, please run the following from the root of the repo:
 ```bash
@@ -54,9 +64,33 @@ srun python diffusion/gen_distrib.py \
      --job-index $SLURM_ARRAY_TASK_ID \
      --num-jobs  $SLURM_ARRAY_TASK_COUNT
 ```
-Make sure to include the constraint that all GPUs are Ampere GPUs, i.e. include `#SBATCH: --constraint=ampere`. Also include `#SBATCH --array=0-n` where `n - 1` is the total number of GPUs you want to divide the generation into. We found that delegating 4 prompts per GPU worked well and avoided OOM errors, so we set `n=249`. The results will save to `data/generated/diff_step_x` where `x` is the corresponding intermediate de-noising step. 
+Make sure to include the constraint that all GPUs are Ampere GPUs, i.e. include `#SBATCH: --constraint=ampere`. Also include `#SBATCH --array=0-n` where `n - 1` is the total number of GPUs you want to divide the generation into. We found that delegating 4 prompts per GPU worked well and avoided OOM errors, so we set `n=249`. The results will save to `data/generated/diff_step_x` where `x` is the corresponding intermediate denoising step. 
 
 Also be sure to clear `data/generated/audio_info.csv` of its past entries if you elect to generate new audio. This keeps track of all the important audio info.
+
+## (3) - CLAP Embeddings
+
+To generate CLAP embeddings from generated audio, run the following:
+
+```bash
+module load cuda cudnn
+python embeddings/gen_embeds.py
+```
+Please keep the Ampere GPU constraint from part (2). The embeddings from audio in `data/generated/diff_step_x` will save to `data/generated/diff_step_x/laion-clap_embeddings`. 
+
+## (4), (5), (6) - NSynth, Concepts, Classifiers
+
+First create the directory `data/nsynth`. Then run
+```bash
+cd data/nsynth
+curl --output nsynth-train.jsonwav.tar.gz "http://download.magenta.tensorflow.org/datasets/nsynth/nsynth-train.jsonwav.tar.gz"
+tar -xzvf nsynth-train.jsonwav.tar.gz
+```
+NSynth train is approximately 22 gigabytes, so installing all the data shouldn't take more than 40 minutes on the CPU. Then run
+```bash
+python interp/main.py
+```
+For each of the concepts in `interp/concept_filters.py`, we will create a concept dataset, store a CSV at `data/concepts/x`, get embeddings for said concept stored at `data/concepts/x/laion-clap_embeddings.py` and then train a logistic and svm classifier on the embeddings. A plot of the performance at inference time will be saved to `data/concepts/x`, as well as a PCA gif of the positive samples in the generated audio dataset.
 
 ## Citations
 
