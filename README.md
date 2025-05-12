@@ -2,10 +2,15 @@
 Charting the emergence of concepts in diffusion-generated audio over a full trajectory. Our full pipeline consists of the following 6 steps:
 
 (1) Generating music prompts and annotating them with a pre-defined set of concepts using GPT-4.1-mini.
+
 (2) Generating batches of audio using Stable Diffusion 1.0 and saving intermediate steps drawn from the denoising process.
+
 (3) Passing audio into CLAP to get representations.
+
 (4) Creating datasets of positive-negative pairs from NSynth audio samples corresponding to pre-selected timbral concepts.
-(5) Getting NSynth audio embeddings from CLAP
+
+(5) Getting NSynth audio embeddings from CLAP.
+
 (6) Training a binary classifier on NSynth embeddings and performing inference on diffusion-generated audio embeddings.
 
 Our code is structured as: 
@@ -18,6 +23,7 @@ Our code is structured as:
 ├── diffusion/
 ├── embeddings/
 ├── interp/
+```
 
 Generated audio is stored at `data/generated/`, concepts embeddings and results are stored at `data/concepts` and code for (1) is stored at `data/prompts/`. `diffusion/` and `embeddings/` contain code for running (2) and (3) respectively. Code for (4), (5), (6) is stored at `interp/`. 
 
@@ -30,13 +36,27 @@ To access Stable Audio 1.0, go to the [model card](https://huggingface.co/stabil
 ```
 huggingface-cli login
 ```
-And enter your HuggingFace access token. Note that creating the environment may take a long time due to resolving dependencies for `stable_audio_tools`. If you wish to skip steps (1)-(2), please comment the following lines in `requirements.yaml`:
+And enter your HuggingFace access token. Note that creating the environment may take a long time due to resolving dependencies for `stable_audio_tools`. If you wish to skip steps (1)-(2), please comment out the following lines in `requirements.yaml`:
 ```bash
 - fsspec==2024.3.1
 - s3fs==2024.3.1
 - stable_audio_tools
 ```
+# (1) — Prompts
 
+# (2) — Audio Generation
+
+To generate the audio from prompts stored at `data/prompts/prompt.txt`, please run the following from the root of the repo:
+```bash
+module load cuda cudnn
+make initgen
+srun python diffusion/gen_distrib.py \
+     --job-index $SLURM_ARRAY_TASK_ID \
+     --num-jobs  $SLURM_ARRAY_TASK_COUNT
+```
+Make sure to include the constraint that all GPUs are Ampere GPUs, i.e. include `#SBATCH: --constraint=ampere`. Also include `#SBATCH --array=0-n` where `n - 1` is the total number of GPUs you want to divide the generation into. We found that delegating 4 prompts per GPU worked well and avoided OOM errors, so we set `n=249`. The results will save to `data/generated/diff_step_x` where `x` is the corresponding intermediate de-noising step. 
+
+Also be sure to clear `data/generated/audio_info.csv` of its past entries if you elect to generate new audio. This keeps track of all the important audio info.
 
 ## Citations
 
