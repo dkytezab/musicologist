@@ -92,11 +92,13 @@ python interp/main.py
 ```
 For each of the concepts in `interp/concept_filters.py`, we will create a concept dataset, store a CSV at `data/concepts/x`, get embeddings for said concept stored at `data/concepts/x/laion-clap_embeddings.py` and then train a logistic and svm classifier on the embeddings. A plot of the performance at inference time will be saved to `data/concepts/x`, as well as a PCA gif of the positive samples in the generated audio dataset.
 
-## Citations
+If you instead want to run experiments for a select number of concepts, just change `concepts = get_all_concepts()` to a list of concepts of your choosing, i.e. `[x, ...]` where `x` is a key for `NSYNTH
+
+<!-- ## Citations
 
 | Citation | Description |
 |----------|-------------|
 | [[EVA2024]](https://arxiv.org/pdf/2402.04825) | Fast Timing-Conditioned Latent Audio Diffusion |
 | [[GAN2025]](https://arxiv.org/pdf/2502.01639) | SliderSpace: Decomposing the Visual Capabilities of Diffusion Models |
 | [[KIM2017]](https://arxiv.org/pdf/1711.11279) | Interpretability Beyond Feature Attribution: Quantitative Testing with Concept Activation Vectors (TCAV) |
-| [[WU2025]](https://arxiv.org/pdf/2211.06687) | Large-scale Contrastive Language-Audio Pretraining with Feature Fusion and Keyword-to-Caption Augmentation |
+| [[WU2025]](https://arxiv.org/pdf/2211.06687) | Large-scale Contrastive Language-Audio Pretraining with Feature Fusion and Keyword-to-Caption Augmentation | -->
