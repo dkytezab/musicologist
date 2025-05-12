@@ -5,6 +5,9 @@ from PIL import Image
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import torch
+import torch.nn.functional as F
+import os
 
 from concept_datasets import ConceptDataset, cache_model
 from models import BinaryClassifier
@@ -51,9 +54,7 @@ def process_embeds() -> None:
 
 
 def interp():
-    ''' Trains binary classifiers, iterating over all classifier model types (logistic, svm) and all concepts.
-
-    '''
+    'Trains binary classifiers, iterating over all classifier model types (logistic, svm) and all concepts.'
     for concept in concepts:
         for class_model in class_models:
             hparams["model_type"] = class_model
@@ -155,8 +156,48 @@ def results_to_im():
         fig1.savefig(f"data/concepts/{concept}/logistic_results.png", dpi=300, bbox_inches="tight")
         fig2.savefig(f"data/concepts/{concept}/svm_results.png", dpi=300, bbox_inches="tight")
 
+def get_clap_tensor_distance():
+    'Computes and plots the tensor L1, L2 and cosine similarity for CLAP embeddings'
+    tensors = []
+    distances = {}
+
+    # Getting CLAP tensor distance
+    for diff_step in truncation_ts:
+        clap_tens = torch.load(f"data/generated/diff_step_{diff_step}/{embed_model}_embeddings.pt")
+        tensors.append(clap_tens)
+    
+    l1_norm, l2_norm, cosine_similarity = [], [], []
+    for i in range(9):
+        a, b = tensors[i], tensors[i+1]
+
+        l1 = torch.norm(a - b, p=1).item()
+        l1_norm.append(l1)
+
+        l2 = torch.norm(a - b, p=2).item()
+        l2_norm.append(l2)
+
+        cos_sim = F.cosine_similarity(a.view(1, -1), b.view(1, -1), dim=1).item()
+        cosine_similarity.append(cos_sim)
+
+    distances["L1"] = l1_norm
+    distances["L2"] = l2_norm
+    distances["Cosine Similarity"] = cosine_similarity
+
+    for metric, values in distances.items():
+        plt.figure()
+        plt.xlabel("Pair index")
+        plt.plot(range(1, len(values) + 1), values)
+        plt.title(f"{metric.replace('_', ' ').title()} Between Successive Tensors")
+        plt.ylabel(metric.replace('_', ' ').title())
+        plt.tight_layout()
+
+        out_path = os.path.join(f"data/concepts", f"CLAP_{metric}.png")
+        plt.savefig(out_path)
+        plt.close()
+
 # Main function
 if __name__ == "__main__":
     process_embeds()
     interp()
     results_to_im()
+    get_clap_tensor_distance()
