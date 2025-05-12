@@ -92,7 +92,7 @@ python interp/main.py
 ```
 For each of the concepts in `interp/concept_filters.py`, we will create a concept dataset, store a CSV at `data/concepts/x`, get embeddings for said concept stored at `data/concepts/x/laion-clap_embeddings.py` and then train a logistic and svm classifier on the embeddings. A plot of the performance at inference time will be saved to `data/concepts/x`, as well as a PCA gif of the positive samples in the generated audio dataset.
 
-If you instead want to run experiments for a select number of concepts, just change `concepts = get_all_concepts()` to a list of concepts of your choosing, i.e. `[x, ...]` where `x` is a key for `NSYNTH
+If you instead want to run experiments for a select number of concepts, just change `concepts = get_all_concepts()` to a list of concepts of your choosing, i.e. `[x, ...]` where `x` is a key in `NSYNTH_FILTER_DICT`.
 
 <!-- ## Citations
 
